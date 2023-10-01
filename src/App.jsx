@@ -10,6 +10,7 @@ import BookingPage from "./pages/BookingPage";
 import TestimonialPage from "./pages/TestimonialPage";
 import FaqPage from "./pages/FaqPage";
 import SyaratKetentuanPage from "./pages/SyaratKetentuanPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/tertimonial" Component={TestimonialPage} />
         <Route path="/faq" Component={FaqPage} />
         <Route path="/syaratdanketentuan" Component={SyaratKetentuanPage} />
+        <Route path="*" Component={NotFoundPage} />
       </Routes>
       {/* <FooterComponent /> */}
     </div>
