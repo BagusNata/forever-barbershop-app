@@ -9,7 +9,7 @@ import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import TestimonialPage from "./pages/TestimonialPage";
 import FaqPage from "./pages/FaqPage";
-import SyaratKetentuanPage from "./pages/SyaratKetentuanPage";
+import SyaratKetenPage from "./pages/SyaratKetenPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
@@ -19,9 +19,9 @@ function App() {
       <Routes>
         <Route path="/" Component={HomePage} />
         <Route path="/booking" Component={BookingPage} />
-        <Route path="/tertimonial" Component={TestimonialPage} />
+        <Route path="/testimonial" Component={TestimonialPage} />
         <Route path="/faq" Component={FaqPage} />
-        <Route path="/syaratdanketentuan" Component={SyaratKetentuanPage} />
+        <Route path="/syaratketen" Component={SyaratKetenPage} />
         <Route path="*" Component={NotFoundPage} />
       </Routes>
       {/* <FooterComponent /> */}
