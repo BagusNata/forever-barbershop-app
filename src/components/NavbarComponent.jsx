@@ -31,11 +31,14 @@ const NavbarComponent = () => {
           <Navbar.Brand href="/">
             <img
               src="./brand-transparent.png"
-              className={changeColor ? "brand-active" : "brand"}
+              className={changeColor ? "nav-color-active" : "nav-color"}
               alt="brand"
             />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle
+            className={changeColor ? "nav-color-active" : "nav-color"}
+            aria-controls="basic-navbar-nav"
+          />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto text-center">
               {navLinks.map((link) => {
@@ -62,8 +65,8 @@ const NavbarComponent = () => {
               <button
                 className={
                   changeColor
-                    ? "btn btn-dark rounded-2 mx-1"
-                    : "btn btn-light rounded-2 mx-1"
+                    ? "btn btn-dark rounded-2 me-2"
+                    : "btn btn-light rounded-2 me-2"
                 }
               >
                 Login
@@ -71,8 +74,8 @@ const NavbarComponent = () => {
               <button
                 className={
                   changeColor
-                    ? "btn btn-outline-dark rounded-2 mx-1"
-                    : "btn btn-outline-light rounded-2 mx-1"
+                    ? "btn btn-outline-dark rounded-2 me-2"
+                    : "btn btn-outline-light rounded-2 me-2"
                 }
               >
                 Sign up
