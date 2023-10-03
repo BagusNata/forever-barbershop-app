@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
 import { semuaService, dataSwiper } from "../data/index.js";
+import FaqComponent from "../components/FaqComponent";
 
 const HomePage = () => {
   return (
@@ -57,7 +58,7 @@ const HomePage = () => {
                 </p>
               </Col>
             </Row>
-            <Row>
+            <Row className="row-col-lg-3 row-col-md-3 row-col-sm-1">
               {semuaService.map((service) => {
                 return (
                   <Col key={service.id}>
@@ -68,11 +69,16 @@ const HomePage = () => {
                         src={service.img}
                       />
                       <Card.Body>
-                        <Card.Title className="fw-bold">
-                          {service.title}
-                        </Card.Title>
+                        <div>
+                          <Col className="d-flex justify-content-between fw-bold">
+                            <Card.Title className="fw-bold">
+                              {service.title}
+                            </Card.Title>
+                            <Card.Text>{service.price}</Card.Text>
+                          </Col>
+                        </div>
                         <Card.Text>{service.description}</Card.Text>
-                        <button className="btn btn-dark btn-lg rounded-2 me-2 mb-mx-0 mb-2 btn-service-book">
+                        <button className="btn btn-dark btn-lg rounded-2 mb-mx-0 mb-2 btn-service-book">
                           Book Now
                         </button>
                       </Card.Body>
@@ -147,6 +153,11 @@ const HomePage = () => {
             </Row>
           </Container>
         </div>
+      </section>
+
+      {/* Section FAQ */}
+      <section id="faq">
+        <FaqComponent />
       </section>
     </div>
   );
