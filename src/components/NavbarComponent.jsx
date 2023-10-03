@@ -65,8 +65,8 @@ const NavbarComponent = () => {
               <button
                 className={
                   changeColor
-                    ? "btn btn-dark rounded-2 me-2"
-                    : "btn btn-light rounded-2 me-2"
+                    ? "btn btn-dark rounded-2 m-2"
+                    : "btn btn-light rounded-2 m-2"
                 }
               >
                 Login
@@ -74,8 +74,8 @@ const NavbarComponent = () => {
               <button
                 className={
                   changeColor
-                    ? "btn btn-outline-dark rounded-2 me-2"
-                    : "btn btn-outline-light rounded-2 me-2"
+                    ? "btn btn-outline-dark rounded-2 m-2 "
+                    : "btn btn-outline-light rounded-2 m-2"
                 }
               >
                 Sign up
