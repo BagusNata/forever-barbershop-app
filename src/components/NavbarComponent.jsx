@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { navLinks } from "../data/index";
-import { NavLink } from "react-router-dom";
+import { section } from "../data/index";
 
 const NavbarComponent = () => {
   const [changeColor, setChangeColor] = useState(false);
@@ -41,21 +40,21 @@ const NavbarComponent = () => {
           />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto text-center">
-              {navLinks.map((link) => {
+              {section.map((link) => {
                 return (
                   <div
                     className={changeColor ? "nav-link-active" : "nav-link"}
                     key={link.id}
                   >
-                    <NavLink
-                      to={link.path}
+                    <a
+                      href={link.path}
                       className={({ isActive, isPending }) =>
                         isPending ? "pending" : isActive ? "active" : ""
                       }
                       end
                     >
                       {link.text}
-                    </NavLink>
+                    </a>
                   </div>
                 );
               })}
