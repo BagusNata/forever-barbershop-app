@@ -17,7 +17,7 @@ const HomePage = () => {
   return (
     <div className="homepage">
       {/* Section Hero */}
-      <section id="Hero">
+      <section id="hero">
         <header className="cover w-100 min-vh-100 d-flex align-items-center">
           <Container>
             <Row className="header-box">
@@ -27,9 +27,7 @@ const HomePage = () => {
                   Bersama Kami!
                 </h1>
                 <p className="mb-4 animate__animated animate__fadeInUp animate__delay-0.5s">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Dolore, possimus tenetur. Maiores minus porro dignissimos modi
-                  repudiandae facere enim optio.
+                  -Forever barbershop, professional barber-
                 </p>
                 <div className="animate__animated animate__fadeInUp animate__delay-0.7s">
                   <button className="btn btn-light btn-lg rounded-2 me-2 mb-mx-0 mb-2">
@@ -50,7 +48,7 @@ const HomePage = () => {
         <div className="services w-100 min-vh-100">
           <Container>
             <Row>
-              <Col data-aos="zoom-in" data-aos-duration="500">
+              <Col data-aos="zoom-in">
                 <h1 className="text-center fw-bold">Pilihan Paket Layanan</h1>
                 <p className="text-center">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
