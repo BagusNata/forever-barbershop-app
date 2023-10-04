@@ -8,11 +8,10 @@ const FaqComponent = () => {
         <Row>
           <Col data-aos="zoom-in">
             <h1 className="text-center fw-bold">
-              Pertanyaan Yang Sering Ditanyakan
+              FAQ
             </h1>
             <p className="text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Recusandae, itaque?
+              Pertanyaan yang sering ditanyakan oleh calon konsumen.
             </p>
           </Col>
         </Row>

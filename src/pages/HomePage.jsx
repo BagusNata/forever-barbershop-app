@@ -51,8 +51,8 @@ const HomePage = () => {
               <Col data-aos="zoom-in">
                 <h1 className="text-center fw-bold">Pilihan Paket Layanan</h1>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, itaque?
+                  Silahkan pilih paket layanan yang disediakan oleh Forever
+                  Barbershop sesuai kebutuhan anda.
                 </p>
               </Col>
             </Row>
@@ -75,7 +75,7 @@ const HomePage = () => {
                             <Card.Text>{service.price}</Card.Text>
                           </Col>
                         </div>
-                        <Card.Text>{service.description}</Card.Text>
+                        <Card.Text>{service.description} <br/> {service.detail}</Card.Text>
                         <button className="btn btn-dark btn-lg rounded-2 mb-mx-0 mb-2 btn-service-book">
                           Book Now
                         </button>
@@ -97,8 +97,7 @@ const HomePage = () => {
               <Col data-aos="zoom-in">
                 <h1 className="text-center fw-bold">Testimonial</h1>
                 <p className="text-center">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, itaque?
+                  Kesan dan pesan dari konsumen setelah menggunakan jasa layanan Forever Barbershop.
                 </p>
               </Col>
             </Row>
