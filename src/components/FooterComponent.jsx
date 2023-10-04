@@ -22,7 +22,11 @@ const FooterComponent = () => {
               </a>
             </div>
             <div className="phone">
-              <a href="https://www.google.com" target="_blank" rel="noreferrer">
+              <a
+                href="https://wa.me/+6282147076324?text=Hallo,%20saya%20ingin%20reservasi%20di%20Forever%20Barbershop"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <i className="fa-brands fa-whatsapp"></i>
                 <p>0821-4707-6324 (text-only)</p>
               </a>
