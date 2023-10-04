@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 //Import Components
 import NavbarComponent from "./components/NavbarComponent";
-// import FooterComponent from "./components/FooterComponent";
+import FooterComponent from "./components/FooterComponent";
 
 //Import Pages
 import HomePage from "./pages/HomePage";
@@ -24,7 +24,7 @@ function App() {
         <Route path="/syaratketen" Component={SyaratKetenPage} />
         <Route path="*" Component={NotFoundPage} />
       </Routes>
-      {/* <FooterComponent /> */}
+      <FooterComponent />
     </div>
   );
 }
