@@ -9,31 +9,106 @@ import People1 from "../assets/img/testimonial/people-1.jpg";
 import People2 from "../assets/img/testimonial/people-2.jpg";
 import People3 from "../assets/img/testimonial/people-3.jpg";
 
-export const navLinks = [
+export const navlinks = [
   {
     id: 1,
+    path: "/login",
+    text: "Login",
+  },
+  {
+    id: 2,
+    path: "/signup",
+    text: "Sign up",
+  },
+  {
+    id: 3,
     path: "",
     text: "Home",
   },
   {
+    id: 4,
+    path: "/booking",
+    text: "Booking",
+  },
+];
+
+export const section = [
+  {
+    id: 1,
+    path: "#hero",
+    text: "Home",
+  },
+  {
     id: 2,
-    path: "booking",
+    path: "#services",
     text: "Booking",
   },
   {
     id: 3,
-    path: "testimonial",
+    path: "#testimonial",
     text: "Testimonial",
   },
   {
     id: 4,
-    path: "faq",
+    path: "#faq",
     text: "FAQ",
   },
   {
     id: 5,
-    path: "syaratketen",
+    path: "#syaratketen",
     text: "Syarat & Ketentuan",
+  },
+];
+
+export const jadwal = [
+  {
+    id: 1,
+    hari: "Senin",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
+  },
+  {
+    id: 2,
+    hari: "Selasa",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
+  },
+  {
+    id: 3,
+    hari: "Rabu",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
+  },
+  {
+    id: 4,
+    hari: "Kamis",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
+  },
+  {
+    id: 5,
+    hari: "Jumat",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
+  },
+  {
+    id: 6,
+    hari: "Sabtu",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
+  },
+  {
+    id: 7,
+    hari: "Minggu",
+    buka: "10:00 WITA",
+    dash: "-",
+    tutup: "21:00 WITA",
   },
 ];
 
