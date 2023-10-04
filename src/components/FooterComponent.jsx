@@ -93,7 +93,16 @@ const FooterComponent = () => {
             <div className="copyright px-md-0 px-3">
               <p>
                 &copy; Copyright {new Date().getFullYear()} by{" "}
-                <strong>Bagus Nata</strong>, All Right Reserved
+                <span>
+                  <a
+                    href="https://www.instagram.com/bagusnataa/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Bagus Nata
+                  </a>
+                </span>
+                , All Right Reserved
               </p>
             </div>
           </Col>
