@@ -6,16 +6,16 @@ const FooterComponent = () => {
     <div className="footer py-5">
       <Container>
         <Row className="d-flex justify-content-between">
-          <Col lg="5" className="col">
-            <h3 className="fw-bold mb-2">Forever Barbershop</h3>
-            <div>
+          <Col lg="5">
+            <h3 className="fw-bold mb-3">Forever Barbershop</h3>
+            <div className="address">
               <a
                 href="https://www.google.com/maps/place/Forever+Barbershop/@-8.6486785,115.2273298,17z/data=!3m1!4b1!4m6!3m5!1s0x2dd23fe4e56c336f:0x1fab75240672e37!8m2!3d-8.6486785!4d115.2322007!16s%2Fg%2F11s5dmbz23?entry=ttu"
                 target="_blank"
                 rel="noreferrer"
               >
                 <i className="fa-solid fa-location-dot"></i>
-                <p>
+                <p className="m-0 mb-2 mx-2">
                   Jl. WR Supratman No.81, Sumerta, Kec. Denpasar Tim., Kota
                   Denpasar, Bali 80236.
                 </p>
@@ -28,46 +28,45 @@ const FooterComponent = () => {
                 rel="noreferrer"
               >
                 <i className="fa-brands fa-whatsapp"></i>
-                <p>0821-4707-6324 (text-only)</p>
+                <p className="m-0 mb-2 mx-2">0821-4707-6324 (text-only)</p>
               </a>
             </div>
             <div className="email">
               <a href="https://www.google.com" target="_blank" rel="noreferrer">
-                <i className="fa-solid fa-envelope"></i>
-                <p>person-email@gmail.com</p>
+                <i className="fa-regular fa-envelope"></i>
+                <p className="m-0 mb-2 mx-2">person-email@gmail.com</p>
               </a>
             </div>
-
-            <div className="social">
-              <h5 className="fw-bold mb-2">Our Socials</h5>
-              <div className="socials d-flex">
-                <a
-                  href="https://www.instagram.com/foreverbarberbali/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <i className="fa-brands fa-instagram px-2"></i>
-                </a>
-                <a
-                  href="https://www.tiktok.com/@foreverbarberbali"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <i className="fa-brands fa-tiktok px-2"></i>
-                </a>
-              </div>
+            <div className="instagram">
+              <a
+                href="https://www.instagram.com/foreverbarberbali/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="fa-brands fa-instagram"></i>
+                <p className="m-0 mb-2 mx-2">Foreverbarberbali</p>
+              </a>
+            </div>
+            <div className="instagram">
+              <a
+                href="https://www.instagram.com/foreverbarberbali/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <i className="fa-brands fa-tiktok"></i>
+                <p className="m-0 mb-2 mx-2">Foreverbarberbali</p>
+              </a>
             </div>
           </Col>
-          <Col className="d-flex flex-column col-lg-2 col">
-            <h5 className="fw-bold mb-2">Menu</h5>
+          <Col className="d-flex flex-column col-lg-2 col mt-lg-0 mt-5">
+            <h5 className="fw-bold mb-3">Menu</h5>
             <a href="#hero">Home</a>
             <a href="#services">Booking</a>
             <a href="#testimonial">Testimonial</a>
             <a href="#faq">FAQ</a>
-            <a href="syaratketen">Syarat & Ketentuan</a>
           </Col>
-          <Col lg="4" className="col">
-            <h5 className="fw-bold mb-2">Jadwal Operasional</h5>
+          <Col lg="4" className="mt-lg-0 mt-5">
+            <h5 className="fw-bold mb-3">Jadwal Operasional</h5>
             <table>
               <thead className="d-none">
                 <tr>
@@ -93,22 +92,18 @@ const FooterComponent = () => {
           </Col>
         </Row>
         <Row>
-          <Col className="text-center py-4">
-            <div className="copyright px-md-0 px-3">
-              <p>
-                &copy; Copyright {new Date().getFullYear()} by{" "}
-                <span>
-                  <a
-                    href="https://www.instagram.com/bagusnataa/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Bagus Nata
-                  </a>
-                </span>
-                , All Right Reserved
-              </p>
-            </div>
+          <Col>
+            <p className="d-flex justify-content-center px-md-0 px-3">
+              &copy; Copyright {new Date().getFullYear()} by
+              <a
+                href="https://www.instagram.com/bagusnataa/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Bagus Nata
+              </a>
+              , All Right Reserved
+            </p>
           </Col>
         </Row>
       </Container>
