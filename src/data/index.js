@@ -53,11 +53,6 @@ export const section = [
     path: "#faq",
     text: "FAQ",
   },
-  {
-    id: 5,
-    path: "#syaratketen",
-    text: "Syarat & Ketentuan",
-  },
 ];
 
 export const jadwal = [
