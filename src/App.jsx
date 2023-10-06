@@ -1,30 +1,24 @@
 import { Routes, Route } from "react-router-dom";
 
-//Import Components
-import NavbarComponent from "./components/NavbarComponent";
-import FooterComponent from "./components/FooterComponent";
-
 //Import Pages
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import TestimonialPage from "./pages/TestimonialPage";
-import FaqPage from "./pages/FaqPage";
-import SyaratKetenPage from "./pages/SyaratKetenPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
     <div>
-      <NavbarComponent />
       <Routes>
+        <Route path="/login" Component={LoginPage} />
+        <Route path="/register" Component={RegisterPage} />
         <Route path="/" Component={HomePage} />
         <Route path="/booking" Component={BookingPage} />
         <Route path="/testimonial" Component={TestimonialPage} />
-        <Route path="/faq" Component={FaqPage} />
-        <Route path="/syaratketen" Component={SyaratKetenPage} />
         <Route path="*" Component={NotFoundPage} />
       </Routes>
-      <FooterComponent />
     </div>
   );
 }
