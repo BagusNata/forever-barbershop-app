@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { section } from "../data/index";
+import { useNavigate } from "react-router-dom";
 
 const NavbarComponent = () => {
+  //navigate page
+  let navigate = useNavigate();
+
+  //styling for navbar color
   const [changeColor, setChangeColor] = useState(false);
 
   const changeBgNavbar = () => {
@@ -67,6 +72,9 @@ const NavbarComponent = () => {
                     ? "btn btn-dark rounded-2 m-2"
                     : "btn btn-light rounded-2 m-2"
                 }
+                onClick={() => {
+                  navigate("/login");
+                }}
               >
                 Login
               </button>
@@ -76,8 +84,11 @@ const NavbarComponent = () => {
                     ? "btn btn-outline-dark rounded-2 m-2 "
                     : "btn btn-outline-light rounded-2 m-2"
                 }
+                onClick={()=>{
+                  navigate("/register");
+                }}
               >
-                Sign up
+                Register
               </button>
             </div>
           </Navbar.Collapse>
