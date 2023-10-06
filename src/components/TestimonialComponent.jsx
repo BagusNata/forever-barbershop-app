@@ -1,4 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -13,6 +14,7 @@ import { Pagination } from "swiper/modules";
 import { dataSwiper } from "../data/index.js";
 
 const TestimonialComponent = () => {
+  let navigate = useNavigate();
   return (
     <div className="testimonial">
       <Container>
@@ -59,18 +61,40 @@ const TestimonialComponent = () => {
                   key={testimonial.id}
                   className="shadow-sm rounded-3"
                 >
-                  <p className="desc">{testimonial.desc}</p>
-                  <div className="people">
-                    <img src={testimonial.image} alt={testimonial.name} />
-                    <div>
+                  <div className="position-fixed pb-5">
+                    <div className="d-flex align-items-center people">
+                      <img src={testimonial.image} alt={testimonial.name} />
                       <h6 className="mb-1">{testimonial.name}</h6>
-                      <p className="m-0 fw-bold">{testimonial.time}</p>
+                    </div>
+                    <div className="d-flex align-items-center pt-2 pb-4 detail">
+                      <i className="fa-solid fa-star rating"></i>
+                      <i className="fa-solid fa-star rating"></i>
+                      <i className="fa-solid fa-star rating"></i>
+                      <i className="fa-solid fa-star rating"></i>
+                      <i className="fa-solid fa-star rating"></i>
+                      <i className="fa-solid fa-circle titik"></i>
+                      <p>{testimonial.time}</p>
                     </div>
                   </div>
+
+                  <p className="desc">{testimonial.desc}</p>
                 </SwiperSlide>
               );
             })}
           </Swiper>
+        </Row>
+        <Row>
+          <Col className="text-center">
+            <button
+              className="btn btn-dark btn-lg rounded-3"
+              onClick={() => {
+                navigate("/testimonial");
+              }}
+            >
+              Lihat Semua Testimonial{" "}
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
+          </Col>
         </Row>
       </Container>
     </div>
