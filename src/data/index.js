@@ -5,32 +5,10 @@ import ServiceImage4 from "../assets/img/service/service-4.jpg";
 import ServiceImage5 from "../assets/img/service/service-5.jpg";
 import ServiceImage6 from "../assets/img/service/service-6.jpg";
 
+import NoImage from "../assets/img/testimonial/no-image.jpg";  
 import People1 from "../assets/img/testimonial/people-1.jpg";
 import People2 from "../assets/img/testimonial/people-2.jpg";
 import People3 from "../assets/img/testimonial/people-3.jpg";
-
-export const navlinks = [
-  {
-    id: 1,
-    path: "/login",
-    text: "Login",
-  },
-  {
-    id: 2,
-    path: "/signup",
-    text: "Sign up",
-  },
-  {
-    id: 3,
-    path: "",
-    text: "Home",
-  },
-  {
-    id: 4,
-    path: "/booking",
-    text: "Booking",
-  },
-];
 
 export const section = [
   {
@@ -136,7 +114,7 @@ export const semuaService = [
     title: "Trimming",
     price: "Rp. 15.000",
     description:
-      "Paket layanan ini cocok untuk kamu yang hanya merapikan ujung-ujung rambut.",
+      "Paket layanan ini cocok untuk kamu yang ingin merapikan ujung-ujung rambut.",
     detail: "(Hair Trimming)",
     buy: "Book Now",
     delay: "1900",
@@ -147,7 +125,7 @@ export const semuaService = [
     title: "Shaving",
     price: "Rp. 30.000",
     description:
-      "Paket layanan ini cocok untuk kamu yang ingin mencukur dan merapikan kumis atau jenggot.",
+      "Paket layanan ini cocok untuk kamu yang ingin merapikan kumis dan jenggot.",
     detail: "(Shaving)",
     buy: "Book Now",
     delay: "",
@@ -179,14 +157,14 @@ export const testimonial = [
   {
     id: 1,
     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
+    image: People3,
     name: "People 1",
     skill: "UI UX Designer",
   },
   {
     id: 2,
     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People2,
+    image: NoImage,
     name: "People 2",
     skill: "Flutter Developer",
   },
@@ -200,7 +178,7 @@ export const testimonial = [
   {
     id: 4,
     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
+    image: NoImage,
     name: "People 4",
     skill: "UI UX Designer",
   },
@@ -214,14 +192,14 @@ export const testimonial = [
   {
     id: 6,
     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People3,
+    image: NoImage,
     name: "People 6",
     skill: "Web Developer",
   },
   {
     id: 7,
     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People1,
+    image: NoImage,
     name: "People 7",
     skill: "UI UX Designer",
   },
@@ -235,7 +213,7 @@ export const testimonial = [
   {
     id: 9,
     desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, saepe a. Quod eos non, dolores sapiente dicta quam esse reprehenderit explicabo vitae nesciunt ut laborum harum, vel optio corporis voluptatem?",
-    image: People3,
+    image: NoImage,
     name: "People 9",
     skill: "Web Developer",
   },
@@ -245,35 +223,35 @@ export const dataSwiper = [
   {
     id: 1,
     desc: "Kebetulan saya waktu itu mendapat kesempatan untuk menjadi model khusus untuk pembuatan content oleh owner-nya, karena saat itu ada sebuah postingan dari salah satu IG denpasar, dan saya DM di IG Forever Babershop. Pelayanan yang sangat ramah, owner-nya ramah dan stafnya juga sangat ramah. Sekalian saya minta hair cut anak saya, dan hasilnya memang cocok dan sesuai dengan keinginan. Top banget lah, kapan-kapan pasti saya balik lagi potong rambut disini.",
-    image: People1,
+    image: People2,
     name: "Adi Elyas Akbar",
     time: "a month ago",
   },
   {
     id: 2,
     desc: "I could say my hair’s character is hard to dress but they made it looks great after treatment. Good playlist, free parking, nice interiors, and cold indoors.",
-    image: People2,
+    image: NoImage,
     name: "Ari Dermawan",
     time: "a month ago",
   },
   {
     id: 3,
     desc: "Best Barber 🌟 🌟 🌟 🌟 🌟Tempat nyaman, Bersih, pelayananya ramah,  baik dan hasil potongan yg sangat memuaskan. Pokoknya Recomended banget.  GRATIS PARKIR pula.",
-    image: People3,
+    image: NoImage,
     name: "Diary Dirandra",
     time: "4 weeks ago",
   },
   {
     id: 4,
     desc: "Mantap ruangan ber ac tempat potong rambut yang sangat bersih dan pelayanan nya juga ramah bener2 nyaman potong rambut disini tidak grasa grusu hasil memuaskan rapi dan bersih keren good job👍",
-    image: People1,
+    image: NoImage,
     name: "Juniawan Fx",
     time: "3 weeks ago",
   },
   {
     id: 5,
     desc: "Harga murah namun hasil cukuran mahal",
-    image: People2,
+    image: NoImage,
     name: "Indra Yasa",
     time: "a month ago",
   },
@@ -294,21 +272,21 @@ export const dataSwiper = [
   {
     id: 8,
     desc: "Potong rambut anak selalu disini...",
-    image: People2,
+    image: NoImage,
     name: "Agus Gede",
     time: "2 months ago",
   },
   {
     id: 9,
     desc: "bagus tempatnya dan bersih, pegawainya juga ramah hasil cukuran juga bagus di sini",
-    image: People3,
+    image: NoImage,
     name: "Reza Pratama",
     time: "3 months ago",
   },
   {
     id: 10,
     desc: "Barber blm banyak yg tau, hasilnya bagus rekomen.",
-    image: People1,
+    image: NoImage,
     name: "Margus Surya5758",
     time: "2 months ago",
   },
