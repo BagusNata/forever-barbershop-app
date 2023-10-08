@@ -12,7 +12,7 @@ const TestimonialPage = () => {
         <Row className="py-5">
           <img
             data-aos="zoom-in-up"
-            src="./brand-transparent.png"
+            src="./brand-transparent.webp"
             alt="Forever Barbershop"
             onClick={() => navigate("/")}
           />

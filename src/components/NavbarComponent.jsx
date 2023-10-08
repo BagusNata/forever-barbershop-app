@@ -34,9 +34,9 @@ const NavbarComponent = () => {
         <Container>
           <Navbar.Brand href="/">
             <img
-              src="./brand-transparent.png"
+              src="./brand-transparent.webp"
               className={changeColor ? "nav-color-active" : "nav-color"}
-              alt="brand"
+              alt="Forever Barbershop"
             />
           </Navbar.Brand>
           <Navbar.Toggle
@@ -84,7 +84,7 @@ const NavbarComponent = () => {
                     ? "btn btn-outline-dark rounded-2 m-2 "
                     : "btn btn-outline-light rounded-2 m-2"
                 }
-                onClick={()=>{
+                onClick={() => {
                   navigate("/register");
                 }}
               >
