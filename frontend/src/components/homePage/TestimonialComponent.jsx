@@ -61,12 +61,11 @@ const TestimonialComponent = () => {
                   key={testimonial.id}
                   className="shadow-sm rounded-3"
                 >
-                  <div className="position-fixed pb-5">
+                  <div className="position-fixed">
                     <div className="d-flex align-items-center people">
-                      <img src={testimonial.image} alt={testimonial.name} />
                       <h6 className="mb-1">{testimonial.name}</h6>
                     </div>
-                    <div className="d-flex align-items-center pt-2 pb-4 detail">
+                    <div className="d-flex align-items-center pt-2 detail">
                       <i className="fa-solid fa-star rating"></i>
                       <i className="fa-solid fa-star rating"></i>
                       <i className="fa-solid fa-star rating"></i>

@@ -35,8 +35,7 @@ const TestimonialPage = () => {
                     <div>
                       <Col>
                         <Card.Title className="d-flex align-items-center">
-                          <img src={data.image} alt={data.name} />
-                          <p className="m-0 mx-2">{data.name}</p>
+                          <p className="m-0">{data.name}</p>
                         </Card.Title>
                         <Card.Text className="d-flex align-items-center pb-3">
                           <i className="fa-solid fa-star rating"></i>
