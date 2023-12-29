@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { jadwal } from "../data";
+import { jadwal } from "../../data";
 
 const FooterComponent = () => {
   return (
@@ -31,12 +31,6 @@ const FooterComponent = () => {
                 <p className="m-0 mb-2 mx-2">0821-4707-6324 (text-only)</p>
               </a>
             </div>
-            <div className="email">
-              <a href="https://www.google.com" target="_blank" rel="noreferrer">
-                <i className="fa-regular fa-envelope"></i>
-                <p className="m-0 mb-2 mx-2">person-email@gmail.com</p>
-              </a>
-            </div>
             <div className="instagram">
               <a
                 href="https://www.instagram.com/foreverbarberbali/"
@@ -47,9 +41,9 @@ const FooterComponent = () => {
                 <p className="m-0 mb-2 mx-2">Foreverbarberbali</p>
               </a>
             </div>
-            <div className="instagram">
+            <div className="tiktok">
               <a
-                href="https://www.instagram.com/foreverbarberbali/"
+                href="https://www.tiktok.com/@foreverbarberbali"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -61,7 +55,9 @@ const FooterComponent = () => {
           <Col className="d-flex flex-column col-lg-2 col mt-lg-0 mt-5">
             <h5 className="fw-bold mb-3">Menu</h5>
             <a href="#hero">Home</a>
-            <a href="#services">Booking</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="/booking">Booking</a>
             <a href="#testimonial">Testimonial</a>
             <a href="#faq">FAQ</a>
           </Col>

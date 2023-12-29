@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { semuaService } from "../data/index.js";
+import { semuaService } from "../../data/index.js";
 
 const ServicesComponent = () => {
   return (

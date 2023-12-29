@@ -11,7 +11,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
 //import data swiper
-import { dataSwiper } from "../data/index.js";
+import { dataSwiper } from "../../data/index.js";
 
 const TestimonialComponent = () => {
   let navigate = useNavigate();

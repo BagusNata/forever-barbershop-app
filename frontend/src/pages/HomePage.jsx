@@ -1,12 +1,13 @@
-import "../dist/css/homepage.css";
+import "../dist/css/homePage.css";
 
 //Import Components
-import NavbarComponent from "../components/NavbarComponent";
-import HeroComponent from "../components/HeroComponent";
-import ServicesComponent from "../components/ServicesComponent";
-import TestimonialComponent from "../components/TestimonialComponent";
-import FaqComponent from "../components/FaqComponent";
-import FooterComponent from "../components/FooterComponent";
+import NavbarComponent from "../components/homePage/NavbarComponent";
+import HeroComponent from "../components/homePage/HeroComponent";
+import AboutComponent from "../components/homePage/AboutComponent";
+import ServicesComponent from "../components/homePage/ServicesComponent";
+import TestimonialComponent from "../components/homePage/TestimonialComponent";
+import FaqComponent from "../components/homePage/FaqComponent";
+import FooterComponent from "../components/homePage/FooterComponent";
 
 
 const HomePage = () => {
@@ -18,6 +19,11 @@ const HomePage = () => {
       {/* Section Hero */}
       <section id="hero">
         <HeroComponent />
+      </section>
+
+      {/* Section About */}
+      <section id="about">
+        <AboutComponent />
       </section>
 
       {/* Section Services */}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { section } from "../data/index";
+import { section } from "../../data/index";
 import { useNavigate } from "react-router-dom";
 
 const NavbarComponent = () => {
@@ -73,10 +73,10 @@ const NavbarComponent = () => {
                     : "btn btn-light rounded-2 m-2"
                 }
                 onClick={() => {
-                  navigate("/login");
+                  navigate("/signin");
                 }}
               >
-                Login
+                Sign in
               </button>
               <button
                 className={
@@ -85,10 +85,10 @@ const NavbarComponent = () => {
                     : "btn btn-outline-light rounded-2 m-2"
                 }
                 onClick={() => {
-                  navigate("/register");
+                  navigate("/signup");
                 }}
               >
-                Register
+                Sign up
               </button>
             </div>
           </Navbar.Collapse>

@@ -13,7 +13,7 @@ import "swiper/css/pagination";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
 
 // import image
-import { aboutSlider } from "../data/index.js";
+import { aboutSlider } from "../../data/index.js";
 
 const AboutComponent = () => {
   return (

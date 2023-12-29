@@ -18,16 +18,26 @@ export const section = [
   },
   {
     id: 2,
-    path: "#services",
-    text: "Booking",
+    path: "#about",
+    text: "About Us",
   },
   {
     id: 3,
+    path: "#services",
+    text: "Services",
+  },
+  {
+    id: 4,
+    path: "/booking",
+    text: "Booking",
+  },
+  {
+    id: 5,
     path: "#testimonial",
     text: "Testimonial",
   },
   {
-    id: 4,
+    id: 6,
     path: "#faq",
     text: "FAQ",
   },
@@ -85,71 +95,92 @@ export const jadwal = [
   },
 ];
 
+export const aboutSlider = [
+  {
+    id: 1,
+    img: ServiceImage1,
+    title: "Forever Barbershop",
+  },
+  {
+    id: 2,
+    img: ServiceImage2,
+    title: "Forever Barbershop",
+  },
+  {
+    id: 3,
+    img: ServiceImage3,
+    title: "Forever Barbershop",
+  },
+  {
+    id: 4,
+    img: ServiceImage4,
+    title: "Forever Barbershop",
+  },
+  {
+    id: 5,
+    img: ServiceImage5,
+    title: "Forever Barbershop",
+  },
+  {
+    id: 6,
+    img: ServiceImage6,
+    title: "Forever Barbershop",
+  },
+];
+
 export const semuaService = [
   {
     id: 1,
     img: ServiceImage1,
     title: "Basic Cut",
-    price: "Rp. 40.000",
+    price: "Rp. 35.000",
     description:
       "Paket layanan yang paling sederhana, cocok untuk kamu yang hanya ingin potong rambut.",
-    detail: "(Hair cut, Styling)",
-    buy: "Book Now",
-    delay: "1300",
+    detail: "(Hair cut, Styling)"
   },
   {
     id: 2,
     img: ServiceImage2,
     title: "King Cut",
-    price: "Rp. 50.000",
+    price: "Rp. 45.000",
     description:
       "Paket layanan ini cocok untuk kamu yang ingin Ganteng Maksimal.",
-    detail: "(Hair cut, Hair Wash, Styling)",
-    buy: "Book Now",
-    delay: "1600",
+    detail: "(Hair cut, Hair Wash, Styling)"
   },
   {
     id: 3,
     img: ServiceImage3,
     title: "Trimming",
-    price: "Rp. 15.000",
+    price: "Rp. 10.000",
     description:
       "Paket layanan ini cocok untuk kamu yang ingin merapikan ujung-ujung rambut.",
-    detail: "(Hair Trimming)",
-    buy: "Book Now",
-    delay: "1900",
+    detail: "(Hair Trimming)"
   },
   {
     id: 4,
     img: ServiceImage4,
     title: "Shaving",
-    price: "Rp. 30.000",
+    price: "Rp. 10.000",
     description:
       "Paket layanan ini cocok untuk kamu yang ingin merapikan kumis dan jenggot.",
-    detail: "(Shaving)",
-    buy: "Book Now",
-    delay: "",
+    detail: "(Shaving)"
   },
   {
     id: 5,
     img: ServiceImage5,
-    title: "Hair Colouring",
-    price: "Rp. 90.000",
+    title: "Hair Color Black",
+    price: "Rp. 80.000",
     description:
-      "Paket layanan ini cocok untuk kamu yang ingin tampil beda dengan mewarnai rambut.",
-    detail: "(Hair Colouring, Hair Wash, Styling)",
-    buy: "Book Now",
-    delay: "300",
+      "Paket layanan ini cocok untuk kamu yang ingin menghitamkan rambut agar tampak lebih fresh.",
+    detail: "(Hair Colouring, Hair Wash, Styling)"
   },
   {
     id: 6,
     img: ServiceImage6,
-    title: "Styling",
+    title: "Hair Wash",
     price: "Rp. 25.000",
-    description: "Paket layanan ini cocok untuk kamu yang hanya ingin menata rambut.",
-    detail: "(Hair Styling)",
-    buy: "Book Now",
-    delay: "600",
+    description: "Paket layanan ini cocok untuk kamu yang hanya ingin mencuci rambut.",
+    detail: "(Hair Wash)"
   },
 ];
 
