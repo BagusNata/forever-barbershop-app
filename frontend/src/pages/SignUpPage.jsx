@@ -1,7 +1,132 @@
-const SignUpPage = () => {
-  return (
-    <div className="w-100 min-vh-100 py5"><h1>SignUpPage</h1></div>
-  )
-}
+import "../dist/css/signUpPage.css";
+import { Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
-export default SignUpPage
+const validate = (values) => {
+  const errors = {};
+
+  if (!values.userName) {
+    errors.userName = "Required!";
+  } else if (values.userName.length < 5) {
+    errors.userName = "Must be 5 characters or more!";
+  }
+
+  if (!values.email) {
+    errors.email = "Required!";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address!";
+  }
+
+  if (!values.password) {
+    errors.password = "Required!";
+  } else if (values.password.length < 3) {
+    errors.password = "Must be 3 characters or more!";
+  }
+
+  return errors;
+};
+
+const SignUpPage = () => {
+  let navigate = useNavigate();
+
+  const formik = useFormik({
+    initialValues: {
+      userName: "",
+      email: "",
+      password: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  return (
+    <div className="signup w-100 min-vh-100">
+      <Container>
+        <div className="position-absolute top-50 start-50 translate-middle form-box">
+          <form onSubmit={formik.handleSubmit}>
+            <div className="d-flex justify-content-center logo-box">
+              <div className="logo rounded-circle d-flex justify-content-center">
+                <img
+                  src="./brand-transparent.webp"
+                  width={"75px"}
+                  height={"40px"}
+                  alt="Forever Barbershop"
+                />
+              </div>
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Username</label>
+              <input
+                className="form-control"
+                autoFocus
+                type="text"
+                id="userName"
+                name="userName"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.userName}
+              />
+              {formik.touched.userName && formik.errors.userName ? (
+                <div className="error">{formik.errors.userName}</div>
+              ) : null}
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input
+                className="form-control"
+                type="email"
+                id="email"
+                name="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <div className="error">{formik.errors.email}</div>
+              ) : null}
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input
+                className="form-control"
+                type="password"
+                id="password"
+                name="password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {formik.touched.password && formik.errors.password ? (
+                <div className="error">{formik.errors.password}</div>
+              ) : null}
+            </div>
+
+            <div className="mb-4">
+              <p>
+                already have account? <a href="/signin"> Sign in</a>
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <button type="submit" className="btn btn-success">
+                Submit
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="btn btn-outline-danger"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </Container>
+    </div>
+  );
+};
+
+export default SignUpPage;
