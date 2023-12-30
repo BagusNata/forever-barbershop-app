@@ -31,8 +31,6 @@ const SignInPage = () => {
         const data = await response.json();
         if (data && data.accessToken) {
           setUserData(data)
-          // save token to localstorage
-          localStorage.setItem('accessToken', JSON.stringify(data.accessToken));
         }
       } finally {
         setIsLoading(false)
