@@ -1,4 +1,4 @@
-import "../dist/css/testimonialPage.css";
+import "../assets/css/testimonialPage.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { testimonial } from "../data";

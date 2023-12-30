@@ -1,0 +1,53 @@
+.testimonial-page {
+  background: linear-gradient(0deg, #292640 0%, #eff0f3 100%);
+  text-align: justify;
+}
+
+.testimonial-page .row:nth-child(1) img {
+  width: 130px;
+  cursor: pointer;
+}
+
+.testimonial-page .header {
+  margin: 50px 0;
+}
+
+.testimonial-page .row:nth-child(3) .card {
+  margin-bottom: 10px;
+  background-color: var(--background-color);
+}
+
+.testimonial-page .row:nth-child(3) .col:nth-child(1) .rating {
+  font-size: 15px;
+  color: rgb(238, 192, 7);
+  margin-right: 10px;
+}
+
+.testimonial-page .row:nth-child(3) .col:nth-child(1) .titik {
+  font-size: 6px;
+  margin-right: 10px;
+  margin-top: 3.5px;
+}
+
+.testimonial-page .row:nth-child(3) .col:nth-child(1) .card-title p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 991px) {
+  .testimonial-page .row:nth-child(1) img {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .testimonial-page .row:nth-child(1) img {
+    width: 110px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .testimonial-page .row:nth-child(1) img {
+    width: 100px;
+  }
+}

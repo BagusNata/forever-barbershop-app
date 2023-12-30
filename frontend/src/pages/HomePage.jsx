@@ -1,4 +1,4 @@
-import "../dist/css/homePage.css";
+import "../assets/css/homePage.css";
 
 //Import Components
 import NavbarComponent from "../components/homePage/NavbarComponent";

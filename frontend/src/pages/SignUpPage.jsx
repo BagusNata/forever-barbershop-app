@@ -1,4 +1,4 @@
-import "../dist/css/signUpPage.css";
+import "../assets/css/signUpPage.css";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
