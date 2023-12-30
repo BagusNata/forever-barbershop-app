@@ -31,6 +31,9 @@ const SignInPage = () => {
         const data = await response.json();
         if (data && data.accessToken) {
           setUserData(data)
+          localStorage.setItem('userData', JSON.stringify(data))
+          // TODO: show alert success and redirect to home page
+          navigate("/")
         }
       } finally {
         setIsLoading(false)

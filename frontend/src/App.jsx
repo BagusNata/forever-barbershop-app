@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from 'react'
 
 //Import Pages
 import SignInPage from "./pages/SignInPage";
@@ -7,11 +8,20 @@ import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
 import TestimonialPage from "./pages/TestimonialPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import { UserContextProvider } from './UserContext'
+import { useUserContext } from './UserContext'
 
 function App() {
+  const { setUserData } = useUserContext()
+
+  useEffect(() => {
+    const userStorage = localStorage.getItem('userData')
+    if (userStorage) {
+      setUserData(JSON.parse(userStorage))
+    }
+  }, [])
+
   return (
-    <UserContextProvider>
+    <div>
       <Routes>
         <Route path="/signin" Component={SignInPage} />
         <Route path="/signup" Component={SignUpPage} />
@@ -20,7 +30,7 @@ function App() {
         <Route path="/testimonial" Component={TestimonialPage} />
         <Route path="*" Component={NotFoundPage} />
       </Routes>
-    </UserContextProvider>
+    </div>
   );
 }
 

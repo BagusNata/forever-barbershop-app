@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { section } from "../../data/index";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from '../../UserContext'
 
 const NavbarComponent = () => {
   //navigate page
@@ -9,6 +10,7 @@ const NavbarComponent = () => {
 
   //styling for navbar color
   const [changeColor, setChangeColor] = useState(false);
+  const { userData } = useUserContext()
 
   const changeBgNavbar = () => {
     if (window.scrollY > 10) {
@@ -65,32 +67,35 @@ const NavbarComponent = () => {
               })}
             </Nav>
 
-            <div className="text-center">
-              <button
-                className={
-                  changeColor
-                    ? "btn btn-dark rounded-2 m-2"
-                    : "btn btn-light rounded-2 m-2"
-                }
-                onClick={() => {
-                  navigate("/signin");
-                }}
-              >
-                Sign in
-              </button>
-              <button
-                className={
-                  changeColor
-                    ? "btn btn-outline-dark rounded-2 m-2 "
-                    : "btn btn-outline-light rounded-2 m-2"
-                }
-                onClick={() => {
-                  navigate("/signup");
-                }}
-              >
-                Sign up
-              </button>
-            </div>
+            { !userData.username ?
+              <div className="text-center">
+                <button
+                  className={
+                    changeColor
+                      ? "btn btn-dark rounded-2 m-2"
+                      : "btn btn-light rounded-2 m-2"
+                  }
+                  onClick={() => {
+                    navigate("/signin");
+                  }}
+                >
+                  Sign in
+                </button>
+                <button
+                  className={
+                    changeColor
+                      ? "btn btn-outline-dark rounded-2 m-2 "
+                      : "btn btn-outline-light rounded-2 m-2"
+                  }
+                  onClick={() => {
+                    navigate("/signup");
+                  }}
+                >
+                  Sign up
+                </button>
+              </div>
+            : <div className="text-center text-white">{ userData.username }</div>
+            }
           </Navbar.Collapse>
         </Container>
       </Navbar>
