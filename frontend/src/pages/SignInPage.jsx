@@ -2,17 +2,35 @@ import "../assets/css/SignInPage.css";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useState } from 'react'
 
 const SignInPage = () => {
   let navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false)
 
   const formik = useFormik({
     initialValues: {
       userName: "",
       password: "",
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        setIsLoading(true)
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signin`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: values.userName,
+            password: values.password
+          })
+        })
+        const data = await response.json();
+        console.log(data)
+      } finally {
+        setIsLoading(false)
+      }
     },
   });
 
@@ -64,8 +82,8 @@ const SignInPage = () => {
             </div>
 
             <div className="mt-4">
-              <button type="submit" className="btn btn-success">
-                Submit
+              <button type="submit" className="btn btn-success" disabled={isLoading}>
+                { isLoading ? 'Loading...' : 'Submit' }
               </button>
               <button
                 type="button"
