@@ -3,10 +3,12 @@ import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from 'react'
+import { useUserContext } from '../UserContext'
 
 const SignInPage = () => {
   let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false)
+  const { setUserData } = useUserContext()
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +29,11 @@ const SignInPage = () => {
           })
         })
         const data = await response.json();
-        console.log(data)
+        if (data && data.accessToken) {
+          setUserData(data)
+          // save token to localstorage
+          localStorage.setItem('accessToken', JSON.stringify(data.accessToken));
+        }
       } finally {
         setIsLoading(false)
       }
