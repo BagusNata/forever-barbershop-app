@@ -104,14 +104,26 @@ const NavbarComponent = () => {
                       title={userData.username}
                       menuVariant="light"
                     >
-                      <NavDropdown.Item href="/myBooking">
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/myBooking");
+                        }}
+                      >
                         My booking
                       </NavDropdown.Item>
-                      <NavDropdown.Item href="/myTestimony">
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/myTestimony");
+                        }}
+                      >
                         My testimony
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
-                      <NavDropdown.Item href="/signout">
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/signout");
+                        }}
+                      >
                         Sign out
                       </NavDropdown.Item>
                     </NavDropdown>
