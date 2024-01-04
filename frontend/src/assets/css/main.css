@@ -96,6 +96,10 @@ html {
     border-bottom: 2px solid #ff8d3ca2;
     transition: all 0.8s ease;
     z-index: 9999;
+
+    .dropdown a {
+      color: var(--primary-color) !important;
+    }
   }
 
   .nav-color {
@@ -121,6 +125,27 @@ html {
   .navbar .nav-link-active {
     margin-bottom: 10px;
   }
+}
+
+.dropdown a{
+  color: var(--text-color-light) !important;
+}
+
+.dropdown-menu-light {
+  background-color: var(--navbar-color) !important;
+  margin-top: 0.7rem !important;
+}
+
+.dropdown-active a{
+  color: var(--primary-color) !important;
+}
+
+.dropdown-menu-light a{
+  color: var(--primary-color) !important;
+}
+
+.dropdown-item:hover {
+  background-color: var(--secondary-color) !important;
 }
 /* NAVBAR STYLE */
 
