@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { section } from "../../data/index";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from '../../UserContext'
+import { useUserContext } from "../../UserContext";
 
 const NavbarComponent = () => {
   //navigate page
@@ -10,7 +10,7 @@ const NavbarComponent = () => {
 
   //styling for navbar color
   const [changeColor, setChangeColor] = useState(false);
-  const { userData } = useUserContext()
+  const { userData } = useUserContext();
 
   const changeBgNavbar = () => {
     if (window.scrollY > 10) {
@@ -67,7 +67,7 @@ const NavbarComponent = () => {
               })}
             </Nav>
 
-            { !userData.username ?
+            {!userData.username ? (
               <div className="text-center">
                 <button
                   className={
@@ -94,8 +94,43 @@ const NavbarComponent = () => {
                   Sign up
                 </button>
               </div>
-            : <div className="text-center text-white">{ userData.username }</div>
-            }
+            ) : (
+              <div className="text-center">
+                <Navbar.Toggle aria-controls="user-info" />
+                <Navbar.Collapse id="user-info">
+                  <Nav>
+                    <NavDropdown
+                      className={changeColor ? "dropdown-active" : "dropdown"}
+                      title={userData.username}
+                      menuVariant="light"
+                    >
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/myBooking");
+                        }}
+                      >
+                        My booking
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/myTestimony");
+                        }}
+                      >
+                        My testimony
+                      </NavDropdown.Item>
+                      <NavDropdown.Divider />
+                      <NavDropdown.Item
+                        onClick={() => {
+                          navigate("/signout");
+                        }}
+                      >
+                        Sign out
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </Nav>
+                </Navbar.Collapse>
+              </div>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
