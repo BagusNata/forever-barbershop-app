@@ -70,7 +70,12 @@ const ServicesComponent = () => {
                           <Card.Title className="fw-bold">
                             {service.name}
                           </Card.Title>
-                          <Card.Text>Rp. {service.price}</Card.Text>
+                          <Card.Text>
+                            {new Intl.NumberFormat("id-ID", {
+                              style: "currency",
+                              currency: "IDR",
+                            }).format(service.price)}
+                          </Card.Text>
                         </Col>
                       </div>
                       <Card.Text>
