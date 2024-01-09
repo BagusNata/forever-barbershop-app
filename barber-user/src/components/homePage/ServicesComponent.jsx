@@ -34,7 +34,7 @@ const ServicesComponent = () => {
       // If user has accessToken, navigate to bookingPage
       navigate("/booking");
     } else {
-      // If user doesn't have accessToken, navigate to loginPage
+      // If user doesn't have accessToken, navigate to signInPage
       navigate("/signin");
     }
   };
