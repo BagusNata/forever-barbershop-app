@@ -142,6 +142,7 @@
 .homepage .about .swiper-slide img {
   border-radius: 15px;
   object-fit: cover;
+  width: 100%;
 }
 
 .homepage .about .swiper-button-prev {
