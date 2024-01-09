@@ -6,6 +6,7 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
+import MyBookingPage from "./pages/MyBookingPage";
 import TestimonialPage from "./pages/TestimonialPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { useUserContext } from './UserContext'
@@ -27,6 +28,7 @@ function App() {
         <Route path="/signup" Component={SignUpPage} />
         <Route path="/" Component={HomePage} />
         <Route path="/booking" Component={BookingPage} />
+        <Route path="/myBooking" Component={MyBookingPage} />
         <Route path="/testimonial" Component={TestimonialPage} />
         <Route path="*" Component={NotFoundPage} />
       </Routes>
