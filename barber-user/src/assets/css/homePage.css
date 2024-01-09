@@ -313,7 +313,8 @@
   margin-right: 10px;
 }
 
-.homepage .titik {
+.homepage .dot {
+  color: var(--primary-color);
   font-size: 6px;
   margin-right: 10px;
   margin-top: 3.5px;
