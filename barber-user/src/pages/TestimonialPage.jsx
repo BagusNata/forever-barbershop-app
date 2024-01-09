@@ -1,13 +1,44 @@
 import "../assets/css/testimonialPage.css";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { testimonial } from "../data";
+import { format } from "date-fns";
+
+//import user information
+import { useUserContext } from "../UserContext";
 
 const TestimonialPage = () => {
   let navigate = useNavigate();
 
+  const [data, setData] = useState([]);
+  const { userData } = useUserContext();
+
+  useEffect(() => {
+    const getService = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/testimonies`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setData(await response.json());
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getService();
+  }, []);
+
+  function formatDate(dateString) {
+    return format(new Date(dateString), "dd MMMM yyyy");
+  }
+
   return (
-    <div className="testimonial-page">
+    <div className="testimonial-page w-100 min-vh-100">
       <Container>
         <Row className="py-5">
           <img
@@ -27,7 +58,7 @@ const TestimonialPage = () => {
           </Col>
         </Row>
         <Row className="row-cols-1">
-          {testimonial.map((data) => {
+          {data.map((testimonial) => {
             return (
               <Col key={data.id}>
                 <Card data-aos="fade-down" className="shadow">
@@ -35,20 +66,21 @@ const TestimonialPage = () => {
                     <div>
                       <Col>
                         <Card.Title className="d-flex align-items-center">
-                          <p className="m-0">{data.name}</p>
+                          <p className="m-0">{userData.username}</p>
                         </Card.Title>
-                        <Card.Text className="d-flex align-items-center pb-3">
-                          <i className="fa-solid fa-star rating"></i>
-                          <i className="fa-solid fa-star rating"></i>
-                          <i className="fa-solid fa-star rating"></i>
-                          <i className="fa-solid fa-star rating"></i>
-                          <i className="fa-solid fa-star rating"></i>
-                          <i className="fa-solid fa-circle titik"></i>
-                          {data.time}
+                        <Card.Text className="d-flex align-items-center pb-3 detail">
+                          {[...Array(testimonial.rating)].map((_, index) => (
+                            <i
+                              key={index}
+                              className="fa-solid fa-star rating"
+                            ></i>
+                          ))}
+                          <i className="fas fa-dot-circle dot"></i>
+                          <p>{formatDate(testimonial.date)}</p>
                         </Card.Text>
                       </Col>
                     </div>
-                    <Card.Text>{data.desc}</Card.Text>
+                    <Card.Text>{testimonial.description}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
