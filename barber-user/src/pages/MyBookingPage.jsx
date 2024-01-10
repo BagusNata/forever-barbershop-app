@@ -12,7 +12,7 @@ const MyBookingPage = () => {
   const { userData } = useUserContext();
 
   useEffect(() => {
-    const getTestimonies = async () => {
+    const getbookings = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/bookings/me`,
@@ -24,13 +24,17 @@ const MyBookingPage = () => {
             },
           }
         );
-        setData(await response.json());
+        const bookings = await response.json();
+        if (bookings && bookings.length) {
+          setData(bookings);
+        }
       } catch (error) {
+        setData([])
         console.error("Error fetching data:", error);
       }
     };
-    getTestimonies();
-  }, []);
+    getbookings();
+  }, [userData]);
 
   function formatDate(dateString) {
     return format(new Date(dateString), "dd MMMM yyyy");
@@ -56,7 +60,9 @@ const MyBookingPage = () => {
           </Col>
         </Row>
         {data.length === 0 ? (
-          "Loading..."
+          <h5 className="no-booking">
+            You don&apos;t have any ongoing bookings
+          </h5>
         ) : (
           <Row className="row-col-lg-3 row-col-md-3 row-col-sm-1">
             {data.map((booking) => {
@@ -65,27 +71,58 @@ const MyBookingPage = () => {
                   <Col key={booking.id}>
                     <Card data-aos="fade-up" className="shadow">
                       <Card.Body>
-                        <div>
-                          <Col className="d-grid justify-content-between fw-bold">
-                            <Card.Title className="fw-bold">
-                              No. Booking : {booking.id}
-                            </Card.Title>
-                            <Card.Text>
-                              Nama : {userData.username} <br />
-                              Tanggal : {formatDate(booking.date)} <br />
-                              Jam : {booking.time}
-                            </Card.Text>
-                          </Col>
-                        </div>
-                        <Card.Text>
-                          Service : ({booking.serviceId})
-                        </Card.Text>
+                        <table className="tables">
+                          <thead className="title">Bukti Booking</thead>
+                          <tbody className="information">
+                            <tr>
+                              <th scope="row">Nama</th>
+                              <td>:</td>
+                              <td>{booking.user.username}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Tanggal</th>
+                              <td>:</td>
+                              <td>{formatDate(booking.date)}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Jam</th>
+                              <td>:</td>
+                              <td>{booking.time}:00</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Service</th>
+                              <td>:</td>
+                              <td>{booking.service.name}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Harga</th>
+                              <td>:</td>
+                              <td>
+                                {new Intl.NumberFormat("id-ID", {
+                                  style: "currency",
+                                  currency: "IDR",
+                                }).format(booking.service.price)}
+                                
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Detail</th>
+                              <td>:</td>
+                              <td>{booking.service.detail}</td>
+                            </tr>
+                          </tbody>
+                          <div className="d-contents mt-3">
+                            <button className="btn btn-danger">
+                              Cancel Booking
+                            </button>
+                          </div>
+                        </table>
                       </Card.Body>
                     </Card>
                   </Col>
                 );
               } else {
-                <div>u dont have booking</div>;
+                return null;
               }
             })}
           </Row>
