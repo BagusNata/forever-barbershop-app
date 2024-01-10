@@ -2,42 +2,76 @@
   background: linear-gradient(0deg, #292640 0%, #eff0f3 100%);
   text-align: justify;
 }
+
 .my-booking .row:nth-child(1) img {
   width: 130px;
   cursor: pointer;
 }
+
 .my-booking .row:nth-child(2) {
   padding-bottom: 50px;
 }
-.my-booking .row:nth-child(2) h1,.row:nth-child(2) p {
+
+.my-booking .row:nth-child(2) h1,
+.row:nth-child(2) p {
   color: var(--primary-color);
 }
+
 .my-booking .row:nth-child(3) {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+
+.my-booking .no-booking {
+  background-color: var(--navbar-color);
+  height: 50px;
+  padding: 13px 10px 10px 20px;
+  border-radius: 10px;
+}
+
 .my-booking .row:nth-child(3) .card {
   width: 100%;
   border: black;
   border-radius: 15px;
   margin-bottom: 2rem;
-  display: grid;
   -webkit-transition: all 2s;
   transition: all 2s;
 }
 
 .my-booking .row:nth-child(3) .card-body {
-  display: grid;
   background-color: var(--navbar-color);
   border-radius: 15px 15px;
 }
-.my-booking .row:nth-child(3) .card-title {
-  font-size: 20px;
+
+.my-booking .tables {
+  display: grid !important;
 }
-.my-booking .row:nth-child(3) .card-text {
-  font-size: 15px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 10; /* Number of lines displayed before it truncate */
-  overflow: hidden;
+
+.my-booking .title {
+  color: dimgrey;
+  font-size: 17px;
+}
+
+.my-booking .tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.my-booking .information {
+  font-size: 15px !important;
+}
+
+.my-booking .tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: var(--primary-color);
+}
+
+.my-booking th,
+.my-booking td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  border-color: rgba(0, 0, 0, 0.06);
 }
