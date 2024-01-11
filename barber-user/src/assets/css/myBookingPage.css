@@ -29,13 +29,18 @@
   border-radius: 10px;
 }
 
+.my-booking .row:nth-child(3) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
 .my-booking .row:nth-child(3) .card {
-  width: 100%;
   border: black;
   border-radius: 15px;
   margin-bottom: 2rem;
   -webkit-transition: all 2s;
   transition: all 2s;
+  margin-right: 1rem;
 }
 
 .my-booking .row:nth-child(3) .card-body {
@@ -60,6 +65,7 @@
 
 .my-booking .information {
   font-size: 15px !important;
+  height: 300px !important;
 }
 
 .my-booking .tr {
