@@ -3,6 +3,8 @@ import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const validate = (values) => {
   const errors = {};
@@ -30,7 +32,7 @@ const validate = (values) => {
 
 const SignUpPage = () => {
   let navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -41,27 +43,45 @@ const SignUpPage = () => {
     validate,
     onSubmit: async (values) => {
       try {
-        setIsLoading(true)
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: values.userName,
-            email: values.email,
-            password: values.password
-          })
-        })
+        setIsLoading(true);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/auth/signup`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: values.userName,
+              email: values.email,
+              password: values.password,
+            }),
+          }
+        );
         const data = await response.json();
         if (data) {
-          // TODO: show alert success and redirect to login page
+          // Show success alert
+          toast.success("Sign up successful! Redirecting to login page...");
+
+          // Redirect to the sign-in page after a brief delay (e.g., 2 seconds)
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
         }
+      } catch (error) {
+        // Handle sign-up error
+        console.error("Error signing up:", error);
+        toast.error("Error signing up. Please try again later.");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
   });
+
+  const handleSignUp = async () => {
+    // This function should be defined outside of the useFormik callback
+    formik.handleSubmit();
+  };
 
   return (
     <div className="signup w-100 min-vh-100">
@@ -132,8 +152,13 @@ const SignUpPage = () => {
             </div>
 
             <div className="mt-4">
-              <button type="submit" className="btn btn-success" disabled={isLoading}>
-                { isLoading ? 'Loading...' : 'Submit' }
+              <button
+                type="button"
+                className="btn btn-success"
+                disabled={isLoading}
+                onClick={handleSignUp}
+              >
+                {isLoading ? "Loading..." : "Submit"}
               </button>
               <button
                 type="button"
@@ -146,6 +171,7 @@ const SignUpPage = () => {
           </form>
         </div>
       </Container>
+      <ToastContainer />
     </div>
   );
 };

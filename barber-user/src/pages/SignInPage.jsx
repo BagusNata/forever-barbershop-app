@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from 'react'
 import { useUserContext } from '../UserContext'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignInPage = () => {
   let navigate = useNavigate();
@@ -17,26 +19,39 @@ const SignInPage = () => {
     },
     onSubmit: async (values) => {
       try {
-        setIsLoading(true)
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signin`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: values.userName,
-            password: values.password
-          })
-        })
+        setIsLoading(true);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/auth/signin`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: values.userName,
+              password: values.password,
+            }),
+          }
+        );
         const data = await response.json();
         if (data && data.accessToken) {
-          setUserData(data)
-          localStorage.setItem('userData', JSON.stringify(data))
-          // TODO: show alert success and redirect to home page
-          navigate("/")
+          setUserData(data);
+          localStorage.setItem("userData", JSON.stringify(data));
+
+          // Show success alert
+          toast.success("Sign in successful! Redirecting to home page...");
+
+          // Redirect to the home page after a brief delay (e.g., 2 seconds)
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
         }
+      } catch (error) {
+        // Handle sign-in error
+        console.error("Error signing in:", error);
+        toast.error("Error signing in. Please try again later.");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
   });
@@ -89,8 +104,12 @@ const SignInPage = () => {
             </div>
 
             <div className="mt-4">
-              <button type="submit" className="btn btn-success" disabled={isLoading}>
-                { isLoading ? 'Loading...' : 'Submit' }
+              <button
+                type="submit"
+                className="btn btn-success"
+                disabled={isLoading}
+              >
+                {isLoading ? "Loading..." : "Submit"}
               </button>
               <button
                 type="button"
@@ -103,6 +122,7 @@ const SignInPage = () => {
           </form>
         </div>
       </Container>
+      <ToastContainer />
     </div>
   );
 };
