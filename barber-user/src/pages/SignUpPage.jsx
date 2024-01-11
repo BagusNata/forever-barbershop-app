@@ -3,8 +3,8 @@ import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from 'react'
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+
 
 const validate = (values) => {
   const errors = {};
@@ -61,17 +61,23 @@ const SignUpPage = () => {
         const data = await response.json();
         if (data) {
           // Show success alert
-          toast.success("Sign up successful! Redirecting to login page...");
-
-          // Redirect to the sign-in page after a brief delay (e.g., 2 seconds)
-          setTimeout(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Sign in successful!",
+            timer: 2000, // 2 seconds
+          }).then(() => {
+            // Redirect to the sign in page
             navigate("/signin");
-          }, 2000);
+          });
         }
       } catch (error) {
         // Handle sign-up error
         console.error("Error signing up:", error);
-        toast.error("Error signing up. Please try again later.");
+        Swal.fire({
+          icon: "error",
+          title: "Error signing up",
+          text: "Please try again later.",
+        });
       } finally {
         setIsLoading(false);
       }
@@ -171,7 +177,6 @@ const SignUpPage = () => {
           </form>
         </div>
       </Container>
-      <ToastContainer />
     </div>
   );
 };

@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useState } from 'react'
 import { useUserContext } from '../UserContext'
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 
 const SignInPage = () => {
   let navigate = useNavigate();
@@ -39,17 +38,23 @@ const SignInPage = () => {
           localStorage.setItem("userData", JSON.stringify(data));
 
           // Show success alert
-          toast.success("Sign in successful! Redirecting to home page...");
-
-          // Redirect to the home page after a brief delay (e.g., 2 seconds)
-          setTimeout(() => {
+          Swal.fire({
+            icon: "success",
+            title: "Sign in successful!",
+            timer: 2000, // 2 seconds
+          }).then(() => {
+            // Redirect to the home page
             navigate("/");
-          }, 2000);
+          });
         }
       } catch (error) {
         // Handle sign-in error
         console.error("Error signing in:", error);
-        toast.error("Error signing in. Please try again later.");
+        Swal.fire({
+          icon: "error",
+          title: "Error signing in",
+          text: "Please try again later.",
+        });
       } finally {
         setIsLoading(false);
       }
@@ -122,7 +127,6 @@ const SignInPage = () => {
           </form>
         </div>
       </Container>
-      <ToastContainer />
     </div>
   );
 };

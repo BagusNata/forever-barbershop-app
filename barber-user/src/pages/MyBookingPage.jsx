@@ -1,11 +1,11 @@
 import "../assets/css/myBookingPage.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../UserContext";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
+
 
 const MyBookingPage = () => {
   let navigate = useNavigate();
@@ -57,11 +57,19 @@ const MyBookingPage = () => {
       );
 
       // Show a success notification
-      toast.success("Booking canceled successfully!");
+      Swal.fire({
+        icon: "success",
+        title: "Booking canceled successfully!",
+        timer: 2000, // 2 seconds
+      });
     } catch (error) {
       console.error("Error deleting booking:", error);
       // Show an error notification
-      toast.error("Error canceling booking. Please try again later.");
+      Swal.fire({
+        icon: "error",
+        title: "Error canceling booking",
+        text: "Please try again later.",
+      });
     }
   };
 
@@ -162,7 +170,6 @@ const MyBookingPage = () => {
           </Row>
         )}
       </Container>
-      <ToastContainer />
     </div>
   );
 };
