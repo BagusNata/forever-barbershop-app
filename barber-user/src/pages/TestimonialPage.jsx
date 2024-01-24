@@ -52,41 +52,47 @@ const TestimonialPage = () => {
           <Col data-aos="zoom-in-up">
             <h1 className="text-center fw-bold">Semua Testimonial</h1>
             <p className="text-center">
-              Kesan dan pesan dari konsumen setelah menggunakan jasa layanan
+              Kesan dan pesan dari pelanggan setelah menggunakan jasa layanan
               Forever Barbershop.
             </p>
           </Col>
         </Row>
-        <Row className="row-cols-1">
-          {data.map((testimonial) => {
-            return (
-              <Col key={data.id}>
-                <Card data-aos="fade-down" className="shadow">
-                  <Card.Body>
-                    <div>
-                      <Col>
-                        <Card.Title className="d-flex align-items-center">
-                          <p className="m-0">{userData.username}</p>
-                        </Card.Title>
-                        <Card.Text className="d-flex align-items-center pb-3 detail">
-                          {[...Array(testimonial.rating)].map((_, index) => (
-                            <i
-                              key={index}
-                              className="fa-solid fa-star rating"
-                            ></i>
-                          ))}
-                          <i className="fas fa-dot-circle dot"></i>
-                          <p>{formatDate(testimonial.date)}</p>
-                        </Card.Text>
-                      </Col>
-                    </div>
-                    <Card.Text>{testimonial.description}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
+        {data.length === 0 ? (
+          <h5 className="no-testimony">
+            Belum ada pelanggan yang menulis testimoni...
+          </h5>
+        ) : (
+          <Row className="row-cols-1">
+            {data.map((testimonial) => {
+              return (
+                <Col key={data.id}>
+                  <Card data-aos="fade-down" className="shadow">
+                    <Card.Body>
+                      <div>
+                        <Col>
+                          <Card.Title className="d-flex align-items-center">
+                            <p className="m-0">{userData.username}</p>
+                          </Card.Title>
+                          <Card.Text className="d-flex align-items-center pb-3 detail">
+                            {[...Array(testimonial.rating)].map((_, index) => (
+                              <i
+                                key={index}
+                                className="fa-solid fa-star rating"
+                              ></i>
+                            ))}
+                            <i className="fas fa-dot-circle dot"></i>
+                            <p>{formatDate(testimonial.date)}</p>
+                          </Card.Text>
+                        </Col>
+                      </div>
+                      <Card.Text>{testimonial.description}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
+        )}
       </Container>
     </div>
   );
