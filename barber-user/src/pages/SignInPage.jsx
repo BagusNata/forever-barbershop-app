@@ -41,7 +41,8 @@ const SignInPage = () => {
           Swal.fire({
             icon: "success",
             title: "Sign in successful!",
-            timer: 2000, // 2 seconds
+            text: "You will be redirected to the home page.",
+            timer: 3000, // 3 seconds
           }).then(() => {
             // Redirect to the home page
             navigate("/");

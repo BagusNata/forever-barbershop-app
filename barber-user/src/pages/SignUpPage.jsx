@@ -63,8 +63,9 @@ const SignUpPage = () => {
           // Show success alert
           Swal.fire({
             icon: "success",
-            title: "Sign in successful!",
-            timer: 2000, // 2 seconds
+            title: "Sign up successful!",
+            text: "You will be redirected to the sign in page.",
+            timer: 3000, // 3 seconds
           }).then(() => {
             // Redirect to the sign in page
             navigate("/signin");

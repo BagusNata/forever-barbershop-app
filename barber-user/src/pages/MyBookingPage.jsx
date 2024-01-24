@@ -60,7 +60,8 @@ const MyBookingPage = () => {
       Swal.fire({
         icon: "success",
         title: "Booking canceled successfully!",
-        timer: 2000, // 2 seconds
+        text: "Bookings that you delete will be removed from the list.",
+        timer: 3000, // 3 seconds
       });
     } catch (error) {
       console.error("Error deleting booking:", error);
