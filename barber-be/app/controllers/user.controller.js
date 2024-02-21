@@ -18,6 +18,7 @@ exports.getUsers = async (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
+        phone: user.phone,
         freezeExpiryDate: user.freezeExpiryDate,
         roles: authorities,
       }
