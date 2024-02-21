@@ -21,6 +21,12 @@ const validate = (values) => {
     errors.email = "Invalid email address!";
   }
 
+  if (!values.phone) {
+    errors.phone = "Required!";
+  } else if (values.phone.length !== 12) {
+    errors.phone = "Invalid phone number!";
+  }
+
   if (!values.password) {
     errors.password = "Required!";
   } else if (values.password.length < 3) {
@@ -38,6 +44,7 @@ const SignUpPage = () => {
     initialValues: {
       userName: "",
       email: "",
+      phone: "",
       password: "",
     },
     validate,
@@ -54,6 +61,7 @@ const SignUpPage = () => {
             body: JSON.stringify({
               username: values.userName,
               email: values.email,
+              phone: values.phone,
               password: values.password,
             }),
           }
@@ -134,6 +142,21 @@ const SignUpPage = () => {
               />
               {formik.touched.email && formik.errors.email ? (
                 <div className="error">{formik.errors.email}</div>
+              ) : null}
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Phone Number</label>
+              <input
+                className="form-control"
+                type="number"
+                id="phone"
+                name="phone"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.phone}
+              />
+              {formik.touched.phone && formik.errors.phone ? (
+                <div className="error">{formik.errors.phone}</div>
               ) : null}
             </div>
             <div className="mb-3">
