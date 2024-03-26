@@ -2,13 +2,17 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from 'react'
 
 //Import Pages
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
-import HomePage from "./pages/HomePage";
-import BookingPage from "./pages/BookingPage";
-import MyBookingPage from "./pages/MyBookingPage";
-import TestimonialPage from "./pages/TestimonialPage";
-import NotFoundPage from "./pages/NotFoundPage";
+//Admin
+import AdminPage from "../src/Admin/pages/AdminPage";
+
+//User
+import SignInPage from "../src/User/pages/SignInPage";
+import SignUpPage from "../src/User/pages/SignUpPage";
+import HomePage from "../src/User/pages/HomePage";
+import BookingPage from "../src/User/pages/BookingPage";
+import MyBookingPage from "../src/User/pages/MyBookingPage";
+import TestimonialPage from "../src/User/pages/TestimonialPage";
+import NotFoundPage from "../src/User/pages/NotFoundPage";
 import { useUserContext } from './UserContext'
 
 function App() {
@@ -24,6 +28,10 @@ function App() {
   return (
     <div>
       <Routes>
+        {/* Admin */}
+        <Route path="/admin" Component={AdminPage} />
+
+        {/* User */}
         <Route path="/signin" Component={SignInPage} />
         <Route path="/signup" Component={SignUpPage} />
         <Route path="/" Component={HomePage} />

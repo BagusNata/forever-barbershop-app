@@ -2,7 +2,7 @@ import "../assets/css/myBookingPage.css";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../UserContext";
+import { useUserContext } from "../../UserContext";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 

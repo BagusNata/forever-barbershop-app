@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
 //import user information
-import { useUserContext } from "../../UserContext";
+import { useUserContext } from "../../../UserContext";
 
 const TestimonialComponent = () => {
   let navigate = useNavigate();

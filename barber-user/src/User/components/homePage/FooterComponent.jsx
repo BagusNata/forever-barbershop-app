@@ -1,5 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
-import { jadwal } from "../../data";
+import { jadwal } from "../../data/index";
 
 const FooterComponent = () => {
   return (

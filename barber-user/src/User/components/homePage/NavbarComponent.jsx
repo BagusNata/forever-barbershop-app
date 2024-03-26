@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { section } from "../../data/index";
 import { useNavigate } from "react-router-dom";
-import { useUserContext } from "../../UserContext";
+import { useUserContext } from "../../../UserContext";
 
 const NavbarComponent = () => {
   //navigate page

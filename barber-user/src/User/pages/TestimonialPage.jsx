@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 //import user information
-import { useUserContext } from "../UserContext";
+import { useUserContext } from "../../UserContext";
 
 const TestimonialPage = () => {
   let navigate = useNavigate();

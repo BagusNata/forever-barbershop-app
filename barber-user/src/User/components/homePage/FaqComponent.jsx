@@ -1,5 +1,5 @@
 import { Container, Row, Col, Accordion } from "react-bootstrap";
-import { faq } from "../../data/index.js";
+import { faq } from "../../data/index";
 
 const FaqComponent = () => {
   return (

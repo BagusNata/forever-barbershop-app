@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import ScrollToTop from "./components/homePage/ScrollToTop.jsx";
-import { UserContextProvider } from './UserContext'
+import ScrollToTop from "../src/User/components/homePage/ScrollToTop.jsx";
+import { UserContextProvider } from './UserContext.jsx'
 import { BrowserRouter } from "react-router-dom";
 
 //Import styling
-import "./assets/css/main.css";
+import "../../barber-user/src/main.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 import AOS from "aos";
