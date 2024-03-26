@@ -1,0 +1,15 @@
+.sidebar-menu a {
+  color: var(--text-color-light);
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.sidebar-menu a:hover {
+  background-color: var(--secondary-color-active);
+  color: var(--text-color-active);
+}
+
+.sidebar-menu a i {
+  margin-right: 10px;
+}
