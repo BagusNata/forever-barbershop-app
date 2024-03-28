@@ -1,0 +1,14 @@
+.sidebar {
+  overflow: "scroll initial";
+  color: #fff !important;
+  background-color: #333 !important;
+}
+.title {
+  margin-right: 15px;
+}
+.gmeTLe:hover {
+  color: var(--secondary-color-active);
+}
+hr {
+  margin-bottom: 0;
+}
