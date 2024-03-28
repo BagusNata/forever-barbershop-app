@@ -2,9 +2,8 @@ import "../assets/css/signUpPage.css";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useState } from 'react'
+import { useState } from "react";
 import Swal from "sweetalert2";
-
 
 const validate = (values) => {
   const errors = {};
@@ -23,7 +22,9 @@ const validate = (values) => {
 
   if (!values.phone) {
     errors.phone = "Required!";
-  } else if (values.phone.length !== 12) {
+  } else if (
+    !/^\+?([0-9]{4})\)?[-.●]?([0-9]{4})[-.●]?([0-9]{4})$/.test(values.phone)
+  ) {
     errors.phone = "Invalid phone number!";
   }
 
@@ -148,7 +149,7 @@ const SignUpPage = () => {
               <label className="form-label">Phone Number</label>
               <input
                 className="form-control"
-                type="number"
+                type="text"
                 id="phone"
                 name="phone"
                 onChange={formik.handleChange}
