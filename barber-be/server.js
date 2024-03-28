@@ -1,13 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-var bcrypt = require('bcryptjs');
+require("dotenv").config();
+const cors = require("cors");
+var bcrypt = require("bcryptjs");
 
+const express = require("express");
 const app = express();
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5173");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 var corsOptions = {
-  origin: ['http://localhost:5173', 'http://localhost:8081', 'http://localhost:3000'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:8081",
+    "http://localhost:3000",
+  ],
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
 
 app.use(cors(corsOptions));
@@ -18,7 +31,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const db = require('./app/models');
+const db = require("./app/models");
 const Role = db.role;
 const User = db.user;
 const Capster = db.capster;
@@ -101,7 +114,7 @@ async function initial() {
     price: 100000,
     description:
       "Paket layanan ini cocok untuk kamu yang ingin mewarnai rambut agar tampak lebih fresh.",
-    detail: "Hair color, Hair wash, Styling"
+    detail: "Hair color, Hair wash, Styling",
   });
   Service.create({
     image:
@@ -130,25 +143,24 @@ async function initial() {
   customer.addTestimony(testimony1);
 }
 
-
 // `force: true` will reset the database everytime we run server.js
-db.sequelize.sync({force: true}).then(() => {
-  console.log('Drop and Resync Db');
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and Resync Db");
   initial();
 });
 
 // simple route
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to barber application.' });
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to barber application." });
 });
 
 // routes
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
-require('./app/routes/capster.routes')(app);
-require('./app/routes/service.routes')(app);
-require('./app/routes/booking.routes')(app);
-require('./app/routes/testimony.routes')(app);
+require("./app/routes/auth.routes")(app);
+require("./app/routes/user.routes")(app);
+require("./app/routes/capster.routes")(app);
+require("./app/routes/service.routes")(app);
+require("./app/routes/booking.routes")(app);
+require("./app/routes/testimony.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
