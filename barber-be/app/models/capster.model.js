@@ -1,17 +1,21 @@
 module.exports = (sequelize, Sequelize) => {
-  const Capster = sequelize.define('capsters', {
+  const Capster = sequelize.define("capsters", {
     name: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     placeOfBirth: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      allowNull: true,
     },
     dateOfBirth: {
-      type: Sequelize.DATE
+      type: Sequelize.DATE,
+      allowNull: true,
     },
     gender: {
-      type: Sequelize.STRING
-    }
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
   });
 
   return Capster;
