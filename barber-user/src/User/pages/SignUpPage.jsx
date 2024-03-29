@@ -73,8 +73,8 @@ const SignUpPage = () => {
           console.error("Error signing up:", 400);
           Swal.fire({
             icon: "error",
-            title: "Error signing up",
-            text: "Please try again later.",
+            title: "Failed signing up",
+            text: "Username or email or phone number has been used!",
           });
           return;
         }
