@@ -68,18 +68,26 @@ const SignUpPage = () => {
           }
         );
         const data = await response.json();
-        if (data) {
-          // Show success alert
+        console.log(data);
+        if (data.message && data.message.toLowerCase().includes("failed")) {
+          console.error("Error signing up:", 400);
           Swal.fire({
-            icon: "success",
-            title: "Sign up successful!",
-            text: "You will be redirected to the sign in page.",
-            timer: 3000, // 3 seconds
-          }).then(() => {
-            // Redirect to the sign in page
-            navigate("/signin");
+            icon: "error",
+            title: "Error signing up",
+            text: "Please try again later.",
           });
+          return;
         }
+        // Show success alert
+        Swal.fire({
+          icon: "success",
+          title: "Sign up successful!",
+          text: "You will be redirected to the sign in page.",
+          timer: 3000, // 3 seconds
+        }).then(() => {
+          // Redirect to the sign in page
+          navigate("/signin");
+        });
       } catch (error) {
         // Handle sign-up error
         console.error("Error signing up:", error);
