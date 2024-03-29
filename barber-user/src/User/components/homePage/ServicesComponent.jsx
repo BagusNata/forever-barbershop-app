@@ -2,7 +2,6 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const ServicesComponent = () => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -52,7 +51,14 @@ const ServicesComponent = () => {
           </Col>
         </Row>
         {data.length === 0 ? (
-          "Loading..."
+          <div className="d-flex align-items-center">
+            <strong>Loading...</strong>
+            <div
+              className="spinner-border ms-auto"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
         ) : (
           <Row className="row-col-lg-3 row-col-md-3 row-col-sm-1">
             {data.map((service) => {
