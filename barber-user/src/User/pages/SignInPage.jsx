@@ -1,15 +1,15 @@
-import "../assets/css/signInPage.css"
+import "../assets/css/signInPage.css";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useState } from 'react'
+import { useState } from "react";
 import { useUserContext } from "../../UserContext";
 import Swal from "sweetalert2";
 
 const SignInPage = () => {
   let navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false)
-  const { setUserData } = useUserContext()
+  const [isLoading, setIsLoading] = useState(false);
+  const { setUserData } = useUserContext();
 
   const formik = useFormik({
     initialValues: {
@@ -46,6 +46,14 @@ const SignInPage = () => {
           }).then(() => {
             // Redirect to the home page
             navigate("/");
+          });
+        } else {
+          // Show failed alert
+          Swal.fire({
+            icon: "error",
+            title: "Sign in failed!",
+            text: "Please use a registered account or check your username and password!",
+            timer: 3000, // 3 seconds
           });
         }
       } catch (error) {
