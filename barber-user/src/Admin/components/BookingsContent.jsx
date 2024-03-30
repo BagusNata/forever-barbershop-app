@@ -122,7 +122,7 @@ const BookingsContent = () => {
                   </tr>
                 ) : (
                   data
-                    .filter((booking) => userData.id === booking.userId)
+                    .filter((data) => userData.id === data.userId)
                     .sort((a, b) => {
                       const dateComparison =
                         new Date(formatDate(a.date)) -
@@ -132,16 +132,16 @@ const BookingsContent = () => {
                       }
                       return dateComparison;
                     })
-                    .map((booking) => (
-                      <tr key={booking.id}>
-                        <th className="text-center">{booking.id}</th>
-                        <td>{booking.user.username}</td>
-                        <td>{booking.service.name}</td>
-                        <td>{booking.date}</td>
-                        <td>{booking.time}:00</td>
-                        <td>{booking.isDone}</td>
-                        <td>{booking.createdAt}</td>
-                        <td>{booking.updatedAt}</td>
+                    .map((data) => (
+                      <tr key={data.id}>
+                        <th className="text-center">{data.id}</th>
+                        <td>{data.user.username}</td>
+                        <td>{data.service.name}</td>
+                        <td>{data.date}</td>
+                        <td>{data.time}:00</td>
+                        <td>{data.isDone}</td>
+                        <td>{data.createdAt}</td>
+                        <td>{data.updatedAt}</td>
                         <td className="text-center">
                           <a href="">
                             <i className="fas fa-edit fs-6" />
@@ -151,7 +151,7 @@ const BookingsContent = () => {
                         <td className="text-center">
                           <a
                             href=""
-                            onClick={() => handleDeleteBooking(booking.id)}
+                            onClick={() => handleDeleteBooking(data.id)}
                           >
                             <i className="fa-solid fa-trash-can fs-6" />
                             <p>Delete</p>
