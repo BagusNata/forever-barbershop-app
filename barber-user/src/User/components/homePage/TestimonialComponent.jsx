@@ -11,17 +11,12 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper/modules";
 
-//import user information
-import { useUserContext } from "../../../UserContext";
-
 const TestimonialComponent = () => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
-  const { userData } = useUserContext();
-
 
   useEffect(() => {
-    const getService = async () => {
+    const getTestimonies = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/testimonies`,
@@ -32,12 +27,16 @@ const TestimonialComponent = () => {
             },
           }
         );
-        setData(await response.json());
+        const testimonies = await response.json();
+        if (testimonies && testimonies.length) {
+          setData(testimonies);
+        }
       } catch (error) {
+        setData([]);
         console.error("Error fetching data:", error);
       }
     };
-    getService();
+    getTestimonies();
   }, []);
 
   function formatDate(dateString) {
@@ -59,7 +58,7 @@ const TestimonialComponent = () => {
         <Row>
           {data.length === 0 ? (
             <h5 className="no-testimony">
-              Belum ada pelanggan yang menulis testimoni...
+              Belum ada pelanggan yang menuliskan ulasan...
             </h5>
           ) : (
             <Swiper
@@ -97,7 +96,7 @@ const TestimonialComponent = () => {
                   >
                     <div className="position-fixed">
                       <div className="d-flex align-items-center people">
-                        <h6 className="mb-1">{userData.username}</h6>
+                        <h6 className="mb-1">{testimonial.user.username}</h6>
                       </div>
                       <div className="d-flex align-items-center pt-2 detail">
                         {[...Array(testimonial.rating)].map((_, index) => (
