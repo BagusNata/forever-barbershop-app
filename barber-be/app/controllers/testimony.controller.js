@@ -2,10 +2,11 @@ const jwt = require("jsonwebtoken");
 const db = require("../models/index.js");
 const config = require("../config/auth.config.js");
 const Testimony = db.testimony;
+const User = db.user;
 
 exports.addTestimony = async (req, res) => {
   try {
-    // create new booking
+    // create new testimony
     const newTestimony = await Testimony.create({
       date: req.body.date,
       rating: req.body.rating,
@@ -30,9 +31,12 @@ exports.addTestimony = async (req, res) => {
 
 exports.getTestimonies = async (req, res) => {
   try {
-    const testimonies = await Testimony.findAll();
+    const testimonies = await Testimony.findAll({
+      include: [{ model: User, attributes: ["id", "username"] }],
+    });
     res.status(200).send(testimonies);
-  } catch {
+  } catch (error) {
+    console.error("Error fetching testimonies:", error); // Log the error
     res.status(500).send({
       message:
         "Sorry, something went wrong on our end. Please try again later.",
@@ -61,6 +65,3 @@ exports.deleteTestimony = async (req, res) => {
     });
   }
 };
-
-
-
