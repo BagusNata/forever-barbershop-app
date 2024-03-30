@@ -1,11 +1,11 @@
 import Sidebar from "../../components/Sidebar";
-// import CapstersContent from "../../components/CapstersContent";
+import CapstersContent from "../../components/CapstersContent";
 
 const AdminCapstersPage = () => {
   return (
     <div className="d-flex">
       <Sidebar />
-      {/* <CapstersContent /> */}
+      <CapstersContent />
     </div>
   );
 };

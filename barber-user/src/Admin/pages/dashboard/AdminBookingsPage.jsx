@@ -1,9 +1,11 @@
 import Sidebar from "../../components/Sidebar";
+import BookingsContent from "../../components/BookingsContent";
 
 const AdminBookingsPage = () => {
   return (
-    <div>
+    <div className="d-flex">
       <Sidebar />
+      <BookingsContent />
     </div>
   );
 };
