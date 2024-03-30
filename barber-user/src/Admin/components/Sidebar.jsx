@@ -61,7 +61,7 @@ const Sidebar = () => {
           </CDBSidebarMenu>
           <hr />
           <CDBSidebarMenu>
-            <NavLink exact="true" to="/signout">
+            <NavLink exact="true" to="/signout" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-sign-out-alt">
                 Sign Out
               </CDBSidebarMenuItem>

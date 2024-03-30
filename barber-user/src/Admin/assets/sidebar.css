@@ -31,3 +31,7 @@ hr {
   text-align: center;
   margin: 1rem 0;
 }
+
+.sidebar-footer a:hover {
+  color: var(--secondary-color-active) !important;
+}
