@@ -59,9 +59,6 @@ const Sidebar = () => {
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
-        </CDBSidebarContent>
-
-        <CDBSidebarFooter>
           <hr />
           <CDBSidebarMenu>
             <NavLink exact="true" to="/signout">
@@ -70,6 +67,19 @@ const Sidebar = () => {
               </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
+        </CDBSidebarContent>
+
+        <CDBSidebarFooter className="sidebar-footer">
+          <div>
+            Made with <span className="footer-love">&#10084;</span> by
+          </div>
+          <a
+            href="https://www.instagram.com/bagusnataa/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Bagus Nata
+          </a>
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>
