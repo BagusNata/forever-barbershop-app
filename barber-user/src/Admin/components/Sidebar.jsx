@@ -15,7 +15,7 @@ const Sidebar = () => {
       <CDBSidebar className="sidebar min-vh-100 d-flex">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
-            href="/"
+            href="/admin/dashboard"
             className="text-decoration-none title"
             style={{ color: "inherit" }}
           >
@@ -25,43 +25,35 @@ const Sidebar = () => {
 
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <NavLink
-              exact
-              to="/admin/dashboard"
-              activeClassName="activeClicked"
-            >
+            <NavLink exact="true" to="/admin/dashboard" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-home-alt">
                 Dashboard
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/bookings" activeClassName="activeClicked">
+            <NavLink exact="true" to="/admin/bookings" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-coins">
                 Bookings
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/session" activeClassName="activeClicked">
+            <NavLink exact="true" to="/admin/session" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-clock">
                 Sesion
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/users" activeClassName="activeClicked">
+            <NavLink exact="true" to="/admin/users" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-users">Users</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/capsters" activeClassName="activeClicked">
+            <NavLink exact="true" to="/admin/capsters" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-user-tie">
                 Capsters
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/services" activeClassName="activeClicked">
+            <NavLink exact="true" to="/admin/services" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-scissors">
                 Services
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink
-              exact
-              to="/admin/testimonies"
-              activeClassName="activeClicked"
-            >
+            <NavLink exact="true" to="/admin/testimonies" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-comments">
                 Testimonies
               </CDBSidebarMenuItem>
@@ -72,7 +64,7 @@ const Sidebar = () => {
         <CDBSidebarFooter>
           <hr />
           <CDBSidebarMenu>
-            <NavLink exact to="/signout" activeClassName="activeClicked">
+            <NavLink exact="true" to="/signout">
               <CDBSidebarMenuItem icon="fas fa-sign-out-alt">
                 Sign Out
               </CDBSidebarMenuItem>
