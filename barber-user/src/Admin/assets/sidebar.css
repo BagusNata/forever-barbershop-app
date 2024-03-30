@@ -2,13 +2,20 @@
   overflow: "scroll initial";
   color: #fff !important;
   background-color: #333 !important;
+
+  .nav-link:hover {
+    color: var(--secondary-color-active);
+  }
+
+  .nav-link.active {
+    color: var(--secondary-color-active);
+  }
 }
+
 .title {
   margin-right: 15px;
 }
-.gmeTLe:hover {
-  color: var(--secondary-color-active);
-}
+
 hr {
   margin-bottom: 0;
 }
