@@ -38,15 +38,27 @@ const SignInPage = () => {
           localStorage.setItem("userData", JSON.stringify(data));
 
           // Show success alert
-          Swal.fire({
-            icon: "success",
-            title: "Sign in successful!",
-            text: "You will be redirected to the home page.",
-            timer: 3000, // 3 seconds
-          }).then(() => {
-            // Redirect to the home page
-            navigate("/");
-          });
+          if (data.roles.includes("ROLE_ADMIN")) {
+            Swal.fire({
+              icon: "success",
+              title: "Sign in successful!",
+              text: "You will be redirected to the admin dashboard.",
+              timer: 3000, // 3 seconds
+            }).then(() => {
+              // Redirect to the admin dashboard
+              navigate("/admin/dashboard");
+            });
+          } else {
+            Swal.fire({
+              icon: "success",
+              title: "Sign in successful!",
+              text: "You will be redirected to the home page.",
+              timer: 3000, // 3 seconds
+            }).then(() => {
+              // Redirect to the home page
+              navigate("/");
+            });
+          }
         } else {
           // Show failed alert
           Swal.fire({
