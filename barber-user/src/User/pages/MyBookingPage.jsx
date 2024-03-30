@@ -6,7 +6,6 @@ import { useUserContext } from "../../UserContext";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 
-
 const MyBookingPage = () => {
   let navigate = useNavigate();
   const [data, setData] = useState([]);
@@ -119,11 +118,6 @@ const MyBookingPage = () => {
                       <table className="tables">
                         <thead className="title">Bukti Booking</thead>
                         <tbody className="information">
-                          <tr>
-                            <th scope="row">Nama</th>
-                            <td>:</td>
-                            <td>{booking.user.username}</td>
-                          </tr>
                           <tr>
                             <th scope="row">Tanggal</th>
                             <td>:</td>
