@@ -19,3 +19,14 @@
 hr {
   margin-bottom: 0;
 }
+
+.footer-love {
+  color: red;
+}
+
+.sidebar-footer,
+.sidebar-footer a {
+  color: #fff !important;
+  text-decoration: none;
+  text-align: center;
+}
