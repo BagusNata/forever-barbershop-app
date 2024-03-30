@@ -74,8 +74,6 @@ const TestimoniesContent = () => {
     }
   };
 
-  console.log("data", data);
-
   return (
     <div className="w-100 min-vh-100 content-body">
       <Container>
@@ -86,7 +84,7 @@ const TestimoniesContent = () => {
                 <span className="fs-4">{data.length}</span>
                 <span>Testimonies</span>
               </div>
-              <i className="fa fa-fas fa-user-tie icon fs-3" />
+              <i className="fa fa-fas fa-comments icon fs-3" />
             </div>
           </Card>
         </Row>
