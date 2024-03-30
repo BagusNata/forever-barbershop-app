@@ -16,6 +16,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    freezeExpiryDate: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
   });
 
   return User;
