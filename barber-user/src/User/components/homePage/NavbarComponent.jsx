@@ -53,15 +53,7 @@ const NavbarComponent = () => {
                     className={changeColor ? "nav-link-active" : "nav-link"}
                     key={link.id}
                   >
-                    <a
-                      href={link.path}
-                      className={({ isActive, isPending }) =>
-                        isPending ? "pending" : isActive ? "active" : ""
-                      }
-                      end
-                    >
-                      {link.text}
-                    </a>
+                    <a href={link.path}>{link.text}</a>
                   </div>
                 );
               })}
@@ -96,7 +88,6 @@ const NavbarComponent = () => {
               </div>
             ) : (
               <div className="text-center">
-                <Navbar.Toggle aria-controls="user-info" />
                 <Navbar.Collapse id="user-info">
                   <Nav>
                     <NavDropdown
