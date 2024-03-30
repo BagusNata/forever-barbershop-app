@@ -32,17 +32,13 @@ const BookingsContent = () => {
       }
     };
 
-    //kalau accesToken sudah ada baru di jalankan
+    // Execute only if userData.accessToken exists
     if (userData.accessToken) {
       getbookings();
     }
   }, [userData]);
 
-  function formatDate(dateString) {
-    return format(new Date(dateString), "dd MMMM yyyy");
-  }
-
-  //Delete booking
+  // Delete booking
   const handleDeleteBooking = async (bookingId) => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}`, {
@@ -73,6 +69,10 @@ const BookingsContent = () => {
       });
     }
   };
+
+  function formatDate(dateString) {
+    return format(new Date(dateString), "PPpp");
+  }
 
   return (
     <div className="w-100 min-vh-100 content-body">
@@ -140,8 +140,12 @@ const BookingsContent = () => {
                         <td>{data.date}</td>
                         <td>{data.time}:00</td>
                         <td>{data.isDone}</td>
-                        <td>{data.createdAt}</td>
-                        <td>{data.updatedAt}</td>
+                        <td>
+                          {data.createdAt ? formatDate(data.createdAt) : ""}
+                        </td>
+                        <td>
+                          {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                        </td>
                         <td className="text-center">
                           <a href="">
                             <i className="fas fa-edit fs-6" />

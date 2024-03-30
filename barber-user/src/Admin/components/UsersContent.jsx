@@ -1,5 +1,6 @@
 import { Container, Row, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { format } from "date-fns";
 import "../assets/UsersContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
@@ -33,7 +34,7 @@ const UsersContent = () => {
       }
     };
 
-    //kalau accesToken sudah ada baru di jalankan
+    // Execute only if userData.accessToken exists
     if (userData.accessToken) {
       getUser();
     }
@@ -81,7 +82,7 @@ const UsersContent = () => {
     }
   };
 
-  //Delete user
+  // Delete user
   const handleDeleteUser = async (userId) => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/users/${userId}`, {
@@ -93,7 +94,7 @@ const UsersContent = () => {
       });
 
       // After successful deletion, update the data state to re-render without the deleted user
-      setData((prevData) => prevData.filter((user) => user.id));
+      setData((prevData) => prevData.filter((user) => user.id !== userId));
 
       // Show a success notification
       Swal.fire({
@@ -112,6 +113,10 @@ const UsersContent = () => {
       });
     }
   };
+
+  function formatDate(dateString) {
+    return format(new Date(dateString), "PPpp");
+  }
 
   return (
     <div className="w-100 min-vh-100 content-body">
@@ -134,11 +139,10 @@ const UsersContent = () => {
               <thead className="table-dark">
                 <tr className="text-center">
                   <th scope="col">Id</th>
-                  <th scope="col">Username</th>
+                  <th scope="col">Nama</th>
                   <th scope="col">Email</th>
-                  <th scope="col">Phone</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">freezeExpiryDate</th>
+                  <th scope="col">No. Telepon</th>
+                  <th scope="col">Batas akun dibekukan</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
                   <th scope="col" colSpan={3}>
@@ -167,10 +171,17 @@ const UsersContent = () => {
                       <td>{data.username}</td>
                       <td>{data.email}</td>
                       <td>{data.phone}</td>
-                      <td>{data.roles}</td>
-                      <td>{data.freezeExpiryDate}</td>
-                      <td>{data.createdAt}</td>
-                      <td>{data.updatedAt}</td>
+                      <td>
+                        {data.freezeExpiryDate
+                          ? formatDate(data.freezeExpiryDate)
+                          : ""}
+                      </td>
+                      <td>
+                        {data.createdAt ? formatDate(data.createdAt) : ""}
+                      </td>
+                      <td>
+                        {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                      </td>
                       <td className="text-center">
                         <a href="" onClick={() => handleFreezeUser(data.id)}>
                           <i className="fas fa-snowflake fs-6" />

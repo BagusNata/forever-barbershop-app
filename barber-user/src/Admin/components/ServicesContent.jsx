@@ -1,5 +1,6 @@
 import { Container, Row, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import { format } from "date-fns";
 import "../assets/ServicesContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
@@ -63,6 +64,10 @@ const ServicesContent = () => {
     }
   };
 
+  function formatDate(dateString) {
+    return format(new Date(dateString), "PPpp");
+  }
+
   return (
     <div className="w-100 min-vh-100 content-body">
       <Container>
@@ -84,10 +89,10 @@ const ServicesContent = () => {
               <thead className="table-dark">
                 <tr className="text-center">
                   <th scope="col">Id</th>
-                  <th scope="col">Image</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Description</th>
+                  <th scope="col">Gambar</th>
+                  <th scope="col">Nama</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Deskripsi</th>
                   <th scope="col">Detail</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
@@ -131,8 +136,12 @@ const ServicesContent = () => {
                       </td>
                       <td>{data.description}</td>
                       <td>{data.detail}</td>
-                      <td>{data.createdAt}</td>
-                      <td>{data.updatedAt}</td>
+                      <td>
+                        {data.createdAt ? formatDate(data.createdAt) : ""}
+                      </td>
+                      <td>
+                        {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                      </td>
                       <td className="text-center">
                         <a href="">
                           <i className="fas fa-edit fs-6" />
