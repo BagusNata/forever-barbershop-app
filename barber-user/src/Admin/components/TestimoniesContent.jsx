@@ -129,7 +129,7 @@ const TestimoniesContent = () => {
                     <tr key={data.id}>
                       <th className="text-center">{data.id}</th>
                       <td>{data.user.username}</td>
-                      <td>{data.date}</td>
+                      <td>{data.date ? formatDate(data.date) : ""}</td>
                       <td>{data.rating}</td>
                       <td>{data.description}</td>
                       <td>
