@@ -14,7 +14,7 @@ const TestimonialPage = () => {
   const { userData } = useUserContext();
 
   useEffect(() => {
-    const getService = async () => {
+    const getTestimonial = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/testimonies`,
@@ -30,7 +30,7 @@ const TestimonialPage = () => {
         console.error("Error fetching data:", error);
       }
     };
-    getService();
+    getTestimonial();
   }, []);
 
   function formatDate(dateString) {
