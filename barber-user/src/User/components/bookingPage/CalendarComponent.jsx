@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import { useUserContext } from "../../../UserContext";
+import { format } from "date-fns";
 
 const BookingComponent = () => {
   let navigate = useNavigate();
@@ -18,9 +19,17 @@ const BookingComponent = () => {
 
   useEffect(() => {
     const Time = [
-      { id: 1, value: 11 },
-      { id: 2, value: 12 },
-      { id: 3, value: 13 },
+      { id: 1, value: 10 },
+      { id: 2, value: 11 },
+      { id: 3, value: 12 },
+      { id: 4, value: 13 },
+      { id: 5, value: 15 },
+      { id: 6, value: 16 },
+      { id: 7, value: 17 },
+      { id: 8, value: 18 },
+      { id: 9, value: 19 },
+      { id: 10, value: 20 },
+      { id: 11, value: 21 },
     ];
 
     const getBookingTime = async () => {
@@ -145,8 +154,12 @@ const BookingComponent = () => {
     }
   };
 
+  function formatDate(dateString) {
+    return format(new Date(dateString), "eeee, dd MMMM yyyy");
+  }
+
   return (
-    <div className="booking-page w-100 min-vh-100">
+    <div className="booking-page w-100 min-vh-100 d-flex">
       <Container>
         <Row className="py-5">
           <img
@@ -158,7 +171,7 @@ const BookingComponent = () => {
         </Row>
         <Row>
           <Col data-aos="zoom-in">
-            <h1 className="text-center fw-bold mt-3">Booking</h1>
+            <h1 className="text-center fw-bold">Booking</h1>
             <p className="text-center">
               Silahkan pilih sesi sesuai jadwal yang sudah disediakan oleh
               Forever Barbershop.
@@ -174,73 +187,79 @@ const BookingComponent = () => {
               tileDisabled={({ date }) => isPastDate(date)} // Disable past dates
             />
           </div>
-          <p className="d-flex justify-content-center mt-4">
-            <span>Tanggal yang dipilih: </span> &nbsp;
-            {date.toDateString()}
-          </p>
-          {showTime && (
-            <div>
-              {/* Show service */}
-              <div className="d-flex justify-content-center mt-4">
-                {service.map((serviceItem) => (
-                  <button
-                    key={serviceItem.id}
-                    className={`btn btn-primary me-2 ${
-                      selectedService && selectedService.id === serviceItem.id
-                        ? "btn-selected"
-                        : ""
-                    }`}
-                    onClick={() => handleServiceClick(serviceItem)}
-                  >
-                    {serviceItem.name}
-                  </button>
-                ))}
-              </div>
-
-              {/* Show booking time */}
-              <div className="d-flex justify-content-center mt-4 py-2">
-                {availableTimes.map((time) => (
-                  <button
-                    key={time.id}
-                    className={`btn btn-primary me-2 ${
-                      selectedTime && selectedTime.id === time.id
-                        ? "btn-selected"
-                        : ""
-                    }`}
-                    onClick={() => handleTimeClick(time)}
-                    disabled={isPastDate(date)} // Disable time buttons for past dates
-                  >
-                    {time.value}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
         </Row>
-        <Row>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              id="syaratKetentuan"
-              value={syaratKeten}
-              onChange={handleSyaratKetenChange}
-              checked={syaratKeten}
-            />
-            <label className="form-check-label" htmlFor="syaratKetentuan">
-              Syarat dan ketentuan berlaku
-            </label>
-          </div>
-          <div className="mt-4">
-            <button
-              type="button"
-              className="btn btn-success"
-              disabled={!syaratKeten || isLoading}
-              onClick={handleSubmitBooking}
-            >
-              {isLoading ? "Loading..." : "Submit"}
-            </button>
-          </div>
+        <Row className="justify-content-center option-body">
+          <Card className="option-content">
+            <h6 className="d-flex justify-content-center mt-4 pb-3">
+              <span>Tanggal yang dipilih: </span> &nbsp;
+              {formatDate(date.toDateString())}
+            </h6>
+            {showTime && (
+              <div>
+                {/* Show booking time */}
+                <div className="mt-4 mx-3">
+                  <h6>Pilih Jam :</h6>
+                  {availableTimes.map((time) => (
+                    <button
+                      key={time.id}
+                      className={`btn btn-light me-2 ${
+                        selectedTime && selectedTime.id === time.id
+                          ? "btn-selected"
+                          : ""
+                      }`}
+                      onClick={() => handleTimeClick(time)}
+                      disabled={isPastDate(date)} // Disable time buttons for past dates
+                    >
+                      {time.value}:00
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show service */}
+                <div className="mt-5 mx-3">
+                  <h6>Pilih service :</h6>
+                  {service.map((serviceItem) => (
+                    <button
+                      key={serviceItem.id}
+                      className={`btn btn-light me-2 ${
+                        selectedService && selectedService.id === serviceItem.id
+                          ? "btn-selected"
+                          : ""
+                      }`}
+                      onClick={() => handleServiceClick(serviceItem)}
+                    >
+                      {serviceItem.name}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show submit button */}
+                <div className="form-check syaratKeten mx-3">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="syaratKetentuan"
+                    value={syaratKeten}
+                    onChange={handleSyaratKetenChange}
+                    checked={syaratKeten}
+                  />
+                  <label className="form-check-label" htmlFor="syaratKetentuan">
+                    Syarat dan ketentuan berlaku
+                  </label>
+                </div>
+                <div className="mb-4 mx-3 d-grid">
+                  <button
+                    type="button"
+                    className="btn btn-success btn-success-booking"
+                    disabled={!syaratKeten || isLoading}
+                    onClick={handleSubmitBooking}
+                  >
+                    {isLoading ? "Loading..." : "Submit"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </Card>
         </Row>
       </Container>
     </div>
