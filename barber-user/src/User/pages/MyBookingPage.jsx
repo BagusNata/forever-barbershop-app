@@ -134,7 +134,7 @@ const MyBookingPage = () => {
                           <tr>
                             <th scope="row">Jam</th>
                             <td>:</td>
-                            <td>{booking.time}:00</td>
+                            <td>{booking.session.time}:00</td>
                           </tr>
                           <tr>
                             <th scope="row">Service</th>
