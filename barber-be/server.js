@@ -36,7 +36,7 @@ const Role = db.role;
 const User = db.user;
 const Capster = db.capster;
 const Service = db.service;
-const Booking = db.booking;
+const Session = db.session;
 const Testimony = db.testimony;
 
 async function initial() {
@@ -101,16 +101,16 @@ async function initial() {
     ]);
 
     // create services
-    const basicCut = await Service.create({
-      image:
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.FatE4JVDWdHv4DdoZKlS9gHaE7%26pid%3DApi&f=1&ipt=c9de38f860d20e9abf034da909f9d679b9d575f24cea103413f1c2c7ed6897ca&ipo=images",
-      name: "Basic Cut",
-      price: 35000,
-      description:
-        "Paket layanan yang paling sederhana, cocok untuk kamu yang ingin tampil fresh dan ganteng dengan harga murah.",
-      detail: "Hair cut, Styling",
-    });
     await Service.bulkCreate([
+      {
+        image:
+          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.FatE4JVDWdHv4DdoZKlS9gHaE7%26pid%3DApi&f=1&ipt=c9de38f860d20e9abf034da909f9d679b9d575f24cea103413f1c2c7ed6897ca&ipo=images",
+        name: "Basic Cut",
+        price: 35000,
+        description:
+          "Paket layanan yang paling sederhana, cocok untuk kamu yang ingin tampil fresh dan ganteng dengan harga murah.",
+        detail: "Hair cut, Styling",
+      },
       {
         image:
           "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.explicit.bing.net%2Fth%3Fid%3DOIP.hAmLi7WCl7XPkzvMgV2-hgHaGf%26pid%3DApi&f=1&ipt=e71d3285ca19afe44b46f6c2993f6036388d9fe77fe91c0bc11072b92ee15389&ipo=images",
@@ -140,15 +140,41 @@ async function initial() {
       },
     ]);
 
-    // create bookings
-    const booking1 = await Booking.create({
-      date: "2023-12-30 01:39:48",
-      time: 19,
-      isDone: false,
-    });
-    await Promise.all([
-      customer[0].addBooking(booking1),
-      basicCut.addBooking(booking1),
+    // create session
+    await Session.bulkCreate([
+      {
+        time: 10,
+      },
+      {
+        time: 11,
+      },
+      {
+        time: 12,
+      },
+      {
+        time: 13,
+      },
+      {
+        time: 15,
+      },
+      {
+        time: 16,
+      },
+      {
+        time: 17,
+      },
+      {
+        time: 18,
+      },
+      {
+        time: 19,
+      },
+      {
+        time: 20,
+      },
+      {
+        time: 21,
+      },
     ]);
 
     // create testimony
@@ -179,6 +205,7 @@ require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/capster.routes")(app);
 require("./app/routes/service.routes")(app);
+require("./app/routes/session.routes")(app);
 require("./app/routes/booking.routes")(app);
 require("./app/routes/testimony.routes")(app);
 
