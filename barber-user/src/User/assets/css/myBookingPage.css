@@ -36,11 +36,13 @@
   -webkit-transition: all 2s;
   transition: all 2s;
   margin-right: 1rem;
+  width: 300px;
 }
 
 .my-booking .row:nth-child(3) .card-body {
   background-color: var(--navbar-color);
   border-radius: 15px 15px;
+  width: 300px;
 }
 
 .my-booking .tables {
@@ -60,7 +62,7 @@
 
 .my-booking .information {
   font-size: 15px !important;
-  height: 300px !important;
+  height: 270px !important;
 }
 
 .my-booking .tr {

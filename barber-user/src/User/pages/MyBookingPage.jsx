@@ -73,6 +73,8 @@ const MyBookingPage = () => {
     }
   };
 
+  console.log("data", data);
+
   return (
     <div className="my-booking w-100 min-vh-100">
       <Container>

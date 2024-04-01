@@ -1,7 +1,7 @@
 import { Container, Row, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import "../assets/ServicesContent.css";
+import "../assets/AdminContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
 
@@ -73,7 +73,7 @@ const ServicesContent = () => {
       <Container>
         <Row className="py-5">
           <Card>
-            <div className="card-total-service d-flex justify-content-evenly">
+            <div className="card-total-admin d-flex justify-content-evenly">
               <div className="d-grid">
                 <span className="fs-4">{data.length}</span>
                 <span>Services</span>

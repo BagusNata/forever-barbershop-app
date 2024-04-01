@@ -1,6 +1,6 @@
-import { Container, Row, Card } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import "../assets/BookingsContent.css";
+import "../assets/AdminContent.css";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
@@ -38,33 +38,38 @@ const BookingsContent = () => {
     }
   }, [userData]);
 
-  // Delete booking
-  const handleDeleteBooking = async (bookingId) => {
+  // Set booking status
+  const handleDoneBooking = async (bookingId) => {
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}`, {
-        method: "DELETE",
-        headers: {
-          "x-access-token": userData.accessToken,
-          "Content-Type": "application/json",
-        },
-      });
+      await fetch(
+        `${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}/done`,
+        {
+          method: "POST",
+          headers: {
+            "x-access-token": userData.accessToken,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      // After successful deletion, update the data state to re-render without the deleted booking
-      setData((prevData) => prevData.filter((booking) => booking.id));
+      // After successful set status to Done, update the data state to re-render only on-going booking
+      setData((prevData) =>
+        prevData.filter((booking) => booking.id !== bookingId)
+      );
 
       // Show a success notification
       Swal.fire({
         icon: "success",
-        title: "Capster deleted successfully!",
-        text: "Capster that you delete will be removed from the list.",
+        title: "Booking status set successfully!",
+        text: "Booking status will be removed from the list.",
         timer: 3000, // 3 seconds
       });
     } catch (error) {
-      console.error("Error deleting capster:", error);
+      console.error("Error set booking status:", error);
       // Show an error notification
       Swal.fire({
         icon: "error",
-        title: "Error deleting capster",
+        title: "Error set booking status",
         text: "Please try again later.",
       });
     }
@@ -78,32 +83,55 @@ const BookingsContent = () => {
     <div className="w-100 min-vh-100 content-body">
       <Container>
         <Row className="py-5">
-          <Card>
-            <div className="card-total-booking d-flex justify-content-evenly">
-              <div className="d-grid">
-                <span className="fs-4">{data.length}</span>
-                <span>On Going Bookings</span>
+          <Col>
+            <Card>
+              <div className="card-total-admin d-flex justify-content-evenly">
+                <div className="d-grid">
+                  <span className="fs-4">{data.length}</span>
+                  <span>On Going Bookings</span>
+                </div>
+                <i className="fa fa-fas fa-coins icon fs-3" />
               </div>
-              <i className="fa fa-fas fa-coins icon fs-3" />
-            </div>
-          </Card>
+            </Card>
+          </Col>
+          <Col>
+            <Card>
+              <div className="card-total-admin d-flex justify-content-evenly">
+                <div className="d-grid">
+                  <span className="fs-4">
+                    {data.filter((booking) => booking.isDone === true).length}
+                  </span>
+                  <span>Completed Bookings</span>
+                </div>
+                <i className="fa fa-fas fa-check icon fs-3" />
+              </div>
+            </Card>
+          </Col>
+          <Col>
+            <Card>
+              <div className="card-total-admin d-flex justify-content-evenly">
+                <div className="d-grid">
+                  <span className="fs-4">{data.length}</span>
+                  <span>All Bookings</span>
+                </div>
+                <i className="fa fa-fas fa-coins icon fs-3" />
+              </div>
+            </Card>
+          </Col>
         </Row>
         <Row>
           <div className="table-responsive">
             <table className="table table-striped table-hover table-bordered">
               <thead className="table-dark">
                 <tr className="text-center">
-                  <th scope="col">Id</th>
+                  <th scope="col">#</th>
                   <th scope="col">Nama</th>
                   <th scope="col">Layanan</th>
                   <th scope="col">Tanggal</th>
                   <th scope="col">Jam</th>
-                  <th scope="col">Status</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
-                  <th scope="col" colSpan={2}>
-                    Action
-                  </th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -122,7 +150,6 @@ const BookingsContent = () => {
                   </tr>
                 ) : (
                   data
-                    .filter((data) => userData.id === data.userId)
                     .sort((a, b) => {
                       const dateComparison =
                         new Date(formatDate(a.date)) -
@@ -132,33 +159,25 @@ const BookingsContent = () => {
                       }
                       return dateComparison;
                     })
-                    .map((data) => (
+                    .map((data, index) => (
                       <tr key={data.id}>
-                        <th className="text-center">{data.id}</th>
+                        <th className="text-center">{index + 1}</th>
                         <td>{data.user.username}</td>
                         <td>{data.service.name}</td>
-                        <td>{data.date}</td>
+                        <td>{data.date ? formatDate(data.date) : ""}</td>
                         <td>{data.time}:00</td>
-                        <td>{data.isDone}</td>
                         <td>
                           {data.createdAt ? formatDate(data.createdAt) : ""}
                         </td>
                         <td>
                           {data.updatedAt ? formatDate(data.updatedAt) : ""}
                         </td>
+
+                        {/* Action */}
                         <td className="text-center">
-                          <a href="">
-                            <i className="fas fa-edit fs-6" />
-                            <p>Edit</p>
-                          </a>
-                        </td>
-                        <td className="text-center">
-                          <a
-                            href=""
-                            onClick={() => handleDeleteBooking(data.id)}
-                          >
-                            <i className="fa-solid fa-trash-can fs-6" />
-                            <p>Delete</p>
+                          <a href="" onClick={() => handleDoneBooking(data.id)}>
+                            <i className="fas fa-check fs-6" />
+                            <p>Done</p>
                           </a>
                         </td>
                       </tr>
