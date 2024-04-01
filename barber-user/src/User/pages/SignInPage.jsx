@@ -46,7 +46,7 @@ const SignInPage = () => {
               timer: 3000, // 3 seconds
             }).then(() => {
               // Redirect to the admin dashboard
-              navigate("/admin/dashboard");
+              navigate("/admin/bookings");
             });
           } else {
             Swal.fire({
