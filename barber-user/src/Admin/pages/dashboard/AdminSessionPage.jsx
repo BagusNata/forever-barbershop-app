@@ -1,11 +1,11 @@
 import Sidebar from "../../components/Sidebar";
-// import SessionsContent from "../../components/SessionsContent";
+import SessionsContent from "../../components/SessionsContent";
 
 const AdminSessionPage = () => {
   return (
     <div className="d-flex">
       <Sidebar />
-      {/* <SessionsContent /> */}
+      <SessionsContent />
     </div>
   );
 };
