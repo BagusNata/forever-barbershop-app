@@ -33,7 +33,11 @@ const MyBookingPage = () => {
         console.error("Error fetching data:", error);
       }
     };
-    getbookings();
+
+    // Execute only if userData.accessToken exists
+    if (userData.accessToken) {
+      getbookings();
+    }
   }, [userData]);
 
   function formatDate(dateString) {
@@ -72,8 +76,6 @@ const MyBookingPage = () => {
       });
     }
   };
-
-  console.log("data", data);
 
   return (
     <div className="my-booking w-100 min-vh-100">
@@ -118,8 +120,12 @@ const MyBookingPage = () => {
                   <Card data-aos="fade-up" className="shadow">
                     <Card.Body>
                       <table className="tables">
-                        <thead className="title">Bukti Booking</thead>
-                        <tbody className="information">
+                        <tbody>
+                          <tr>
+                            <th className="title" colSpan="3">
+                              Bukti Booking
+                            </th>
+                          </tr>
                           <tr>
                             <th scope="row">Tanggal</th>
                             <td>:</td>
