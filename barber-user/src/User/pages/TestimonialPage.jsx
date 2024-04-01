@@ -4,14 +4,10 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
-//import user information
-import { useUserContext } from "../../UserContext";
-
 const TestimonialPage = () => {
   let navigate = useNavigate();
 
   const [data, setData] = useState([]);
-  const { userData } = useUserContext();
 
   useEffect(() => {
     const getTestimonial = async () => {
@@ -65,13 +61,13 @@ const TestimonialPage = () => {
           <Row className="row-cols-1">
             {data.map((testimonial) => {
               return (
-                <Col key={data.id}>
+                <Col key={testimonial.id}>
                   <Card data-aos="fade-down" className="shadow">
                     <Card.Body>
                       <div>
                         <Col>
                           <Card.Title className="d-flex align-items-center">
-                            <p className="m-0">{userData.username}</p>
+                            <p className="m-0">{testimonial.user.username}</p>
                           </Card.Title>
                           <Card.Text className="d-flex align-items-center pb-3 detail">
                             {[...Array(testimonial.rating)].map((_, index) => (
@@ -81,7 +77,7 @@ const TestimonialPage = () => {
                               ></i>
                             ))}
                             <i className="fas fa-dot-circle dot"></i>
-                            <p>{formatDate(testimonial.date)}</p>
+                            <span>{formatDate(testimonial.date)}</span>
                           </Card.Text>
                         </Col>
                       </div>
