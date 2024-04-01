@@ -145,7 +145,7 @@ const UsersContent = () => {
                   <th scope="col">Batas akun dibekukan</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
-                  <th scope="col" colSpan={3}>
+                  <th scope="col" colSpan={2}>
                     Action
                   </th>
                 </tr>
@@ -153,7 +153,7 @@ const UsersContent = () => {
               <tbody>
                 {data.length === 0 ? (
                   <tr>
-                    <td colSpan="10">
+                    <td colSpan="9">
                       <div className="d-flex align-items-center">
                         <strong>Loading...</strong>
                         <div
@@ -186,12 +186,6 @@ const UsersContent = () => {
                         <a href="" onClick={() => handleFreezeUser(data.id)}>
                           <i className="fas fa-snowflake fs-6" />
                           <p>Freeze</p>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <a href="">
-                          <i className="fas fa-edit fs-6" />
-                          <p>Edit</p>
                         </a>
                       </td>
                       <td className="text-center">

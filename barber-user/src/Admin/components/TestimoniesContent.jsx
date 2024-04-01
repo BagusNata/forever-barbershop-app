@@ -105,15 +105,13 @@ const TestimoniesContent = () => {
                   <th scope="col">Deskripsi</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
-                  <th scope="col" colSpan={2}>
-                    Action
-                  </th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {data.length === 0 ? (
                   <tr>
-                    <td colSpan="10">
+                    <td colSpan="8">
                       <div className="d-flex align-items-center">
                         <strong>Loading...</strong>
                         <div
@@ -137,12 +135,6 @@ const TestimoniesContent = () => {
                       </td>
                       <td>
                         {data.updatedAt ? formatDate(data.updatedAt) : ""}
-                      </td>
-                      <td className="text-center">
-                        <a href="">
-                          <i className="fas fa-edit fs-6" />
-                          <p>Edit</p>
-                        </a>
                       </td>
                       <td className="text-center">
                         <a
