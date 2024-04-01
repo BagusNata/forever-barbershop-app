@@ -113,7 +113,7 @@ const BookingsContent = () => {
               <tbody>
                 {data.length === 0 ? (
                   <tr>
-                    <td colSpan="10">
+                    <td colSpan="8">
                       <div className="d-flex align-items-center">
                         <strong>Loading...</strong>
                         <div
