@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import { useUserContext } from "../../../UserContext";
 import { format } from "date-fns";
+import Swal from "sweetalert2";
 
 const BookingComponent = () => {
   let navigate = useNavigate();
@@ -141,16 +142,31 @@ const BookingComponent = () => {
   const handleSubmitBooking = async () => {
     if (syaratKeten && selectedTime && selectedService) {
       setIsLoading(true);
-      console.log("Submitting booking...");
       try {
-        const response = await addBooking(JSON.parse(localStorage.userBooking));
+        await addBooking(JSON.parse(localStorage.userBooking));
         setIsLoading(false);
-        console.log("Booking submitted successfully:", response);
-        navigate("/myBooking");
+
+        // Show success alert
+        Swal.fire({
+          icon: "success",
+          title: "Your booking has been recorded!",
+          text: "You will be redirected to myBooking page.",
+          timer: 3000, // 3 seconds
+        }).then(() => {
+          navigate("/myBooking");
+        });
       } catch (error) {
         setIsLoading(false);
         console.error("Failed to submit booking:", error);
       }
+    } else {
+      // Show failed alert
+      Swal.fire({
+        icon: "error",
+        title: "Failed to add a new booking!",
+        text: "Please make sure you have selected the hours and service!",
+        timer: 3000, // 3 seconds
+      });
     }
   };
 
