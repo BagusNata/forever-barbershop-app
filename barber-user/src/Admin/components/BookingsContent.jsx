@@ -94,30 +94,6 @@ const BookingsContent = () => {
               </div>
             </Card>
           </Col>
-          <Col>
-            <Card>
-              <div className="card-total-admin d-flex justify-content-evenly">
-                <div className="d-grid">
-                  <span className="fs-4">
-                    {data.filter((booking) => booking.isDone === true).length}
-                  </span>
-                  <span>Completed Bookings</span>
-                </div>
-                <i className="fa fa-fas fa-check icon fs-3" />
-              </div>
-            </Card>
-          </Col>
-          <Col>
-            <Card>
-              <div className="card-total-admin d-flex justify-content-evenly">
-                <div className="d-grid">
-                  <span className="fs-4">{data.length}</span>
-                  <span>All Bookings</span>
-                </div>
-                <i className="fa fa-fas fa-coins icon fs-3" />
-              </div>
-            </Card>
-          </Col>
         </Row>
         <Row>
           <div className="table-responsive">
@@ -165,7 +141,7 @@ const BookingsContent = () => {
                         <td>{data.user.username}</td>
                         <td>{data.service.name}</td>
                         <td>{data.date ? formatDate(data.date) : ""}</td>
-                        <td>{data.time}:00</td>
+                        <td>{data.session.time}:00</td>
                         <td>
                           {data.createdAt ? formatDate(data.createdAt) : ""}
                         </td>
