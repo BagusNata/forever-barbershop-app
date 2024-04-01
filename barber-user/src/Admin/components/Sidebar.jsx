@@ -15,7 +15,7 @@ const Sidebar = () => {
       <CDBSidebar className="sidebar min-vh-100 d-flex">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a
-            href="/admin/dashboard"
+            href="/admin/bookings"
             className="text-decoration-none title"
             style={{ color: "inherit" }}
           >
@@ -25,11 +25,6 @@ const Sidebar = () => {
 
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <NavLink exact="true" to="/admin/dashboard" className="nav-link">
-              <CDBSidebarMenuItem icon="fas fa-home-alt">
-                Dashboard
-              </CDBSidebarMenuItem>
-            </NavLink>
             <NavLink exact="true" to="/admin/bookings" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-coins">
                 Bookings

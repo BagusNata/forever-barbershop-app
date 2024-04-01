@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 //Import Pages
 //Admin
-import DashboardPage from "../src/Admin/pages/dashboard/DashboardPage";
 import AdminBookingsPage from "../src/Admin/pages/dashboard/AdminBookingsPage";
 import AdminSessionPage from "../src/Admin/pages/dashboard/AdminSessionPage";
 import AdminUsersPage from "../src/Admin/pages/dashboard/AdminUsersPage";
@@ -36,7 +35,6 @@ function App() {
     <div>
       <Routes>
         {/* Admin */}
-        <Route path="/admin/dashboard" Component={DashboardPage} />
         <Route path="/admin/bookings" Component={AdminBookingsPage} />
         <Route path="/admin/session" Component={AdminSessionPage} />
         <Route path="/admin/users" Component={AdminUsersPage} />
