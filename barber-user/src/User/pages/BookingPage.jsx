@@ -1,11 +1,12 @@
 import "../assets/css/bookingPage.css";
-
-//Import Components
 import CalendarComponent from "../components/bookingPage/CalendarComponent";
+
 const BookingPage = () => {
+  // Clear localStorage
+  localStorage.removeItem("userBooking");
+
   return (
     <div className="booking-page">
-      {/* Navigation Bar */}
       <CalendarComponent />
     </div>
   );
