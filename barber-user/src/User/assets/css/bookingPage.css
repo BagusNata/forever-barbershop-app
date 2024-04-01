@@ -48,7 +48,7 @@
 
   .btn-selected {
     background-color: var(--secondary-color-active) !important;
-    border: none;
+    border-color: var(--secondary-color-active) !important;
   }
 
   .btn-success-booking {
