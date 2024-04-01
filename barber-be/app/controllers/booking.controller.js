@@ -6,13 +6,13 @@ const config = require("../config/auth.config.js");
 const Booking = db.booking;
 const User = db.user;
 const Service = db.service;
+const Session = db.session;
 
 exports.addBooking = async (req, res) => {
   try {
     // create new booking
     const newBooking = await Booking.create({
       date: req.body.date,
-      time: req.body.time,
       isDone: false,
     });
 
@@ -22,6 +22,7 @@ exports.addBooking = async (req, res) => {
     await Promise.all([
       newBooking.setUser(decoded.id),
       newBooking.setService(req.body.serviceId),
+      newBooking.setSession(req.body.sessionId),
     ]);
 
     res.status(200).send({
@@ -74,6 +75,10 @@ exports.getBookings = async (req, res) => {
           model: Service,
           attributes: ["id", "image", "name", "price", "description", "detail"],
         },
+        {
+          model: Session,
+          attributes: ["id", "time"],
+        },
         { model: User, attributes: ["id", "username", "email"] },
       ],
     });
@@ -105,6 +110,10 @@ exports.getMyBookings = async (req, res) => {
         {
           model: Service,
           attributes: ["id", "image", "name", "price", "description", "detail"],
+        },
+        {
+          model: Session,
+          attributes: ["id", "time"],
         },
         { model: User, attributes: ["id", "username", "email"] },
       ],

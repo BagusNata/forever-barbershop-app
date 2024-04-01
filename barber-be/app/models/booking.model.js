@@ -4,10 +4,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.DATE,
       allowNull: false,
     },
-    time: {
-      type: Sequelize.TINYINT,
-      allowNull: false,
-    },
     isDone: {
       type: Sequelize.BOOLEAN,
       allowNull: true,
