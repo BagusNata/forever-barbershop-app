@@ -8,52 +8,31 @@ import Swal from "sweetalert2";
 
 const BookingComponent = () => {
   let navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const [session, setSession] = useState([]);
+  const [service, setService] = useState([]);
   const [date, setDate] = useState(new Date());
   const [showTime, setShowTime] = useState(false);
-  const [availableTimes, setAvailableTimes] = useState([]);
-  const [service, setService] = useState([]);
-  const [syaratKeten, setSyaratKeten] = useState(false);
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [syaratKeten, setSyaratKeten] = useState(false);
   const { userData } = useUserContext();
 
   useEffect(() => {
-    const Time = [
-      { id: 1, value: 10 },
-      { id: 2, value: 11 },
-      { id: 3, value: 12 },
-      { id: 4, value: 13 },
-      { id: 5, value: 15 },
-      { id: 6, value: 16 },
-      { id: 7, value: 17 },
-      { id: 8, value: 18 },
-      { id: 9, value: 19 },
-      { id: 10, value: 20 },
-      { id: 11, value: 21 },
-    ];
-
-    const getBookingTime = async () => {
+    const getSession = async () => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/bookings/me/time`,
+          `${import.meta.env.VITE_API_URL}/api/sessions`,
           {
-            method: "POST",
+            method: "GET",
             headers: {
-              "x-access-token": userData.accessToken,
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ date: date.toISOString() }), // Send selected date to API
           }
         );
-        const bookedTime = await response.json();
-        // Check if there are already 3 bookings for the selected date
-        if (bookedTime.length < 3) {
-          setAvailableTimes(Time);
-        }
+        setSession(await response.json());
       } catch (error) {
         console.error("Error fetching data:", error);
-        setAvailableTimes([]); // Reset available times on error
       }
     };
 
@@ -76,26 +55,14 @@ const BookingComponent = () => {
 
     // Run only if accessToken exists and showTime is true
     if (userData.accessToken && showTime) {
-      getBookingTime();
+      getSession();
       getService();
     }
-  }, [userData, date, showTime]);
+  }, [userData, date, showTime, session]);
 
   const isPastDate = (selectedDate) => {
     const currentDate = new Date();
     return selectedDate < currentDate;
-  };
-
-  // push selected Time & Service data to userBooking
-  const handleServiceClick = (selectedService) => {
-    setSelectedService(selectedService); // Set selected service
-    let userBooking = {
-      nama: userData.id ? userData.id : null,
-      date: date.toDateString() ? date.toDateString() : null,
-      time: selectedTime.value ? selectedTime.value : null,
-      serviceId: selectedService.id,
-    };
-    localStorage.setItem("userBooking", JSON.stringify(userBooking));
   };
 
   // push selected Time & Service data to userBooking
@@ -104,8 +71,20 @@ const BookingComponent = () => {
     let userBooking = {
       nama: userData.id,
       date: date.toDateString(),
-      time: selectedTime.value,
+      sessionId: selectedTime.id, // Use selectedTime object directly
       serviceId: selectedService ? selectedService.id : null,
+    };
+    localStorage.setItem("userBooking", JSON.stringify(userBooking));
+  };
+
+  // push selected Time & Service data to userBooking
+  const handleServiceClick = (selectedService) => {
+    setSelectedService(selectedService); // Set selected service
+    let userBooking = {
+      nama: userData.id ? userData.id : null,
+      date: date.toDateString() ? date.toDateString() : null,
+      sessionId: selectedTime.id ? selectedTime.id : null,
+      serviceId: selectedService.id,
     };
     localStorage.setItem("userBooking", JSON.stringify(userBooking));
   };
@@ -215,18 +194,18 @@ const BookingComponent = () => {
                 {/* Show booking time */}
                 <div className="mt-4 mx-3">
                   <h6>Pilih Jam :</h6>
-                  {availableTimes.map((time) => (
+                  {session.map((data) => (
                     <button
-                      key={time.id}
+                      key={data.id}
                       className={`btn btn-light me-2 ${
-                        selectedTime && selectedTime.id === time.id
+                        selectedTime && selectedTime.id === data.id
                           ? "btn-selected"
                           : ""
                       }`}
-                      onClick={() => handleTimeClick(time)}
+                      onClick={() => handleTimeClick(data)}
                       disabled={isPastDate(date)} // Disable time buttons for past dates
                     >
-                      {time.value}:00
+                      {data.time}:00
                     </button>
                   ))}
                 </div>
