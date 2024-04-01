@@ -158,7 +158,7 @@ const MyBookingPage = () => {
                           </tr>
                         </tbody>
                       </table>
-                      <div className="d-contents mt-3">
+                      <div className="d-contents mt-3 d-grid">
                         <button
                           className="btn btn-danger"
                           onClick={() => handleCancelBooking(booking.id)}
