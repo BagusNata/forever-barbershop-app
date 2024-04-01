@@ -60,11 +60,6 @@
   border-color: inherit;
 }
 
-.my-booking .information {
-  font-size: 15px !important;
-  height: 270px !important;
-}
-
 .my-booking .tr {
   display: table-row;
   vertical-align: inherit;
