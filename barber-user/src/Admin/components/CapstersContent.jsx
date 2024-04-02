@@ -7,6 +7,7 @@ import { useUserContext } from "../../UserContext";
 
 const CapstersContent = () => {
   const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const { userData } = useUserContext();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const CapstersContent = () => {
       }
     };
 
-    //kalau accesToken sudah ada baru di jalankan
+    // If the accessToken already exists then run it
     if (userData.accessToken) {
       getCapster();
     }
@@ -52,7 +53,9 @@ const CapstersContent = () => {
       });
 
       // After successful deletion, update the data state to re-render without the deleted capster
-      setData((prevData) => prevData.filter((capster) => capster.id));
+      setData((prevData) =>
+        prevData.filter((capster) => capster.id !== capsterId)
+      );
 
       // Show a success notification
       Swal.fire({
@@ -76,6 +79,11 @@ const CapstersContent = () => {
     return format(new Date(dateString), "PPpp");
   }
 
+  // Function to update search values
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="w-100 min-vh-100 content-body">
       <Container>
@@ -89,6 +97,25 @@ const CapstersContent = () => {
               <i className="fa fa-fas fa-user-tie icon fs-3" />
             </div>
           </Card>
+        </Row>
+        <Row>
+          <div className="d-flex justify-content-end mb-3">
+            <div className="searchbar input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search capster..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                <i className="fa fa-fas fa-search" />
+              </span>
+            </div>
+            <button type="button" className="btn btn-primary-add">
+              <i className="fa fa-fas fa-plus icon-plus" /> add new capster
+            </button>
+          </div>
         </Row>
         <Row>
           <div className="table-responsive">
@@ -122,35 +149,51 @@ const CapstersContent = () => {
                     </td>
                   </tr>
                 ) : (
-                  data.map((data) => (
-                    <tr key={data.id}>
-                      <th className="text-center">{data.id}</th>
-                      <td>{data.name}</td>
-                      <td>{data.placeOfBirth}</td>
-                      <td>
-                        {data.dateOfBirth ? formatDate(data.dateOfBirth) : ""}
-                      </td>
-                      <td>{data.gender}</td>
-                      <td>
-                        {data.createdAt ? formatDate(data.createdAt) : ""}
-                      </td>
-                      <td>
-                        {data.updatedAt ? formatDate(data.updatedAt) : ""}
-                      </td>
-                      <td className="text-center">
-                        <a href="">
-                          <i className="fas fa-edit fs-6" />
-                          <p>Edit</p>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <a href="" onClick={() => handleDeleteCapster(data.id)}>
-                          <i className="fa-solid fa-trash-can fs-6" />
-                          <p>Delete</p>
-                        </a>
-                      </td>
-                    </tr>
-                  ))
+                  data
+                    // Filter data based on search value
+                    .filter((capster) =>
+                      [
+                        capster.name,
+                        capster.placeOfBirth,
+                        capster.dateOfBirth,
+                        capster.gender,
+                      ]
+                        .map((property) => property.toLowerCase())
+                        .join(" ")
+                        .includes(searchTerm.toLowerCase())
+                    )
+                    .map((data) => (
+                      <tr key={data.id}>
+                        <th className="text-center">{data.id}</th>
+                        <td>{data.name}</td>
+                        <td>{data.placeOfBirth}</td>
+                        <td>
+                          {data.dateOfBirth ? formatDate(data.dateOfBirth) : ""}
+                        </td>
+                        <td>{data.gender}</td>
+                        <td>
+                          {data.createdAt ? formatDate(data.createdAt) : ""}
+                        </td>
+                        <td>
+                          {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                        </td>
+                        <td className="text-center">
+                          <a href="">
+                            <i className="fas fa-edit fs-6" />
+                            <p>Edit</p>
+                          </a>
+                        </td>
+                        <td className="text-center">
+                          <a
+                            href=""
+                            onClick={() => handleDeleteCapster(data.id)}
+                          >
+                            <i className="fa-solid fa-trash-can fs-6" />
+                            <p>Delete</p>
+                          </a>
+                        </td>
+                      </tr>
+                    ))
                 )}
               </tbody>
             </table>
