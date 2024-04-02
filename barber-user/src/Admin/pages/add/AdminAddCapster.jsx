@@ -106,7 +106,7 @@ const AdminAddCapster = () => {
       <Container>
         <div className="position-absolute top-50 start-50 translate-middle form-box">
           <form onSubmit={formik.handleSubmit}>
-            <h3 className="text-center mb-5">Tambah Capster</h3>
+            <h3 className="text-center mb-5">Tambah Capster Baru</h3>
             <div className="mb-3">
               <label className="form-label">Nama</label>
               <input
