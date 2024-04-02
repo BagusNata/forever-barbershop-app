@@ -8,6 +8,7 @@ import { useUserContext } from "../../UserContext";
 const BookingsContent = () => {
   const [data, setData] = useState([]);
   const { userData } = useUserContext();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getbookings = async () => {
@@ -37,6 +38,11 @@ const BookingsContent = () => {
       getbookings();
     }
   }, [userData]);
+
+  // Function to update search values
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   // Set booking status
   const handleDoneBooking = async (bookingId) => {
@@ -96,6 +102,22 @@ const BookingsContent = () => {
           </Col>
         </Row>
         <Row>
+          <div className="d-flex justify-content-end mb-3">
+            <div className="searchbar input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search booking..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                <i className="fa fa-fas fa-search" />
+              </span>
+            </div>
+          </div>
+        </Row>
+        <Row>
           <div className="table-responsive">
             <table className="table table-striped table-hover table-bordered">
               <thead className="table-dark">
@@ -126,6 +148,18 @@ const BookingsContent = () => {
                   </tr>
                 ) : (
                   data
+                    // Filter data based on search value
+                    .filter((data) =>
+                      [
+                        data.user.username,
+                        data.service.name,
+                        formatDate(data.date),
+                        data.session.time,
+                      ]
+                        .toString()
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    )
                     .sort((a, b) => {
                       const dateComparison =
                         new Date(formatDate(a.date)) -
