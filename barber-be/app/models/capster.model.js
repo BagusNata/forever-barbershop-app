@@ -6,15 +6,15 @@ module.exports = (sequelize, Sequelize) => {
     },
     placeOfBirth: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     dateOfBirth: {
       type: Sequelize.DATE,
-      allowNull: true,
+      allowNull: false,
     },
     gender: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
     },
   });
 
