@@ -9,6 +9,12 @@ import AdminUsersPage from "../src/Admin/pages/dashboard/AdminUsersPage";
 import AdminCapstersPage from "../src/Admin/pages/dashboard/AdminCapstersPage";
 import AdminServicesPage from "../src/Admin/pages/dashboard/AdminServicesPage";
 import AdminTestimoniesPage from "../src/Admin/pages/dashboard/AdminTestimoniesPage";
+// add
+import AdminAddCapster from "../src/Admin/pages/add/AdminAddCapster";
+import AdminAddService from "../src/Admin/pages/add/AdminAddService";
+import AdminAddSession from "../src/Admin/pages/add/AdminAddSession";
+// edit
+import AdminEditSessionPage from "../src/Admin/pages/edit/AdminEditSessionPage";
 
 //User
 import SignInPage from "../src/User/pages/SignInPage";
@@ -35,12 +41,20 @@ function App() {
     <div>
       <Routes>
         {/* Admin */}
+        {/* Dashboard */}
         <Route path="/admin/bookings" Component={AdminBookingsPage} />
-        <Route path="/admin/session" Component={AdminSessionPage} />
+        <Route path="/admin/sessions" Component={AdminSessionPage} />
         <Route path="/admin/users" Component={AdminUsersPage} />
         <Route path="/admin/capsters" Component={AdminCapstersPage} />
         <Route path="/admin/services" Component={AdminServicesPage} />
         <Route path="/admin/testimonies" Component={AdminTestimoniesPage} />
+        {/* Add Page */}
+        <Route path="/admin/sessions/add" Component={AdminAddSession} />
+        <Route path="/admin/capsters/add" Component={AdminAddCapster} />
+        <Route path="/admin/services/add" Component={AdminAddService} />
+
+        {/* Edit Page */}
+        <Route path="/admin/session/edit" Component={AdminEditSessionPage} />
 
         {/* User */}
         <Route path="/signin" Component={SignInPage} />
