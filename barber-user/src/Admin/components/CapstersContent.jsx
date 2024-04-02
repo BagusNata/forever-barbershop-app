@@ -1,11 +1,13 @@
 import { Container, Row, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import "../assets/AdminContent.css";
+import "../assets/adminContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const CapstersContent = () => {
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { userData } = useUserContext();
@@ -40,6 +42,16 @@ const CapstersContent = () => {
       getCapster();
     }
   }, [userData]);
+
+  // Function to update search values
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // function to direct users to the add page
+  const handleClickAdd = () => {
+    navigate("/admin/capsters/add");
+  };
 
   //Delete capster
   const handleDeleteCapster = async (capsterId) => {
@@ -79,11 +91,6 @@ const CapstersContent = () => {
     return format(new Date(dateString), "PPpp");
   }
 
-  // Function to update search values
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
   return (
     <div className="w-100 min-vh-100 content-body">
       <Container>
@@ -112,7 +119,11 @@ const CapstersContent = () => {
                 <i className="fa fa-fas fa-search" />
               </span>
             </div>
-            <button type="button" className="btn btn-primary-add">
+            <button
+              type="button"
+              className="btn btn-primary-add"
+              onClick={() => handleClickAdd()}
+            >
               <i className="fa fa-fas fa-plus icon-plus" /> add new capster
             </button>
           </div>

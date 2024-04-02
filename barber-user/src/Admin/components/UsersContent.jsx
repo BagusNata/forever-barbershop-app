@@ -1,7 +1,7 @@
 import { Container, Row, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import "../assets/AdminContent.css";
+import "../assets/adminContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
 
