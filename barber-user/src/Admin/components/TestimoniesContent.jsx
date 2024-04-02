@@ -8,6 +8,7 @@ import { useUserContext } from "../../UserContext";
 const TestimoniesContent = () => {
   const [data, setData] = useState([]);
   const { userData } = useUserContext();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getTestimonies = async () => {
@@ -39,6 +40,11 @@ const TestimoniesContent = () => {
       getTestimonies();
     }
   }, [userData]);
+
+  // Function to update search values
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   //Delete testimony
   const handleDeleteTestimony = async (testimonyId) => {
@@ -94,6 +100,22 @@ const TestimoniesContent = () => {
           </Card>
         </Row>
         <Row>
+          <div className="d-flex justify-content-end mb-3">
+            <div className="searchbar input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search testimony..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                <i className="fa fa-fas fa-search" />
+              </span>
+            </div>
+          </div>
+        </Row>
+        <Row>
           <div className="table-responsive">
             <table className="table table-striped table-hover table-bordered">
               <thead className="table-dark">
@@ -123,30 +145,38 @@ const TestimoniesContent = () => {
                     </td>
                   </tr>
                 ) : (
-                  data.map((data) => (
-                    <tr key={data.id}>
-                      <th className="text-center">{data.id}</th>
-                      <td>{data.user.username}</td>
-                      <td>{data.date ? formatDate(data.date) : ""}</td>
-                      <td>{data.rating}</td>
-                      <td>{data.description}</td>
-                      <td>
-                        {data.createdAt ? formatDate(data.createdAt) : ""}
-                      </td>
-                      <td>
-                        {data.updatedAt ? formatDate(data.updatedAt) : ""}
-                      </td>
-                      <td className="text-center">
-                        <a
-                          href=""
-                          onClick={() => handleDeleteTestimony(data.id)}
-                        >
-                          <i className="fa-solid fa-trash-can fs-6" />
-                          <p>Delete</p>
-                        </a>
-                      </td>
-                    </tr>
-                  ))
+                  data
+                    // Filter data based on search value
+                    .filter((data) =>
+                      [data.user.username, formatDate(data.date), data.rating]
+                        .toString()
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    )
+                    .map((data) => (
+                      <tr key={data.id}>
+                        <th className="text-center">{data.id}</th>
+                        <td>{data.user.username}</td>
+                        <td>{data.date ? formatDate(data.date) : ""}</td>
+                        <td>{data.rating}</td>
+                        <td>{data.description}</td>
+                        <td>
+                          {data.createdAt ? formatDate(data.createdAt) : ""}
+                        </td>
+                        <td>
+                          {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                        </td>
+                        <td className="text-center">
+                          <a
+                            href=""
+                            onClick={() => handleDeleteTestimony(data.id)}
+                          >
+                            <i className="fa-solid fa-trash-can fs-6" />
+                            <p>Delete</p>
+                          </a>
+                        </td>
+                      </tr>
+                    ))
                 )}
               </tbody>
             </table>
