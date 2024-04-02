@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const AdminBookingsPage = () => {
   const navigate = useNavigate();
-  const { userData } = useUserContext();
+  const { userData, setUserData } = useUserContext();
 
   useEffect(() => {
     // Check if user role = admin
@@ -15,17 +15,28 @@ const AdminBookingsPage = () => {
       // Render admin page
       return;
     } else {
-      // Show restricted message
-      Swal.fire({
-        icon: "error",
-        title: "Restricted to access admin page",
-        text: `Your account doesn't have admin role`,
-      }).then(() => {
-        // Redirect to the home page
-        navigate("/");
-      });
+      // Check if user data exists in local storage
+      const storedUserData = JSON.parse(localStorage.getItem("userData"));
+      if (
+        storedUserData &&
+        storedUserData.roles &&
+        storedUserData.roles.includes("ROLE_ADMIN")
+      ) {
+        // Update context with stored user data
+        setUserData(storedUserData);
+      } else {
+        // Show restricted message
+        Swal.fire({
+          icon: "error",
+          title: "Restricted to access admin page",
+          text: `Your account doesn't have admin role`,
+        }).then(() => {
+          // Redirect to the home page
+          navigate("/");
+        });
+      }
     }
-  }, [userData, navigate]);
+  }, [userData, navigate, setUserData]);
 
   // Render admin page only if user has admin role
   return userData && userData.roles && userData.roles.includes("ROLE_ADMIN") ? (
