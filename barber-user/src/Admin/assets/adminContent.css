@@ -1,0 +1,78 @@
+.content-body {
+  background-color: var(--background-color);
+
+  .header {
+    max-width: 15rem;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+  }
+
+  .card,
+  .card-header {
+    --bs-card-bg: transparent !important;
+    border: none;
+    background-color: transparent !important;
+  }
+
+  .card-total-admin {
+    max-width: 15rem;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    padding: 15px 0;
+  }
+
+  .icon {
+    margin: 1rem 0 1rem 0;
+  }
+
+  .searchbar {
+    margin: 0 1rem;
+
+    span {
+      height: 50px !important;
+      background-color: #c6c6c6;
+    }
+  }
+
+  .icon-plus {
+    margin-right: 10px;
+  }
+
+  .input-group {
+    width: auto !important;
+  }
+
+  .form-control {
+    height: 50px !important;
+  }
+
+  .btn-primary-add {
+    background-color: var(--secondary-color-active) !important;
+    height: 50px !important;
+  }
+
+  .btn-primary-add:hover {
+    background-color: var(--secondary-color) !important;
+  }
+
+  .table-dark {
+    --bs-table-bg: #333 !important;
+  }
+
+  td a {
+    text-decoration: none;
+    color: black;
+  }
+
+  td p {
+    font-size: 15px;
+    margin-top: 3px;
+  }
+
+  a:hover {
+    color: var(--secondary-color-active) !important;
+  }
+}
