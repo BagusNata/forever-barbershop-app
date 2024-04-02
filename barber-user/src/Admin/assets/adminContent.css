@@ -29,8 +29,6 @@
   }
 
   .searchbar {
-    margin: 0 1rem;
-
     span {
       height: 50px !important;
       background-color: #c6c6c6;
@@ -50,6 +48,7 @@
   }
 
   .btn-primary-add {
+    margin-left: 1rem;
     background-color: var(--secondary-color-active) !important;
     height: 50px !important;
   }
