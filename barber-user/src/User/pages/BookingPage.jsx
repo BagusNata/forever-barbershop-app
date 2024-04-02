@@ -4,37 +4,42 @@ import { useUserContext } from "../../UserContext";
 import Swal from "sweetalert2";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const BookingPage = () => {
   let navigate = useNavigate();
-  const { userData } = useUserContext();
+  const { userData, setUserData } = useUserContext();
 
-  // Clear localStorage
-  localStorage.removeItem("userBooking");
+  useEffect(() => {
+    // Clear localStorage
+    localStorage.removeItem("userBooking");
 
-  //format date
+    // Logic to check freezeExpiryDate
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    if (
+      storedUserData &&
+      storedUserData.freezeExpiryDate &&
+      new Date(storedUserData.freezeExpiryDate) > new Date()
+    ) {
+      // Update context with stored user data
+      setUserData(storedUserData);
+
+      // Show restricted message
+      Swal.fire({
+        icon: "error",
+        title: "Restricted to access booking page",
+        html: `Your account has been freeze until <strong>${formatDate(
+          storedUserData.freezeExpiryDate
+        )}</strong>`,
+      }).then(() => {
+        // Redirect to the home page
+        navigate("/");
+      });
+    }
+  }, [setUserData, navigate]);
+
   function formatDate(dateString) {
     return format(new Date(dateString), "dd MMMM yyyy, p");
-  }
-
-  // Logic to check freezeExpiryDate
-  if (
-    userData &&
-    userData.freezeExpiryDate &&
-    new Date(userData.freezeExpiryDate) > new Date()
-  ) {
-    // User has a freeze expiry date in the future
-    // Show restricted message
-    Swal.fire({
-      icon: "error",
-      title: "Restricted to access booking page",
-      html: `Your account has been freeze until <strong>${formatDate(
-        userData.freezeExpiryDate
-      )}</strong>`,
-    }).then(() => {
-      // Redirect to the home page
-      navigate("/");
-    });
   }
 
   return (
