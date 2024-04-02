@@ -4,10 +4,13 @@ import { format } from "date-fns";
 import "../assets/adminContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const ServicesContent = () => {
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
   const { userData } = useUserContext();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getService = async () => {
@@ -33,6 +36,17 @@ const ServicesContent = () => {
     }
   }, [userData]);
 
+  // Function to update search values
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // function to direct users to the add page
+  const handleClickAdd = () => {
+    navigate("/admin/services/add");
+  };
+
+  //Delete service
   const handleDeleteService = async (serviceId) => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/services/${serviceId}`, {
@@ -84,6 +98,29 @@ const ServicesContent = () => {
           </Card>
         </Row>
         <Row>
+          <div className="d-flex justify-content-end mb-3">
+            <div className="searchbar input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search service..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                <i className="fa fa-fas fa-search" />
+              </span>
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary-add"
+              onClick={() => handleClickAdd()}
+            >
+              <i className="fa fa-fas fa-plus icon-plus" /> add new service
+            </button>
+          </div>
+        </Row>
+        <Row>
           <div className="table-responsive">
             <table className="table table-striped table-hover table-bordered">
               <thead className="table-dark">
@@ -116,46 +153,63 @@ const ServicesContent = () => {
                     </td>
                   </tr>
                 ) : (
-                  data.map((data) => (
-                    <tr key={data.id}>
-                      <th className="text-center">{data.id}</th>
-                      <td>
-                        <img
-                          src={data.image}
-                          alt={data.name}
-                          width={150}
-                          className="px-2"
-                        />
-                      </td>
-                      <td>{data.name}</td>
-                      <td>
-                        {new Intl.NumberFormat("id-ID", {
-                          style: "currency",
-                          currency: "IDR",
-                        }).format(data.price)}
-                      </td>
-                      <td>{data.description}</td>
-                      <td>{data.detail}</td>
-                      <td>
-                        {data.createdAt ? formatDate(data.createdAt) : ""}
-                      </td>
-                      <td>
-                        {data.updatedAt ? formatDate(data.updatedAt) : ""}
-                      </td>
-                      <td className="text-center">
-                        <a href="">
-                          <i className="fas fa-edit fs-6" />
-                          <p>Edit</p>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <a href="" onClick={() => handleDeleteService(data.id)}>
-                          <i className="fa-solid fa-trash-can fs-6" />
-                          <p>Delete</p>
-                        </a>
-                      </td>
-                    </tr>
-                  ))
+                  data
+                    // Filter data based on search value
+                    .filter((data) =>
+                      [data.name, data.detail]
+                        .concat(
+                          new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                          }).format(data.price)
+                        )
+                        .map((property) => property.toLowerCase())
+                        .join(" ")
+                        .includes(searchTerm.toLowerCase())
+                    )
+                    .map((data) => (
+                      <tr key={data.id}>
+                        <th className="text-center">{data.id}</th>
+                        <td>
+                          <img
+                            src={data.image}
+                            alt={data.name}
+                            width={150}
+                            className="px-2"
+                          />
+                        </td>
+                        <td>{data.name}</td>
+                        <td>
+                          {new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR",
+                          }).format(data.price)}
+                        </td>
+                        <td>{data.description}</td>
+                        <td>{data.detail}</td>
+                        <td>
+                          {data.createdAt ? formatDate(data.createdAt) : ""}
+                        </td>
+                        <td>
+                          {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                        </td>
+                        <td className="text-center">
+                          <a href="">
+                            <i className="fas fa-edit fs-6" />
+                            <p>Edit</p>
+                          </a>
+                        </td>
+                        <td className="text-center">
+                          <a
+                            href=""
+                            onClick={() => handleDeleteService(data.id)}
+                          >
+                            <i className="fa-solid fa-trash-can fs-6" />
+                            <p>Delete</p>
+                          </a>
+                        </td>
+                      </tr>
+                    ))
                 )}
               </tbody>
             </table>
