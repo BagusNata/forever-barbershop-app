@@ -30,7 +30,7 @@ const Sidebar = () => {
                 Bookings
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact="true" to="/admin/session" className="nav-link">
+            <NavLink exact="true" to="/admin/sessions" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-clock">
                 Sesion
               </CDBSidebarMenuItem>
