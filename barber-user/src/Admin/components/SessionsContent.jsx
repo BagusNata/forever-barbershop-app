@@ -1,16 +1,19 @@
 import { Container, Row, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import "../assets/AdminContent.css";
+import "../assets/adminContent.css";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
+import { useNavigate } from "react-router-dom";
 
 const SessionsContent = () => {
+  let navigate = useNavigate();
   const [data, setData] = useState([]);
   const { userData } = useUserContext();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const getSessio = async () => {
+    const getSession = async () => {
       try {
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/sessions`,
@@ -29,10 +32,21 @@ const SessionsContent = () => {
 
     //kalau accesToken sudah ada baru di jalankan
     if (userData.accessToken) {
-      getSessio();
+      getSession();
     }
   }, [userData]);
 
+  // Function to update search values
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // function to direct users to the add page
+  const handleClickAdd = () => {
+    navigate("/admin/sessions/add");
+  };
+
+  // Delete session
   const handleDeleteSession = async (sessionId) => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/api/sessions/${sessionId}`, {
@@ -44,7 +58,9 @@ const SessionsContent = () => {
       });
 
       // After successful deletion, update the data state to re-render without the deleted session
-      setData((prevData) => prevData.filter((session) => session.id));
+      setData((prevData) =>
+        prevData.filter((session) => session.id !== sessionId)
+      );
 
       // Show a success notification
       Swal.fire({
@@ -84,11 +100,34 @@ const SessionsContent = () => {
           </Card>
         </Row>
         <Row>
+          <div className="d-flex justify-content-end mb-3">
+            <div className="searchbar input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search session..."
+                value={searchTerm}
+                onChange={handleSearch}
+              />
+              <span className="input-group-text" id="inputGroup-sizing-sm">
+                <i className="fa fa-fas fa-search" />
+              </span>
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary-add"
+              onClick={() => handleClickAdd()}
+            >
+              <i className="fa fa-fas fa-plus icon-plus" /> add new session
+            </button>
+          </div>
+        </Row>
+        <Row>
           <div className="table-responsive">
             <table className="table table-striped table-hover table-bordered">
               <thead className="table-dark">
                 <tr className="text-center">
-                  <th scope="col">Id</th>
+                  <th scope="col">#</th>
                   <th scope="col">Jam</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
@@ -112,30 +151,48 @@ const SessionsContent = () => {
                     </td>
                   </tr>
                 ) : (
-                  data.map((data) => (
-                    <tr key={data.id}>
-                      <th className="text-center">{data.id}</th>
-                      <td>{data.time}:00</td>
-                      <td>
-                        {data.createdAt ? formatDate(data.createdAt) : ""}
-                      </td>
-                      <td>
-                        {data.updatedAt ? formatDate(data.updatedAt) : ""}
-                      </td>
-                      <td className="text-center">
-                        <a href="">
-                          <i className="fas fa-edit fs-6" />
-                          <p>Edit</p>
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <a href="" onClick={() => handleDeleteSession(data.id)}>
-                          <i className="fa-solid fa-trash-can fs-6" />
-                          <p>Delete</p>
-                        </a>
-                      </td>
-                    </tr>
-                  ))
+                  data
+                    // Filter data based on search value
+                    .filter((data) =>
+                      data.time
+                        .toString()
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase())
+                    )
+                    .sort((a, b) => {
+                      const timeComparison = a.time - b.time;
+                      if (timeComparison === 0) {
+                        return a.time - b.time;
+                      }
+                      return timeComparison;
+                    })
+                    .map((data, index) => (
+                      <tr key={data.id}>
+                        <th className="text-center">{index + 1}</th>
+                        <td>{data.time}:00</td>
+                        <td>
+                          {data.createdAt ? formatDate(data.createdAt) : ""}
+                        </td>
+                        <td>
+                          {data.updatedAt ? formatDate(data.updatedAt) : ""}
+                        </td>
+                        <td className="text-center">
+                          <a href="#!">
+                            <i className="fas fa-edit fs-6" />
+                            <p>Edit</p>
+                          </a>
+                        </td>
+                        <td className="text-center">
+                          <a
+                            href="#!"
+                            onClick={() => handleDeleteSession(data.id)}
+                          >
+                            <i className="fa-solid fa-trash-can fs-6" />
+                            <p>Delete</p>
+                          </a>
+                        </td>
+                      </tr>
+                    ))
                 )}
               </tbody>
             </table>
