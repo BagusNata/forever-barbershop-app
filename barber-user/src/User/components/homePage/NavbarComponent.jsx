@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
-import { section } from "../../data/index";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../../UserContext";
+import { format } from "date-fns";
+import Swal from "sweetalert2";
 
 const NavbarComponent = () => {
   //navigate page
@@ -26,6 +27,31 @@ const NavbarComponent = () => {
     window.addEventListener("scroll", changeBgNavbar);
   });
 
+  function formatDate(dateString) {
+    return format(new Date(dateString), "dd MMMM yyyy, p");
+  }
+
+  const handleBookingClick = () => {
+    if (
+      userData &&
+      userData.freezeExpiryDate &&
+      new Date(userData.freezeExpiryDate) > new Date()
+    ) {
+      // User has a freeze expiry date in the future
+      // Show restricted message
+      Swal.fire({
+        icon: "error",
+        title: "Restricted to access booking page",
+        html: `Your account has been freeze until <strong>${formatDate(
+          userData.freezeExpiryDate
+        )}</strong>`,
+      });
+    } else {
+      // If user doesn't have freeze expiry or it's already expired, navigate to booking page
+      navigate("/booking");
+    }
+  };
+
   return (
     <div>
       <Navbar
@@ -47,16 +73,33 @@ const NavbarComponent = () => {
           />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mx-auto text-center">
-              {section.map((link) => {
-                return (
-                  <div
-                    className={changeColor ? "nav-link-active" : "nav-link"}
-                    key={link.id}
-                  >
-                    <a href={link.path}>{link.text}</a>
-                  </div>
-                );
-              })}
+              {/* home */}
+              <div className={changeColor ? "nav-link-active" : "nav-link"}>
+                <a href="#hero">Home</a>
+              </div>
+              {/* about */}
+              <div className={changeColor ? "nav-link-active" : "nav-link"}>
+                <a href="#about">About Us</a>
+              </div>
+              {/* service */}
+              <div className={changeColor ? "nav-link-active" : "nav-link"}>
+                <a href="#services">Services</a>
+              </div>
+              {/* booking */}
+              <div
+                className={changeColor ? "nav-link-active" : "nav-link"}
+                onClick={handleBookingClick}
+              >
+                <a href="#booking">Booking</a>
+              </div>
+              {/* testimonial */}
+              <div className={changeColor ? "nav-link-active" : "nav-link"}>
+                <a href="#testimonial">Testimonial</a>
+              </div>
+              {/* FAQ */}
+              <div className={changeColor ? "nav-link-active" : "nav-link"}>
+                <a href="#faq">FAQ</a>
+              </div>
             </Nav>
 
             {!userData.username ? (
@@ -101,13 +144,6 @@ const NavbarComponent = () => {
                         }}
                       >
                         My booking
-                      </NavDropdown.Item>
-                      <NavDropdown.Item
-                        onClick={() => {
-                          navigate("/myTestimony");
-                        }}
-                      >
-                        My testimony
                       </NavDropdown.Item>
                       <NavDropdown.Divider />
                       <NavDropdown.Item

@@ -1,18 +1,39 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
+import { format } from "date-fns";
 
 const HeroComponent = () => {
   let navigate = useNavigate();
 
-  const handleClick = () => {
-    const accessToken = localStorage.getItem("userData");
+  function formatDate(dateString) {
+    return format(new Date(dateString), "dd MMMM yyyy, p");
+  }
 
-    if (accessToken) {
-      // If user has accessToken, navigate to bookingPage
+  const handleClick = () => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
+    if (
+      userData &&
+      userData.freezeExpiryDate &&
+      new Date(userData.freezeExpiryDate) > new Date()
+    ) {
+      // show failed alert because account user has been freeze
+      Swal.fire({
+        icon: "error",
+        title: "Restricted to access booking page",
+        html: `Your account has been freeze until <strong>${formatDate(
+          userData.freezeExpiryDate
+        )}</strong>`,
+      });
+    } else if (
+      (userData && userData.freezeExpiryDate === null) ||
+      new Date(userData.freezeExpiryDate) < new Date()
+    ) {
+      // If user has userData, navigate to bookingPage
       navigate("/booking");
     } else {
-      // If user doesn't have accessToken, navigate to signInPage
+      // If user doesn't have userData, navigate to signInPage
       navigate("/signin");
     }
   };
