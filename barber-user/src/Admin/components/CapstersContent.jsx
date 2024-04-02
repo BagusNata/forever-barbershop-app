@@ -162,12 +162,12 @@ const CapstersContent = () => {
                 ) : (
                   data
                     // Filter data based on search value
-                    .filter((capster) =>
+                    .filter((data) =>
                       [
-                        capster.name,
-                        capster.placeOfBirth,
-                        capster.dateOfBirth,
-                        capster.gender,
+                        data.name,
+                        data.placeOfBirth,
+                        data.dateOfBirth,
+                        data.gender,
                       ]
                         .map((property) => property.toLowerCase())
                         .join(" ")
