@@ -1,4 +1,5 @@
 import "../../assets/css/addTestimonial.css";
+import { useEffect } from "react";
 import { useUserContext } from "../../../UserContext";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -21,14 +22,44 @@ const validate = (values) => {
 };
 
 const AddTestimonial = () => {
-  let navigate = useNavigate();
-  const { userData } = useUserContext();
+  const navigate = useNavigate();
+  const { userData, setUserData } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    // Check if user role = user
+    if (userData && userData.roles && userData.roles.includes("ROLE_USER")) {
+      // Render add testimonial page
+      return;
+    } else {
+      // Check if user data exists in local storage
+      const storedUserData = JSON.parse(localStorage.getItem("userData"));
+      if (
+        storedUserData &&
+        storedUserData.roles &&
+        storedUserData.roles.includes("ROLE_USER")
+      ) {
+        // Update context with stored user data
+        setUserData(storedUserData);
+      } else {
+        // Show restricted message
+        Swal.fire({
+          icon: "error",
+          title: "Restricted to access add testimonial page",
+          text: `Your account doesn't have user role`,
+        }).then(() => {
+          // Redirect to the home page
+          navigate("/");
+        });
+      }
+    }
+  }, [userData, navigate, setUserData]);
 
   function formatDate(dateString) {
     return format(new Date(dateString), "dd MMMM yyyy, p");
   }
 
+  // Form logic
   const formik = useFormik({
     initialValues: {
       name: userData.username,
@@ -88,7 +119,7 @@ const AddTestimonial = () => {
     formik.handleSubmit();
   };
 
-  return (
+  return userData && userData.roles && userData.roles.includes("ROLE_USER") ? (
     <div className="testimonial-add w-100 min-vh-100">
       <Container>
         <div className="position-absolute top-50 start-50 translate-middle form-box">
@@ -149,7 +180,7 @@ const AddTestimonial = () => {
         </div>
       </Container>
     </div>
-  );
+  ) : null;
 };
 
 export default AddTestimonial;
