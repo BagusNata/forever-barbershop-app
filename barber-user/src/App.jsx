@@ -26,6 +26,8 @@ import MyBookingPage from "../src/User/pages/MyBookingPage";
 import TestimonialPage from "../src/User/pages/TestimonialPage";
 import NotFoundPage from "../src/User/pages/NotFoundPage";
 import { useUserContext } from "./UserContext";
+// add
+import AddTestimonial from "../src/User/pages/add/AddTestimonial";
 
 function App() {
   const { setUserData } = useUserContext();
@@ -65,6 +67,8 @@ function App() {
         <Route path="/myBooking" Component={MyBookingPage} />
         <Route path="/testimonial" Component={TestimonialPage} />
         <Route path="*" Component={NotFoundPage} />
+        {/* Add Page */}
+        <Route path="/testimonial/add" Component={AddTestimonial} />
       </Routes>
     </div>
   );
