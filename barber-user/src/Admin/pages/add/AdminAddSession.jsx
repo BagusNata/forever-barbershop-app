@@ -1,4 +1,5 @@
 import "../../assets/adminAdd.css";
+import { useEffect } from "react";
 import { useUserContext } from "../../../UserContext";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -16,10 +17,40 @@ const validate = (values) => {
 };
 
 const AdminAddSession = () => {
-  let navigate = useNavigate();
-  const { userData } = useUserContext();
+  const navigate = useNavigate();
+  const { userData, setUserData } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    // Check if user role = admin
+    if (userData && userData.roles && userData.roles.includes("ROLE_ADMIN")) {
+      // Render admin page
+      return;
+    } else {
+      // Check if user data exists in local storage
+      const storedUserData = JSON.parse(localStorage.getItem("userData"));
+      if (
+        storedUserData &&
+        storedUserData.roles &&
+        storedUserData.roles.includes("ROLE_ADMIN")
+      ) {
+        // Update context with stored user data
+        setUserData(storedUserData);
+      } else {
+        // Show restricted message
+        Swal.fire({
+          icon: "error",
+          title: "Restricted to access admin page",
+          text: `Your account doesn't have admin role`,
+        }).then(() => {
+          // Redirect to the home page
+          navigate("/");
+        });
+      }
+    }
+  }, [userData, navigate, setUserData]);
+
+  // Form logic
   const formik = useFormik({
     initialValues: {
       time: "",
@@ -81,7 +112,7 @@ const AdminAddSession = () => {
     formik.handleSubmit();
   };
 
-  return (
+  return userData && userData.roles && userData.roles.includes("ROLE_ADMIN") ? (
     <div className="admin-add w-100 min-vh-100">
       <Container>
         <div className="position-absolute top-50 start-50 translate-middle form-box">
@@ -125,7 +156,7 @@ const AdminAddSession = () => {
         </div>
       </Container>
     </div>
-  );
+  ) : null;
 };
 
 export default AdminAddSession;
