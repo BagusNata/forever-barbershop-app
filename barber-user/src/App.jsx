@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 
-//Import Pages
-//Admin
+// Import Pages
+// Admin
 import AdminBookingsPage from "../src/Admin/pages/dashboard/AdminBookingsPage";
 import AdminSessionPage from "../src/Admin/pages/dashboard/AdminSessionPage";
 import AdminUsersPage from "../src/Admin/pages/dashboard/AdminUsersPage";
@@ -10,13 +10,15 @@ import AdminCapstersPage from "../src/Admin/pages/dashboard/AdminCapstersPage";
 import AdminServicesPage from "../src/Admin/pages/dashboard/AdminServicesPage";
 import AdminTestimoniesPage from "../src/Admin/pages/dashboard/AdminTestimoniesPage";
 // add
-import AdminAddCapster from "../src/Admin/pages/add/AdminAddCapster";
-import AdminAddService from "../src/Admin/pages/add/AdminAddService";
-import AdminAddSession from "../src/Admin/pages/add/AdminAddSession";
+import AdminAddCapsterPage from "../src/Admin/pages/add/AdminAddCapsterPage";
+import AdminAddServicePage from "../src/Admin/pages/add/AdminAddServicePage";
+import AdminAddSessionPage from "../src/Admin/pages/add/AdminAddSessionPage";
 // edit
 import AdminEditSessionPage from "../src/Admin/pages/edit/AdminEditSessionPage";
+import AdminEditCapsterPage from "../src/Admin/pages/edit/AdminEditCapsterPage";
+import AdminEditServicePage from "../src/Admin/pages/edit/AdminEditServicePage";
 
-//User
+// User
 import SignInPage from "../src/User/pages/SignInPage";
 import SignUpPage from "../src/User/pages/SignUpPage";
 import SignOutPage from "./User/pages/SignOutPage";
@@ -51,12 +53,22 @@ function App() {
         <Route path="/admin/services" Component={AdminServicesPage} />
         <Route path="/admin/testimonies" Component={AdminTestimoniesPage} />
         {/* Add Page */}
-        <Route path="/admin/sessions/add" Component={AdminAddSession} />
-        <Route path="/admin/capsters/add" Component={AdminAddCapster} />
-        <Route path="/admin/services/add" Component={AdminAddService} />
-
+        <Route path="/admin/sessions/add" Component={AdminAddSessionPage} />
+        <Route path="/admin/capsters/add" Component={AdminAddCapsterPage} />
+        <Route path="/admin/services/add" Component={AdminAddServicePage} />
         {/* Edit Page */}
-        <Route path="/admin/session/edit" Component={AdminEditSessionPage} />
+        <Route
+          path="/admin/sessions/edit/:sessionId"
+          element={<AdminEditSessionPage />}
+        />
+        <Route
+          path="/admin/capsters/edit/:capsterId"
+          element={<AdminEditCapsterPage />}
+        />
+        <Route
+          path="/admin/services/edit/:serviceId"
+          element={<AdminEditServicePage />}
+        />
 
         {/* User */}
         <Route path="/signin" Component={SignInPage} />
