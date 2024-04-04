@@ -30,7 +30,7 @@ const SessionsContent = () => {
       }
     };
 
-    //kalau accesToken sudah ada baru di jalankan
+    // If the accessToken already exists then run it
     if (userData.accessToken) {
       getSession();
     }
@@ -44,6 +44,11 @@ const SessionsContent = () => {
   // function to direct users to the add page
   const handleClickAdd = () => {
     navigate("/admin/sessions/add");
+  };
+
+  // function to direct users to the add page
+  const handleClickEdit = (sessionId) => {
+    navigate(`/admin/sessions/edit/${sessionId}`);
   };
 
   // Delete session
@@ -177,14 +182,14 @@ const SessionsContent = () => {
                           {data.updatedAt ? formatDate(data.updatedAt) : ""}
                         </td>
                         <td className="text-center">
-                          <a href="#!">
+                          <a href="" onClick={() => handleClickEdit(data.id)}>
                             <i className="fas fa-edit fs-6" />
                             <p>Edit</p>
                           </a>
                         </td>
                         <td className="text-center">
                           <a
-                            href="#!"
+                            href=""
                             onClick={() => handleDeleteSession(data.id)}
                           >
                             <i className="fa-solid fa-trash-can fs-6" />

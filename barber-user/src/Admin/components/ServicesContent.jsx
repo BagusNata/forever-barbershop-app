@@ -46,6 +46,11 @@ const ServicesContent = () => {
     navigate("/admin/services/add");
   };
 
+  // function to direct users to the add page
+  const handleClickEdit = (serviceId) => {
+    navigate(`/admin/services/edit/${serviceId}`);
+  };
+
   //Delete service
   const handleDeleteService = async (serviceId) => {
     try {
@@ -194,7 +199,7 @@ const ServicesContent = () => {
                           {data.updatedAt ? formatDate(data.updatedAt) : ""}
                         </td>
                         <td className="text-center">
-                          <a href="">
+                          <a href="" onClick={() => handleClickEdit(data.id)}>
                             <i className="fas fa-edit fs-6" />
                             <p>Edit</p>
                           </a>

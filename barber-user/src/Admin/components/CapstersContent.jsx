@@ -53,6 +53,11 @@ const CapstersContent = () => {
     navigate("/admin/capsters/add");
   };
 
+  // function to direct users to the add page
+  const handleClickEdit = (capsterId) => {
+    navigate(`/admin/capsters/edit/${capsterId}`);
+  };
+
   //Delete capster
   const handleDeleteCapster = async (capsterId) => {
     try {
@@ -189,7 +194,7 @@ const CapstersContent = () => {
                           {data.updatedAt ? formatDate(data.updatedAt) : ""}
                         </td>
                         <td className="text-center">
-                          <a href="">
+                          <a href="" onClick={() => handleClickEdit(data.id)}>
                             <i className="fas fa-edit fs-6" />
                             <p>Edit</p>
                           </a>
