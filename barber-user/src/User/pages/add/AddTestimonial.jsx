@@ -12,6 +12,8 @@ const validate = (values) => {
   const errors = {};
   if (!values.rating) {
     errors.rating = "Required!";
+  } else if (values.rating < 1 || values.rating > 5) {
+    errors.rating = "rating must be between 10 and 24";
   }
 
   if (!values.description) {
