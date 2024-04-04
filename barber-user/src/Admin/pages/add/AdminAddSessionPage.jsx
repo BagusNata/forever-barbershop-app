@@ -11,12 +11,13 @@ const validate = (values) => {
   const errors = {};
   if (!values.time) {
     errors.time = "Required!";
+  } else if (values.time < 10 || values.time > 24) {
+    errors.time = "Time must be between 10 and 24";
   }
-
   return errors;
 };
 
-const AdminAddSession = () => {
+const AdminAddSessionPage = () => {
   const navigate = useNavigate();
   const { userData, setUserData } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -159,4 +160,4 @@ const AdminAddSession = () => {
   ) : null;
 };
 
-export default AdminAddSession;
+export default AdminAddSessionPage;

@@ -9,28 +9,26 @@ import Swal from "sweetalert2";
 
 const validate = (values) => {
   const errors = {};
+  if (!values.image) {
+    errors.image = "Required!";
+  }
+
   if (!values.name) {
     errors.name = "Required!";
-  } else if (values.name.length < 5) {
-    errors.name = "Must be 5 characters or more!";
   }
 
-  if (!values.placeOfBirth) {
-    errors.placeOfBirth = "Required!";
+  if (!values.price) {
+    errors.price = "Required!";
   }
 
-  if (!values.dateOfBirth) {
-    errors.dateOfBirth = "Required!";
-  }
-
-  if (!values.gender) {
-    errors.gender = "Required!";
+  if (!values.description) {
+    errors.description = "Required!";
   }
 
   return errors;
 };
 
-const AdminAddCapster = () => {
+const AdminAddServicePage = () => {
   const navigate = useNavigate();
   const { userData, setUserData } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
@@ -67,17 +65,18 @@ const AdminAddCapster = () => {
   // Form logic
   const formik = useFormik({
     initialValues: {
+      image: "",
       name: "",
-      placeOfBirth: "",
-      dateOfBirth: "",
-      gender: "",
+      price: "",
+      description: "",
+      detail: "",
     },
     validate,
     onSubmit: async (values) => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/capsters`,
+          `${import.meta.env.VITE_API_URL}/api/services`,
           {
             method: "POST",
             headers: {
@@ -85,20 +84,21 @@ const AdminAddCapster = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              image: values.image,
               name: values.name,
-              placeOfBirth: values.placeOfBirth,
-              dateOfBirth: values.dateOfBirth,
-              gender: values.gender,
+              price: values.price,
+              description: values.description,
+              detail: values.detail,
             }),
           }
         );
         const data = await response.json();
         console.log(data);
         if (data.message && data.message.toLowerCase().includes("failed")) {
-          console.error("Error add capster:", 400);
+          console.error("Error add service:", 400);
           Swal.fire({
             icon: "error",
-            title: "Failed add new capster",
+            title: "Failed add new service",
             text: "Failed! Gender does not exist!",
           });
           return;
@@ -106,19 +106,19 @@ const AdminAddCapster = () => {
         // Show success alert
         Swal.fire({
           icon: "success",
-          title: "New capster added successfully!",
-          text: "You will be redirected to the admin capster page.",
+          title: "New service added successfully!",
+          text: "You will be redirected to the admin service page.",
           timer: 3000, // 3 seconds
         }).then(() => {
-          // Redirect to the admin capster page
-          navigate("/admin/capsters");
+          // Redirect to the admin service page
+          navigate("/admin/services");
         });
       } catch (error) {
-        // Handle add capster error
-        console.error("Error add capster:", error);
+        // Handle add service error
+        console.error("Error add service:", error);
         Swal.fire({
           icon: "error",
-          title: "Error add new capster",
+          title: "Error add new service",
           text: "Please try again later.",
         });
       } finally {
@@ -127,7 +127,7 @@ const AdminAddCapster = () => {
     },
   });
 
-  const handleAddCapster = async () => {
+  const handleAddService = async () => {
     // This function should be defined outside of the useFormik callback
     formik.handleSubmit();
   };
@@ -137,14 +137,30 @@ const AdminAddCapster = () => {
       <Container>
         <div className="position-absolute top-50 start-50 translate-middle form-box">
           <form onSubmit={formik.handleSubmit}>
-            <h3 className="text-center mb-5">Tambah Capster Baru</h3>
+            <h3 className="text-center mb-5">Tambah Service Baru</h3>
             <div className="mb-3">
-              <label className="form-label">Nama</label>
+              <label className="form-label">Link Gambar</label>
               <input
                 className="form-control"
                 autoFocus
                 type="text"
-                placeholder="Contoh : (Bagus Nata)"
+                placeholder="Contoh : (https://blablabla)"
+                id="image"
+                name="image"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.image}
+              />
+              {formik.touched.image && formik.errors.image ? (
+                <div className="error">{formik.errors.image}</div>
+              ) : null}
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Nama layanan</label>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Contoh : (Basic Cut)"
                 id="name"
                 name="name"
                 onChange={formik.handleChange}
@@ -156,51 +172,51 @@ const AdminAddCapster = () => {
               ) : null}
             </div>
             <div className="mb-3">
-              <label className="form-label">Tempat lahir</label>
+              <label className="form-label">Harga</label>
               <input
                 className="form-control"
-                type="text"
-                placeholder="Contoh : (Denpasar)"
-                id="placeOfBirth"
-                name="placeOfBirth"
+                type="number"
+                placeholder="Contoh : (35000)"
+                id="price"
+                name="price"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.placeOfBirth}
+                value={formik.values.price}
               />
-              {formik.touched.placeOfBirth && formik.errors.placeOfBirth ? (
-                <div className="error">{formik.errors.placeOfBirth}</div>
+              {formik.touched.price && formik.errors.price ? (
+                <div className="error">{formik.errors.price}</div>
               ) : null}
             </div>
             <div className="mb-3">
-              <label className="form-label">Tanggal lahir</label>
-              <input
-                className="form-control"
-                type="date"
-                placeholder="Contoh : (1998-12-2)"
-                id="dateOfBirth"
-                name="dateOfBirth"
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.dateOfBirth}
-              />
-              {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
-                <div className="error">{formik.errors.dateOfBirth}</div>
-              ) : null}
-            </div>
-            <div className="mb-3">
-              <label className="form-label">Gender</label>
+              <label className="form-label">Deskripsi</label>
               <input
                 className="form-control"
                 type="text"
-                placeholder="Contoh : (M = laki-laki, F = perempuan)"
-                id="gender"
-                name="gender"
+                placeholder="Contoh : (Paket layanan yang paling bagus, blablabla.)"
+                id="description"
+                name="description"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                value={formik.values.gender}
+                value={formik.values.description}
               />
-              {formik.touched.gender && formik.errors.gender ? (
-                <div className="error">{formik.errors.gender}</div>
+              {formik.touched.description && formik.errors.description ? (
+                <div className="error">{formik.errors.description}</div>
+              ) : null}
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Detail</label>
+              <input
+                className="form-control"
+                type="text"
+                placeholder="Contoh : (Hair cut, Hair wash, Styling)"
+                id="detail"
+                name="detail"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.detail}
+              />
+              {formik.touched.detail && formik.errors.detail ? (
+                <div className="error">{formik.errors.detail}</div>
               ) : null}
             </div>
 
@@ -209,13 +225,13 @@ const AdminAddCapster = () => {
                 type="button"
                 className="btn btn-success"
                 disabled={isLoading}
-                onClick={handleAddCapster}
+                onClick={handleAddService}
               >
                 {isLoading ? "Loading..." : "Submit"}
               </button>
               <button
                 type="button"
-                onClick={() => navigate("/admin/capsters")}
+                onClick={() => navigate("/admin/services")}
                 className="btn btn-outline-danger"
               >
                 Cancel
@@ -228,4 +244,4 @@ const AdminAddCapster = () => {
   ) : null;
 };
 
-export default AdminAddCapster;
+export default AdminAddServicePage;
