@@ -1,7 +1,7 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import "../assets/adminContent.css";
-import { format } from "date-fns";
+import { format, subDays } from "date-fns";
 import Swal from "sweetalert2";
 import { useUserContext } from "../../UserContext";
 
@@ -83,6 +83,14 @@ const BookingsContent = () => {
 
   function formatDate(dateString) {
     return format(new Date(dateString), "PPpp");
+  }
+
+  function formatBookingDate(dateString) {
+    const date = new Date(dateString);
+    const adjustedDate = subDays(date, 1); // Subtract one day from the date
+    return format(adjustedDate, "dd MMMM yyyy", {
+      timeZone: "Asia/Makassar",
+    });
   }
 
   return (
@@ -174,7 +182,7 @@ const BookingsContent = () => {
                         <th className="text-center">{index + 1}</th>
                         <td>{data.user.username}</td>
                         <td>{data.service.name}</td>
-                        <td>{data.date ? formatDate(data.date) : ""}</td>
+                        <td>{data.date ? formatBookingDate(data.date) : ""}</td>
                         <td>{data.session.time}:00</td>
                         <td>
                           {data.createdAt ? formatDate(data.createdAt) : ""}
