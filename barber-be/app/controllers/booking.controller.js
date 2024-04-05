@@ -127,12 +127,8 @@ exports.getMyBookings = async (req, res) => {
   }
 };
 
-exports.getMyBookingsTime = async (req, res) => {
+exports.getBookingsTime = async (req, res) => {
   try {
-    // get current user from token
-    const token = req.headers["x-access-token"];
-    const decoded = jwt.verify(token, config.secret);
-
     // get all bookings from date in range from 00:00 to 23:00 of current user
     const bookings = await Booking.findAll({
       where: {
@@ -141,12 +137,9 @@ exports.getMyBookingsTime = async (req, res) => {
           [Op.gte]: setHours(new Date(req.body.date), 0),
           [Op.lte]: setHours(new Date(req.body.date), 23),
         },
-        userId: decoded.id,
       },
     });
-    // return array of time e.g. [16,17,18,18,19]
-    const bookingTime = bookings.map((book) => book.time);
-    res.status(200).send(bookingTime);
+    res.status(200).send(bookings);
   } catch {
     res.status(500).send({
       message:
