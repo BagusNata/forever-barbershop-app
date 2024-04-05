@@ -60,32 +60,68 @@ const BookingComponent = () => {
     }
   }, [userData, date, showTime, session]);
 
+  // logic to check past date
   const isPastDate = (selectedDate) => {
     const currentDate = new Date();
-    return selectedDate < currentDate;
+    // Subtract one day from the current date
+    const pastDate = new Date(currentDate);
+    pastDate.setDate(currentDate.getDate() - 1);
+    return selectedDate < pastDate;
+  };
+
+  // logic to check past time
+  const isPastTime = (selectedDate, sessionTime) => {
+    const currentDate = new Date();
+
+    // Check if selectedDate is the same as currentDate
+    if (
+      selectedDate.getDate() === currentDate.getDate() &&
+      selectedDate.getMonth() === currentDate.getMonth() &&
+      selectedDate.getFullYear() === currentDate.getFullYear()
+    ) {
+      // Compare the sessionTime with the current hour
+      if (typeof sessionTime !== "number") {
+        return false; // Return false if sessionTime is not a number
+      }
+      const currentHour = new Date().getHours() + 1;
+      return currentHour > sessionTime;
+    } else {
+      // If the selectedDate is not the current date, return false
+      return false;
+    }
   };
 
   // push selected Time & Service data to userBooking
   const handleTimeClick = (selectedTime) => {
-    setSelectedTime(selectedTime); // Set selected time
+    setSelectedTime(selectedTime);
+
+    // Create a new Date object and add one day
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + 1);
+
     let userBooking = {
       nama: userData.id,
-      date: date.toDateString(),
-      sessionId: selectedTime.id, // Use selectedTime object directly
+      date: newDate.toISOString(), // Store the date as a string in ISO 8601 format
+      sessionId: selectedTime.id,
       serviceId: selectedService ? selectedService.id : null,
     };
     localStorage.setItem("userBooking", JSON.stringify(userBooking));
   };
 
-  // push selected Time & Service data to userBooking
   const handleServiceClick = (selectedService) => {
-    setSelectedService(selectedService); // Set selected service
+    setSelectedService(selectedService);
+
+    // Create a new Date object and add one day
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + 1);
+
     let userBooking = {
       nama: userData.id ? userData.id : null,
-      date: date.toDateString() ? date.toDateString() : null,
-      sessionId: selectedTime.id ? selectedTime.id : null,
+      date: newDate.toISOString(), // Store the date as a string in ISO 8601 format
+      sessionId: selectedTime ? selectedTime.id : null,
       serviceId: selectedService.id,
     };
+    console.log(date);
     localStorage.setItem("userBooking", JSON.stringify(userBooking));
   };
 
@@ -150,7 +186,9 @@ const BookingComponent = () => {
   };
 
   function formatDate(dateString) {
-    return format(new Date(dateString), "eeee, dd MMMM yyyy");
+    return format(new Date(dateString), "eeee, dd MMMM yyyy", {
+      timeZone: "Asia/Makassar",
+    });
   }
 
   return (
@@ -176,9 +214,12 @@ const BookingComponent = () => {
         <Row>
           <div className="d-flex justify-content-center">
             <Calendar
-              onChange={setDate}
+              onChange={(date) => {
+                setDate(date);
+                setShowTime(true);
+                setSelectedTime(null); // Reset selectedTime when a new date is clicked
+              }}
               value={date}
-              onClickDay={() => setShowTime(true)}
               tileDisabled={({ date }) => isPastDate(date)} // Disable past dates
             />
           </div>
@@ -203,7 +244,7 @@ const BookingComponent = () => {
                           : ""
                       }`}
                       onClick={() => handleTimeClick(data)}
-                      disabled={isPastDate(date)} // Disable time buttons for past dates
+                      disabled={isPastTime(date, data.time)} // Disable buttons for past session times
                     >
                       {data.time}:00
                     </button>
