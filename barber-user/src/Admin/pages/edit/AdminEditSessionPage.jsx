@@ -10,8 +10,8 @@ const validate = (values) => {
   const errors = {};
   if (!values.time) {
     errors.time = "Required!";
-  } else if (values.time < 10 || values.time > 24) {
-    errors.time = "Time must be between 10 and 24";
+  } else if (values.time < 10 || values.time > 23) {
+    errors.time = "Time must be between 10 and 23";
   }
   return errors;
 };
