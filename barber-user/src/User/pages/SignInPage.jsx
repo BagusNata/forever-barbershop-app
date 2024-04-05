@@ -129,20 +129,13 @@ const SignInPage = () => {
               </p>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 d-grid">
               <button
                 type="submit"
                 className="btn btn-success"
                 disabled={isLoading}
               >
                 {isLoading ? "Loading..." : "Submit"}
-              </button>
-              <button
-                type="button"
-                onClick={() => navigate("/")}
-                className="btn btn-outline-danger"
-              >
-                Cancel
               </button>
             </div>
           </form>
