@@ -10,7 +10,8 @@ const BookingComponent = () => {
   let navigate = useNavigate();
   const [session, setSession] = useState([]);
   const [service, setService] = useState([]);
-  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [bookedTime, setBookedTime] = useState([]);
   const [showTime, setShowTime] = useState(false);
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
@@ -53,12 +54,9 @@ const BookingComponent = () => {
       }
     };
 
-    // Run only if accessToken exists and showTime is true
-    if (userData.accessToken && showTime) {
-      getSession();
-      getService();
-    }
-  }, [userData, date, showTime, session]);
+    getSession();
+    getService();
+  }, []);
 
   // logic to check past date
   const isPastDate = (selectedDate) => {
@@ -67,6 +65,30 @@ const BookingComponent = () => {
     const pastDate = new Date(currentDate);
     pastDate.setDate(currentDate.getDate() - 1);
     return selectedDate < pastDate;
+  };
+
+  const getBookingsTime = async (dateSelected) => {
+    try {
+      // Create a new Date object and add one day
+      const newDate = new Date(dateSelected);
+      newDate.setDate(newDate.getDate() + 1);
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/bookings/time`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            date: newDate.toISOString(),
+          }),
+        }
+      );
+      setBookedTime(await response.json());
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   // logic to check past time
@@ -80,9 +102,6 @@ const BookingComponent = () => {
       selectedDate.getFullYear() === currentDate.getFullYear()
     ) {
       // Compare the sessionTime with the current hour
-      if (typeof sessionTime !== "number") {
-        return false; // Return false if sessionTime is not a number
-      }
       const currentHour = new Date().getHours() + 1;
       return currentHour > sessionTime;
     } else {
@@ -91,12 +110,24 @@ const BookingComponent = () => {
     }
   };
 
+  const isSessionFull = (sessionId) => {
+    // cek duplicated sessionId di bookedTime array
+    const count = bookedTime.reduce((acc, booking) => {
+      if (booking.sessionId === sessionId) {
+        acc++;
+      }
+      return acc;
+    }, 0);
+
+    return count >= 3;
+  };
+
   // push selected Time & Service data to userBooking
   const handleTimeClick = (selectedTime) => {
     setSelectedTime(selectedTime);
 
     // Create a new Date object and add one day
-    const newDate = new Date(date);
+    const newDate = new Date(selectedDate);
     newDate.setDate(newDate.getDate() + 1);
 
     let userBooking = {
@@ -112,7 +143,7 @@ const BookingComponent = () => {
     setSelectedService(selectedService);
 
     // Create a new Date object and add one day
-    const newDate = new Date(date);
+    const newDate = new Date(selectedDate);
     newDate.setDate(newDate.getDate() + 1);
 
     let userBooking = {
@@ -121,7 +152,6 @@ const BookingComponent = () => {
       sessionId: selectedTime ? selectedTime.id : null,
       serviceId: selectedService.id,
     };
-    console.log(date);
     localStorage.setItem("userBooking", JSON.stringify(userBooking));
   };
 
@@ -215,11 +245,12 @@ const BookingComponent = () => {
           <div className="d-flex justify-content-center">
             <Calendar
               onChange={(date) => {
-                setDate(date);
+                setSelectedDate(date);
+                getBookingsTime(date);
                 setShowTime(true);
                 setSelectedTime(null); // Reset selectedTime when a new date is clicked
               }}
-              value={date}
+              value={selectedDate}
               tileDisabled={({ date }) => isPastDate(date)} // Disable past dates
             />
           </div>
@@ -228,7 +259,7 @@ const BookingComponent = () => {
           <Card className="option-content">
             <h6 className="d-flex justify-content-center mt-4 pb-3">
               <span>Tanggal yang dipilih: </span> &nbsp;
-              {formatDate(date.toDateString())}
+              {formatDate(selectedDate.toDateString())}
             </h6>
             {showTime && (
               <div>
@@ -244,7 +275,10 @@ const BookingComponent = () => {
                           : ""
                       }`}
                       onClick={() => handleTimeClick(data)}
-                      disabled={isPastTime(date, data.time)} // Disable buttons for past session times
+                      disabled={
+                        isPastTime(selectedDate, data.time) ||
+                        isSessionFull(data.id)
+                      } // Disable buttons for past session times
                     >
                       {data.time}:00
                     </button>
