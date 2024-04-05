@@ -96,6 +96,10 @@ const CapstersContent = () => {
     return format(new Date(dateString), "PPpp");
   }
 
+  function formatBirthDate(dateString) {
+    return format(new Date(dateString), "dd MMMM yyyy");
+  }
+
   return (
     <div className="w-100 min-vh-100 content-body">
       <Container>
@@ -184,7 +188,9 @@ const CapstersContent = () => {
                         <td>{data.name}</td>
                         <td>{data.placeOfBirth}</td>
                         <td>
-                          {data.dateOfBirth ? formatDate(data.dateOfBirth) : ""}
+                          {data.dateOfBirth
+                            ? formatBirthDate(data.dateOfBirth)
+                            : ""}
                         </td>
                         <td>{data.gender}</td>
                         <td>
