@@ -1,60 +1,50 @@
 .signin {
   background: linear-gradient(0deg, #eff0f3 0%, #575376 100%);
   color: var(--text-color-light);
-}
 
-.signin .logo-box {
-  margin-top: -50px;
-  margin-bottom: 25px;
-}
-
-.signin .logo {
-  background-color: var(--text-color-light);
-  padding: 10px;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  align-items: center;
-}
-
-.signin .form-box {
-  background-color: var(--footer-color);
-  color: var(--text-color-light);
-  width: 500px;
-  height: auto;
-  padding: 30px;
-  border-radius: 15px;
-  margin-top: 1rem;
-  font-size: 15px;
-}
-
-@media screen and (max-width: 768px) {
-  .signin .form-box {
-    width: 340px;
+  .logo-box {
+    margin-top: -50px;
+    margin-bottom: 25px;
   }
-}
 
-.signin .error {
-  color: var(--secondary-color);
-  padding: 5px;
-}
+  .logo {
+    background-color: var(--text-color-light);
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    align-items: center;
+  }
 
-.signin a {
-  text-decoration: none;
-  color: var(--secondary-color);
-}
+  .form-box {
+    background-color: var(--footer-color);
+    color: var(--text-color-light);
+    width: 500px;
+    height: auto;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 1rem;
+    font-size: 15px;
+  }
 
-.signin .btn-success {
-  margin-right: 15px;
-}
+  @media screen and (max-width: 768px) {
+    .form-box {
+      width: 340px;
+    }
+  }
 
-.signin .btn-success:hover {
-  margin-right: 15px;
-  background-color: var(--secondary-color-active);
-  border-color: var(--secondary-color-active);
-}
+  .error {
+    color: var(--secondary-color);
+    padding: 5px;
+  }
 
-.signin .btn-outline-danger {
-  color: var(--secondary-color);
-  border-color: var(--secondary-color);
+  a {
+    text-decoration: none;
+    color: var(--secondary-color);
+  }
+
+  .btn-success:hover {
+    background-color: var(--secondary-color-active);
+    border-color: var(--secondary-color-active);
+  }
 }
