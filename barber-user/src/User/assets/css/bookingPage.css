@@ -46,6 +46,12 @@
     margin-top: 1rem !important;
   }
 
+  .btn:disabled {
+    background-color: rgb(58, 17, 17) !important;
+    color: #fff !important;
+    border-color: rgb(58, 17, 17) !important;
+  }
+
   .btn-selected {
     background-color: var(--secondary-color-active) !important;
     border-color: var(--secondary-color-active) !important;
