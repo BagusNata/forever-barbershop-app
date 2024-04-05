@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../UserContext";
-import { format } from "date-fns";
+import { format, subDays } from "date-fns";
 import Swal from "sweetalert2";
 
 const MyBookingPage = () => {
@@ -41,7 +41,11 @@ const MyBookingPage = () => {
   }, [userData]);
 
   function formatDate(dateString) {
-    return format(new Date(dateString), "dd MMMM yyyy");
+    const date = new Date(dateString);
+    const adjustedDate = subDays(date, 1); // Subtract one day from the date
+    return format(adjustedDate, "dd MMMM yyyy", {
+      timeZone: "Asia/Makassar",
+    });
   }
 
   const handleCancelBooking = async (bookingId) => {
