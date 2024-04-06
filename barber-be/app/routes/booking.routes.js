@@ -28,6 +28,8 @@ module.exports = function (app) {
 
   app.post("/api/bookings/time", controller.getBookingsTime);
 
+  app.post("/api/bookings/send-email", controller.sendBookingMail);
+
   app.delete(
     "/api/bookings/:id",
     [authJwt.verifyToken],
