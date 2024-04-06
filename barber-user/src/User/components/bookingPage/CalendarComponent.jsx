@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Calendar from "react-calendar";
 import { useUserContext } from "../../../UserContext";
-import { format } from "date-fns";
+import { format, subDays } from "date-fns";
 import Swal from "sweetalert2";
 
 const BookingComponent = () => {
@@ -188,7 +188,35 @@ const BookingComponent = () => {
     if (syaratKeten && selectedTime && selectedService) {
       setIsLoading(true);
       try {
-        await addBooking(JSON.parse(localStorage.userBooking));
+        const bookingData = JSON.parse(localStorage.userBooking);
+        await addBooking(bookingData);
+
+        // Get the selected session time
+        const selectedSession = session.find(
+          (data) => data.id === selectedTime.id
+        );
+
+        // Get the selected service name
+        const selectedServiceItem = service.find(
+          (serviceItem) => serviceItem.id === selectedService.id
+        );
+
+        // Send email after successful booking
+        await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/send-email`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipientEmail: userData.email,
+            userName: userData.username,
+            bookingDate: formatDateEmail(bookingData.date),
+            bookingTime: `${selectedSession.time}:00`,
+            bookingService: selectedServiceItem.name,
+            bookingServiceDetail: selectedServiceItem.detail,
+          }),
+        });
+
         setIsLoading(false);
 
         // Show success alert
@@ -196,13 +224,20 @@ const BookingComponent = () => {
           icon: "success",
           title: "Your booking has been recorded!",
           text: "You will be redirected to myBooking page.",
-          timer: 3000, // 3 seconds
+          timer: 3000,
         }).then(() => {
           navigate("/myBooking");
         });
       } catch (error) {
         setIsLoading(false);
         console.error("Failed to submit booking:", error);
+        // Show error alert
+        Swal.fire({
+          icon: "error",
+          title: "Failed to add a new booking!",
+          text: "An error occurred while processing your booking.",
+          timer: 3000,
+        });
       }
     } else {
       // Show failed alert
@@ -210,13 +245,21 @@ const BookingComponent = () => {
         icon: "error",
         title: "Failed to add a new booking!",
         text: "Please make sure you have selected the hours and service!",
-        timer: 3000, // 3 seconds
+        timer: 3000,
       });
     }
   };
 
   function formatDate(dateString) {
     return format(new Date(dateString), "eeee, dd MMMM yyyy", {
+      timeZone: "Asia/Makassar",
+    });
+  }
+
+  function formatDateEmail(dateString) {
+    const date = new Date(dateString);
+    const adjustedDate = subDays(date, 1); // Subtract one day from the date
+    return format(adjustedDate, "eeee, dd MMMM yyyy", {
       timeZone: "Asia/Makassar",
     });
   }
@@ -259,7 +302,7 @@ const BookingComponent = () => {
           <Card className="option-content">
             <h6 className="d-flex justify-content-center mt-4 pb-3">
               <span>Tanggal yang dipilih: </span> &nbsp;
-              {formatDate(selectedDate.toDateString())}
+              {formatDate(selectedDate.toISOString())}
             </h6>
             {showTime && (
               <div>
