@@ -7,6 +7,9 @@ const Booking = db.booking;
 const User = db.user;
 const Service = db.service;
 const Session = db.session;
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
 
 exports.addBooking = async (req, res) => {
   try {
@@ -145,6 +148,73 @@ exports.getBookingsTime = async (req, res) => {
       message:
         "Sorry, something went wrong on our end. Please try again later.",
     });
+  }
+};
+
+exports.sendBookingMail = async (req, res) => {
+  // Configure Nodemailer with your SMTP settings
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.SMTP_HOST,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
+
+  const {
+    recipientEmail,
+    userName,
+    bookingDate,
+    bookingTime,
+    bookingService,
+    bookingServiceDetail,
+  } = req.body;
+
+  // Compose email
+  const mailOptions = {
+    from: process.env.SMTP_HOST,
+    to: recipientEmail,
+    subject: "Booking Confirmation",
+    html: `
+    <p><strong>Dear customer, <br> Your booking details :</strong></p>
+    <table style="border-collapse: collapse; width: 100%;">
+      <tr>
+        <td style="border: none; text-align: left; padding: 8px;">Nama</td>
+        <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: left; padding: 8px;">${userName}</td>
+      </tr>
+      <tr>
+        <td style="border: none; text-align: left; padding: 8px;">Tanggal</td>
+        <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: left; padding: 8px;">${bookingDate}</td>
+      </tr>
+      <tr>
+        <td style="border: none; text-align: left; padding: 8px;">Jam</td>
+        <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: left; padding: 8px;">${bookingTime}</td>
+      </tr>
+      <tr>
+        <td style="border: none; text-align: left; padding: 8px;">Layanan</td>
+                <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: left; padding: 8px;">${bookingService}</td>
+      </tr>
+      <tr>
+        <td style="border: none; text-align: left; padding: 8px;">Detail Layanan</td>
+        <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: left; padding: 8px;">${bookingServiceDetail}</td>
+      </tr>
+    </table>
+    <p><strong>Best Regards,<br>Forever Barbershop Bali</strong></p>
+  `,
+  };
+
+  try {
+    // Send email
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent successfully" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ message: "Failed to send email" });
   }
 };
 
