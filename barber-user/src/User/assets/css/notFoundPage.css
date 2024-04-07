@@ -1,0 +1,40 @@
+.not-found-page {
+  background-color: #252525;
+  color: #fff;
+
+  .not-found-content {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  button {
+    margin-top: 5rem;
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-weight: bold;
+    margin: 0 1rem;
+  }
+
+  @media screen and (max-width: 580px) {
+    .not-found-content {
+      width: 300px;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 10px;
+    }
+
+    h3 {
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 3rem;
+      font-size: 12px;
+    }
+  }
+}
