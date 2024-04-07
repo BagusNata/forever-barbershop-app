@@ -81,6 +81,40 @@ const BookingsContent = () => {
     }
   };
 
+  //Delete booking
+  const handleDeleteBooking = async (bookingId) => {
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/bookings/${bookingId}`, {
+        method: "DELETE",
+        headers: {
+          "x-access-token": userData.accessToken,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // After successful deletion, update the data state to re-render without the deleted booking
+      setData((prevData) =>
+        prevData.filter((booking) => booking.id !== bookingId)
+      );
+
+      // Show a success notification
+      Swal.fire({
+        icon: "success",
+        title: "Booking canceled successfully!",
+        text: "Bookings that you delete will be removed from the list.",
+        timer: 3000, // 3 seconds
+      });
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+      // Show an error notification
+      Swal.fire({
+        icon: "error",
+        title: "Error canceling booking",
+        text: "Please try again later.",
+      });
+    }
+  };
+
   function formatDate(dateString) {
     return format(new Date(dateString), "PPpp");
   }
@@ -137,7 +171,9 @@ const BookingsContent = () => {
                   <th scope="col">Jam</th>
                   <th scope="col">CreatedAt</th>
                   <th scope="col">UpdatedAt</th>
-                  <th scope="col">Action</th>
+                  <th scope="col" colSpan={2}>
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -196,6 +232,15 @@ const BookingsContent = () => {
                           <a href="" onClick={() => handleDoneBooking(data.id)}>
                             <i className="fas fa-check fs-6" />
                             <p>Done</p>
+                          </a>
+                        </td>
+                        <td className="text-center">
+                          <a
+                            href=""
+                            onClick={() => handleDeleteBooking(data.id)}
+                          >
+                            <i className="fa-solid fa-trash-can fs-6" />
+                            <p>Delete</p>
                           </a>
                         </td>
                       </tr>
