@@ -213,6 +213,10 @@ const BookingComponent = () => {
             bookingDate: formatDateEmail(bookingData.date),
             bookingTime: `${selectedSession.time}:00`,
             bookingService: selectedServiceItem.name,
+            bookingPrice: new Intl.NumberFormat("id-ID", {
+              style: "currency",
+              currency: "IDR",
+            }).format(selectedServiceItem.price),
             bookingServiceDetail: selectedServiceItem.detail,
           }),
         });

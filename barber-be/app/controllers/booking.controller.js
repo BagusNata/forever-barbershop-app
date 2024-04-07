@@ -167,6 +167,7 @@ exports.sendBookingMail = async (req, res) => {
     bookingDate,
     bookingTime,
     bookingService,
+    bookingPrice,
     bookingServiceDetail,
   } = req.body;
 
@@ -176,13 +177,8 @@ exports.sendBookingMail = async (req, res) => {
     to: recipientEmail,
     subject: "Booking Confirmation",
     html: `
-    <p><strong>Dear customer, <br> Your booking details :</strong></p>
+    <p>Dear <strong>${userName}</strong>, <br> Here are your booking details:</p>
     <table style="border-collapse: collapse; width: 100%;">
-      <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Nama</td>
-        <td style="border: none; text-align: center;">:</td>
-        <td style="border: none; text-align: left; padding: 8px;">${userName}</td>
-      </tr>
       <tr>
         <td style="border: none; text-align: left; padding: 8px;">Tanggal</td>
         <td style="border: none; text-align: center;">:</td>
@@ -195,8 +191,13 @@ exports.sendBookingMail = async (req, res) => {
       </tr>
       <tr>
         <td style="border: none; text-align: left; padding: 8px;">Layanan</td>
-                <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: center;">:</td>
         <td style="border: none; text-align: left; padding: 8px;">${bookingService}</td>
+      </tr>
+      <tr>
+        <td style="border: none; text-align: left; padding: 8px;">Layanan</td>
+        <td style="border: none; text-align: center;">:</td>
+        <td style="border: none; text-align: left; padding: 8px;">${bookingPrice}</td>
       </tr>
       <tr>
         <td style="border: none; text-align: left; padding: 8px;">Detail Layanan</td>
@@ -204,7 +205,7 @@ exports.sendBookingMail = async (req, res) => {
         <td style="border: none; text-align: left; padding: 8px;">${bookingServiceDetail}</td>
       </tr>
     </table>
-    <p><strong>Best Regards,<br>Forever Barbershop Bali</strong></p>
+    <p>Best Regards,<br><strong>Forever Barbershop Bali</strong></p>
   `,
   };
 
