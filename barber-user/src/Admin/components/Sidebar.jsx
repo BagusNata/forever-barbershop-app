@@ -32,7 +32,7 @@ const Sidebar = () => {
             </NavLink>
             <NavLink exact="true" to="/admin/sessions" className="nav-link">
               <CDBSidebarMenuItem icon="fas fa-clock">
-                Sesion
+                Sessions
               </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact="true" to="/admin/users" className="nav-link">

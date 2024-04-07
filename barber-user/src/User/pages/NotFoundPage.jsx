@@ -18,7 +18,7 @@ const NotFoundPage = () => {
         className="btn btn-light btn-lg rounded-2 position-absolute top-50 start-50 translate-middle"
         onClick={handleClickAdd}
       >
-        Back to Home page
+        Back to Homepage
       </button>
     </div>
   );
