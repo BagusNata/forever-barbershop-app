@@ -10,10 +10,14 @@ const validate = (values) => {
   const errors = {};
   if (!values.image) {
     errors.image = "Required!";
+  } else if (values.image.length > 225) {
+    errors.image = "maximum 225 characters!";
   }
 
   if (!values.name) {
     errors.name = "Required!";
+  } else if (values.name.length > 225) {
+    errors.name = "maximum 225 characters!";
   }
 
   if (!values.price) {
@@ -22,6 +26,12 @@ const validate = (values) => {
 
   if (!values.description) {
     errors.description = "Required!";
+  } else if (values.description.length > 225) {
+    errors.description = "maximum 225 characters!";
+  }
+
+  if (values.detail.length > 225) {
+    errors.detail = "maximum 225 characters!";
   }
 
   return errors;

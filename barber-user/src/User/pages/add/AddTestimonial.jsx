@@ -18,6 +18,8 @@ const validate = (values) => {
 
   if (!values.description) {
     errors.description = "Required!";
+  } else if (values.description.length > 225) {
+    errors.description = "maximum 225 characters!";
   }
 
   return errors;

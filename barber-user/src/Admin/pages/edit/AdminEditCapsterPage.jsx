@@ -13,10 +13,14 @@ const validate = (values) => {
     errors.name = "Required!";
   } else if (values.name.length < 5) {
     errors.name = "Must be 5 characters or more!";
+  } else if (values.name.length > 225) {
+    errors.name = "maximum 225 characters!";
   }
 
   if (!values.placeOfBirth) {
     errors.placeOfBirth = "Required!";
+  } else if (values.placeOfBirth.length > 225) {
+    errors.placeOfBirth = "maximum 225 characters!";
   }
 
   if (!values.dateOfBirth) {
@@ -24,7 +28,11 @@ const validate = (values) => {
   }
 
   if (!values.gender) {
-    errors.gender = "Required!";
+    errors.gender = "Gender is required!";
+  } else if (values.gender !== "M" && values.gender !== "F") {
+    errors.gender = "Gender must be either 'M' or 'F'";
+  } else if (values.gender.length !== 1) {
+    errors.gender = "Gender must be a single character";
   }
 
   return errors;
