@@ -14,13 +14,13 @@ const validate = (values) => {
   } else if (values.name.length < 5) {
     errors.name = "Must be 5 characters or more!";
   } else if (values.name.length > 225) {
-    errors.name = "maximum 225 characters!";
+    errors.name = "Maximum 225 characters!";
   }
 
   if (!values.placeOfBirth) {
     errors.placeOfBirth = "Required!";
   } else if (values.placeOfBirth.length > 225) {
-    errors.placeOfBirth = "maximum 225 characters!";
+    errors.placeOfBirth = "Maximum 225 characters!";
   }
 
   if (!values.dateOfBirth) {

@@ -195,7 +195,7 @@ exports.sendBookingMail = async (req, res) => {
         <td style="border: none; text-align: left; padding: 8px;">${bookingService}</td>
       </tr>
       <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Layanan</td>
+        <td style="border: none; text-align: left; padding: 8px;">Harga</td>
         <td style="border: none; text-align: center;">:</td>
         <td style="border: none; text-align: left; padding: 8px;">${bookingPrice}</td>
       </tr>

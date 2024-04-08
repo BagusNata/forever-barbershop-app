@@ -12,8 +12,10 @@ const HeroComponent = () => {
 
   const handleClick = () => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-
-    if (
+    if (!userData) {
+      // If user doesn't have userData, navigate to signInPage
+      navigate("/signin");
+    } else if (
       userData &&
       userData.freezeExpiryDate &&
       new Date(userData.freezeExpiryDate) > new Date()
@@ -30,11 +32,8 @@ const HeroComponent = () => {
       (userData && userData.freezeExpiryDate === null) ||
       new Date(userData.freezeExpiryDate) < new Date()
     ) {
-      // If user has userData, navigate to bookingPage
+      // If user has userData and no freeze, navigate to bookingPage
       navigate("/booking");
-    } else {
-      // If user doesn't have userData, navigate to signInPage
-      navigate("/signin");
     }
   };
 

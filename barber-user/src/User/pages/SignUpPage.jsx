@@ -13,13 +13,15 @@ const validate = (values) => {
   } else if (values.userName.length < 5) {
     errors.userName = "Must be 5 characters or more!";
   } else if (values.userName.length > 225) {
-    errors.userName = "maximum 225 characters!";
+    errors.userName = "Maximum 225 characters!";
   }
 
   if (!values.email) {
     errors.email = "Required!";
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = "Invalid email address!";
+  } else if (values.email.length > 225) {
+    errors.email = "Maximum 225 characters!";
   }
 
   if (!values.phone) {
@@ -34,6 +36,8 @@ const validate = (values) => {
     errors.password = "Required!";
   } else if (values.password.length < 3) {
     errors.password = "Must be 3 characters or more!";
+  } else if (values.email.length > 225) {
+    errors.email = "Maximum 225 characters!";
   }
 
   return errors;

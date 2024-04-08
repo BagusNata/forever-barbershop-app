@@ -13,13 +13,13 @@ const validate = (values) => {
   if (!values.rating) {
     errors.rating = "Required!";
   } else if (values.rating < 1 || values.rating > 5) {
-    errors.rating = "rating must be between 10 and 24";
+    errors.rating = "Rating must be between 1 and 5";
   }
 
   if (!values.description) {
     errors.description = "Required!";
   } else if (values.description.length > 225) {
-    errors.description = "maximum 225 characters!";
+    errors.description = "Maximum 225 characters!";
   }
 
   return errors;
