@@ -43,6 +43,18 @@ const TestimonialComponent = () => {
     return format(new Date(dateString), "dd MMMM yyyy");
   }
 
+  const handleClick = () => {
+    const accessToken = localStorage.getItem("userData");
+
+    if (accessToken) {
+      // If user has accessToken, navigate to bookingPage
+      navigate("/testimonial");
+    } else {
+      // If user doesn't have accessToken, navigate to signInPage
+      navigate("/signin");
+    }
+  };
+
   return (
     <div className="testimonial">
       <Container>
@@ -120,11 +132,9 @@ const TestimonialComponent = () => {
           <Col className="text-center">
             <button
               className="btn btn-dark btn-lg rounded-3"
-              onClick={() => {
-                navigate("/testimonial");
-              }}
+              onClick={handleClick}
             >
-              Lihat Semua Testimonial{" "}
+              Lihat Semua Testimonial
               <i className="fa-solid fa-chevron-right"></i>
             </button>
           </Col>
