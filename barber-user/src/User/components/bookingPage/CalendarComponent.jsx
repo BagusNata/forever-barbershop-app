@@ -156,7 +156,28 @@ const BookingComponent = () => {
   };
 
   const handleSyaratKetenChange = (event) => {
-    setSyaratKeten(event.target.checked);
+    const isChecked = event.target.checked;
+    setSyaratKeten(isChecked);
+
+    if (isChecked) {
+      // Show SweetAlert2 pop-up when checkbox is checked
+      Swal.fire({
+        icon: "info",
+        title: "Syarat & Ketentuan",
+        html: `
+          <div style="max-height: 300px; overflow-y: auto; text-align: center;">
+            <ol style="text-align: left; padding-left: 20px; line-height: 1.5;">
+              <li style="margin-bottom: 10px;">Toleransi waktu keterlambatan maksimal <strong>15 menit</strong>.</li>
+              <li style="margin-bottom: 10px;">Pembatalan booking paling lambat <strong>2 jam</strong> sebelum waktu booking.</li>
+              <li style="margin-bottom: 10px;">Pelanggan yang ingin memilih service (Perming, Colouring, Keratin) <strong>harap konsultasi terlebih dahulu</strong> melalui no. Whatsapp (0821-4707-6324).</li>
+              <li style="margin-bottom: 10px;">Jika memilih service (Perming, Colouring, Keratin) <strong>buatlah 2 booking-an di jam yang bersebelahan di hari yang sama</strong>. <br/>Contoh : <br/> booking 1 : (tanggal 1 Januari 2024, jam 10:00), <br/> booking 2 : (tanggal 1 Januari 2024, jam 11:00).</li>
+              <li style="margin-bottom: 10px;">Admin berhak <strong>membekukan akun pelanggan selama 30 hari</strong>, jika pelanggan memiliki jadwal booking tetapi <strong>tidak hadir</strong>.</li>
+            </ol>
+          </div>
+        `,
+        confirmButtonText: "Setuju",
+      });
+    }
   };
 
   // Function post data to db. booking
@@ -350,6 +371,58 @@ const BookingComponent = () => {
                   ))}
                 </div>
 
+                {/* Show confirmation oder */}
+                <div className="mt-4 mx-3">
+                  <hr />
+                  <h5>Confirmation order</h5>
+                  <table style={{ borderCollapse: "collapse", width: "100%" }}>
+                    <tbody>
+                      <tr>
+                        <td className="table-content-title">Tanggal</td>
+                        <td>:</td>
+                        <td className="table-content-value">
+                          {format(selectedDate, "eeee, dd MMMM yyyy", {
+                            timeZone: "Asia/Makassar",
+                          })}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="table-content-title">Jam</td>
+                        <td>:</td>
+                        <td className="table-content-value">
+                          {selectedTime ? `${selectedTime.time}:00` : ""}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="table-content-title">Layanan</td>
+                        <td>:</td>
+                        <td className="table-content-value">
+                          {selectedService ? selectedService.name : ""}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="table-content-title">Harga</td>
+                        <td>:</td>
+                        <td className="table-content-value">
+                          {selectedService
+                            ? new Intl.NumberFormat("id-ID", {
+                                style: "currency",
+                                currency: "IDR",
+                              }).format(selectedService.price)
+                            : ""}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="table-content-title">Detail layanan</td>
+                        <td>:</td>
+                        <td className="table-content-value">
+                          {selectedService ? selectedService.detail : ""}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
                 {/* Show submit button */}
                 <div className="form-check syaratKeten mx-3">
                   <input
@@ -361,7 +434,7 @@ const BookingComponent = () => {
                     checked={syaratKeten}
                   />
                   <label className="form-check-label" htmlFor="syaratKetentuan">
-                    Syarat dan ketentuan berlaku
+                    Saya setuju dengan syarat & ketentuan yang berlaku
                   </label>
                 </div>
                 <div className="mb-4 mx-3 d-grid">
