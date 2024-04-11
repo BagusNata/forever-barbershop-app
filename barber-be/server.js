@@ -104,39 +104,48 @@ async function initial() {
     await Service.bulkCreate([
       {
         image:
-          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.FatE4JVDWdHv4DdoZKlS9gHaE7%26pid%3DApi&f=1&ipt=c9de38f860d20e9abf034da909f9d679b9d575f24cea103413f1c2c7ed6897ca&ipo=images",
+          "https://t3.ftcdn.net/jpg/02/06/60/64/240_F_206606441_ZUmECkVNkChMXABKKfoOgZKpLxU8xioN.jpg",
         name: "Basic Cut",
         price: 35000,
         description:
-          "Paket layanan yang paling sederhana, cocok untuk kamu yang ingin tampil fresh dan ganteng dengan harga murah.",
+          "Paket layanan yang paling sederhana, cocok untuk anda yang ingin tampil fresh dan ganteng dengan harga murah.",
         detail: "Hair cut, Styling",
       },
       {
         image:
-          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.explicit.bing.net%2Fth%3Fid%3DOIP.hAmLi7WCl7XPkzvMgV2-hgHaGf%26pid%3DApi&f=1&ipt=e71d3285ca19afe44b46f6c2993f6036388d9fe77fe91c0bc11072b92ee15389&ipo=images",
+          "https://t3.ftcdn.net/jpg/01/35/35/32/240_F_135353252_KrrqfRsbhgSggJXwu6APWUaXKhO8jYFu.jpg",
         name: "King Cut",
         price: 45000,
         description:
-          "Paket layanan ini cocok untuk kamu yang ingin auto ganteng karena sudah paket komplit.",
+          "Paket layanan ini cocok untuk anda yang ingin auto ganteng karena sudah paket komplit.",
         detail: "Hair cut, Hair wash, Styling",
       },
       {
         image:
-          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Vb38kD5cvROjppdMtKZHzQHaGM%26pid%3DApi&f=1&ipt=d876d36c8a9395f84374de4af6405f9ca82efc2f3afba920d35928a3c605d05e&ipo=images",
-        name: "Hair Color",
-        price: 100000,
+          "https://t4.ftcdn.net/jpg/06/12/26/03/240_F_612260300_EyhFl0IeDXeuCfKyhj1FSlnLZJwJGmdp.jpg",
+        name: "Hair Color Black",
+        price: 80000,
         description:
-          "Paket layanan ini cocok untuk kamu yang ingin mewarnai rambut agar tampak lebih fresh.",
+          "Paket layanan ini cocok untuk anda yang ingin menghitamkan kembali rambut agar tampak lebih fresh.",
         detail: "Hair color, Hair wash, Styling",
       },
       {
         image:
-          "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.BQ0jXn8pn7GJuwutk9r2mAHaGZ%26pid%3DApi&f=1&ipt=aa9e9c399fa84cc25a1d8d552d53a657f28974967e8fa61f439f1e4bc3bf8862&ipo=images",
-        name: "Hair Perming",
+          "https://t4.ftcdn.net/jpg/05/44/14/27/240_F_544142710_QYdNnNiBoWipmf6TW2ROvslg3eijwUXs.jpg",
+        name: "Hair perming",
         price: 250000,
         description:
-          "Paket layanan ini cocok untuk kamu yang ingin tampil beda.",
-        detail: "Hair Perming, Hair wash, Styling",
+          "Paket layanan ini cocok untuk anda yang ingin mengubah gaya rambut, dari yang walnya lurus menjadi curly.",
+        detail: "Hair perm, Hair wash, Styling",
+      },
+      {
+        image:
+          "https://t3.ftcdn.net/jpg/04/29/53/84/240_F_429538476_23kZ81sKA6CHwax4ID1K7bKFHJb0ecWX.jpg",
+        name: "Hair Spa",
+        price: 45000,
+        description:
+          "Paket layanan ini cocok untuk anda yang ingin merasakan relaksasi dan memanjakan rambut dengan treatment hair spa.",
+        detail: "Hair spa, Styling",
       },
     ]);
 

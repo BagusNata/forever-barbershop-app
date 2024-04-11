@@ -1,9 +1,8 @@
-import ServiceImage1 from "../assets/img/service/service-1.jpg";
-import ServiceImage2 from "../assets/img/service/service-2.jpg";
-import ServiceImage3 from "../assets/img/service/service-3.jpg";
-import ServiceImage4 from "../assets/img/service/service-4.jpg";
-import ServiceImage5 from "../assets/img/service/service-5.jpg";
-import ServiceImage6 from "../assets/img/service/service-6.jpg";
+import AboutImage1 from "../assets/img/price-list-basic.jpg";
+import AboutImage2 from "../assets/img/price-list-signature.jpg";
+import AboutImage3 from "../assets/img/rizky.jpg";
+import AboutImage4 from "../assets/img/fajar.jpg";
+import AboutImage5 from "../assets/img/gunawan.jpg";
 
 export const section = [
   {
@@ -93,32 +92,27 @@ export const jadwal = [
 export const aboutSlider = [
   {
     id: 1,
-    img: ServiceImage1,
+    img: AboutImage1,
     title: "Forever Barbershop",
   },
   {
     id: 2,
-    img: ServiceImage2,
+    img: AboutImage2,
     title: "Forever Barbershop",
   },
   {
     id: 3,
-    img: ServiceImage3,
+    img: AboutImage3,
     title: "Forever Barbershop",
   },
   {
     id: 4,
-    img: ServiceImage4,
+    img: AboutImage4,
     title: "Forever Barbershop",
   },
   {
     id: 5,
-    img: ServiceImage5,
-    title: "Forever Barbershop",
-  },
-  {
-    id: 6,
-    img: ServiceImage6,
+    img: AboutImage5,
     title: "Forever Barbershop",
   },
 ];
