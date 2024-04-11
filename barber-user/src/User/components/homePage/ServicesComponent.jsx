@@ -69,6 +69,7 @@ const ServicesComponent = () => {
                       className="w-100"
                       variant="top"
                       src={service.image}
+                      alt={service.name}
                     />
                     <Card.Body>
                       <div>
