@@ -36,12 +36,46 @@
     .option-content {
       width: 370px;
     }
+    h5 {
+      font-size: 19px !important;
+    }
+  }
+
+  /* confirm order style */
+  hr {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    border-width: 3px;
+  }
+
+  td {
+    border: none;
+    font-size: 15px;
+  }
+
+  .table-content-title {
+    width: 120px !important;
+    padding-bottom: 0.5rem;
+  }
+
+  .table-content-value {
+    padding-left: 0.5rem;
+  }
+
+  @media screen and (max-width: 550px) {
+    h5 {
+      font-size: 19px !important;
+    }
+    .table-content-value {
+      padding-left: 1rem;
+    }
   }
 
   .syaratKeten {
     margin-top: 3rem;
   }
 
+  /* button style */
   .btn {
     margin-top: 1rem !important;
   }
