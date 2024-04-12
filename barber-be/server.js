@@ -216,10 +216,10 @@ async function initial() {
 }
 
 // `force: true` will reset the database everytime we run server.js
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and Resync Db");
-  initial();
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and Resync Db");
+//   initial();
+// });
 
 // simple route
 app.get("/", (req, res) => {
