@@ -86,7 +86,8 @@ const ServicesComponent = () => {
                         </Col>
                       </div>
                       <Card.Text>
-                        {service.description} <br /> ({service.detail})
+                        {service.description} <br />
+                        {service.detail ? `(${service.detail})` : ""}
                       </Card.Text>
                       <button
                         className="btn btn-dark btn-lg rounded-2 mb-mx-0 mb-2 btn-service-book"
