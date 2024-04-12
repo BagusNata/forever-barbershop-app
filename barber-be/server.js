@@ -132,10 +132,28 @@ async function initial() {
       {
         image:
           "https://t4.ftcdn.net/jpg/05/44/14/27/240_F_544142710_QYdNnNiBoWipmf6TW2ROvslg3eijwUXs.jpg",
-        name: "Hair perming",
+        name: "Hair Perming",
         price: 250000,
         description:
           "Paket layanan ini cocok untuk anda yang ingin mengubah gaya rambut, dari yang walnya lurus menjadi curly.",
+        detail: "Hair perm, Hair wash, Styling",
+      },
+      {
+        image:
+          "https://t3.ftcdn.net/jpg/05/44/14/26/240_F_544142647_ZuTggOytc8iqBwXj2hp7Np6z06YO3cAg.jpg",
+        name: "Korean Perm",
+        price: 120000,
+        description:
+          "Paket layanan ini cocok untuk anda yang ingin membuat rambut agar memiliki korean look.",
+        detail: "Korean perm, Hair wash, Styling",
+      },
+      {
+        image:
+          "https://t4.ftcdn.net/jpg/05/44/14/25/240_F_544142539_6vsoj5g9qLS0X2fF8CIkqFnm9z6dxjDX.jpg",
+        name: "Hair Keratin",
+        price: 300000,
+        description:
+          "Paket layanan ini cocok untuk anda yang ingin menutrisi rambut sehingga lebih sehat, mudah diatur, dan lurus natural.",
         detail: "Hair perm, Hair wash, Styling",
       },
       {
@@ -145,7 +163,6 @@ async function initial() {
         price: 45000,
         description:
           "Paket layanan ini cocok untuk anda yang ingin merasakan relaksasi dan memanjakan rambut dengan treatment hair spa.",
-        detail: "Hair spa, Styling",
       },
     ]);
 
