@@ -54,9 +54,9 @@ async function initial() {
     // create users
     const userAdmin = await User.create({
       username: "admin",
-      email: "admin@barber.com",
+      email: "rizkyjaya800@gmail.com",
       phone: "082147076324",
-      password: bcrypt.hashSync("123456", 8),
+      password: bcrypt.hashSync("#admin123", 8),
       freezeExpiryDate: null,
     });
     userAdmin.setRoles([2]);
