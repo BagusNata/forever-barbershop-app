@@ -178,34 +178,36 @@ exports.sendBookingMail = async (req, res) => {
     subject: "Booking Confirmation",
     html: `
     <p>Dear <strong>${userName}</strong>, <br> Here are your booking details:</p>
-    <table style="border-collapse: collapse; width: 100%;">
-      <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Tanggal</td>
-        <td style="border: none; text-align: center;">:</td>
-        <td style="border: none; text-align: left; padding: 8px;">${bookingDate}</td>
-      </tr>
-      <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Jam</td>
-        <td style="border: none; text-align: center;">:</td>
-        <td style="border: none; text-align: left; padding: 8px;">${bookingTime}</td>
-      </tr>
-      <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Layanan</td>
-        <td style="border: none; text-align: center;">:</td>
-        <td style="border: none; text-align: left; padding: 8px;">${bookingService}</td>
-      </tr>
-      <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Harga</td>
-        <td style="border: none; text-align: center;">:</td>
-        <td style="border: none; text-align: left; padding: 8px;">${bookingPrice}</td>
-      </tr>
-      <tr>
-        <td style="border: none; text-align: left; padding: 8px;">Detail Layanan</td>
-        <td style="border: none; text-align: center;">:</td>
-        <td style="border: none; text-align: left; padding: 8px;">${bookingServiceDetail}</td>
-      </tr>
+      <table style={{ borderCollapse: "collapse", width: "100%" }}>
+      <tbody>
+        <tr>
+          <td style={{ width: "120px", paddingBottom: "0.5rem" }}>Tanggal</td>
+          <td>:</td>
+          <td style={{ paddingLeft: "0.5rem" }}>${bookingDate}</td>
+        </tr>
+        <tr>
+          <td style={{ width: "120px", paddingBottom: "0.5rem" }}>Jam</td>
+          <td>:</td>
+          <td style={{ paddingLeft: "0.5rem" }}>${bookingTime}</td>
+        </tr>
+        <tr>
+          <td style={{ width: "120px", paddingBottom: "0.5rem" }}>Layanan</td>
+          <td>:</td>
+          <td style={{ paddingLeft: "0.5rem" }}>${bookingService}</td>
+        </tr>
+        <tr>
+          <td style={{ width: "120px", paddingBottom: "0.5rem" }}>Harga</td>
+          <td>:</td>
+          <td style={{ paddingLeft: "0.5rem" }}>${bookingPrice}</td>
+        </tr>
+        <tr>
+          <td style={{ width: "120px", paddingBottom: "0.5rem" }}>Detail layanan</td>
+          <td>:</td>
+          <td style={{ paddingLeft: "0.5rem" }}>${bookingServiceDetail}</td>
+        </tr>
+      </tbody>
     </table>
-    <p>Best Regards,<br><strong>Forever Barbershop Bali</strong></p>
+  <p>Best Regards,<br><strong>Forever Barbershop Bali</strong></p>
   `,
   };
 
