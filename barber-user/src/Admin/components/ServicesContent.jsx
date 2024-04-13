@@ -168,9 +168,9 @@ const ServicesContent = () => {
                             currency: "IDR",
                           }).format(data.price)
                         )
-                        .map((property) => property.toLowerCase())
+                        .map((property) => property?.toLowerCase())
                         .join(" ")
-                        .includes(searchTerm.toLowerCase())
+                        .includes(searchTerm?.toLowerCase())
                     )
                     .map((data) => (
                       <tr key={data.id}>
