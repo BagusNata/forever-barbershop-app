@@ -19,7 +19,7 @@ var corsOptions = {
     "http://localhost:5173",
     "http://localhost:8081",
     "http://localhost:3000",
-    "https://forever-barbershop-app.vercel.app/",
+    "https://forever-barbershop-app.vercel.app",
   ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
