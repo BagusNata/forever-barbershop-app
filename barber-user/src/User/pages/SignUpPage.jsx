@@ -26,9 +26,7 @@ const validate = (values) => {
 
   if (!values.phone) {
     errors.phone = "Required!";
-  } else if (
-    !/^\+?([0-9]{4})\)?[-.●]?([0-9]{4})[-.●]?([0-9]{4})$/.test(values.phone)
-  ) {
+  } else if (!/^\d{11,13}$/.test(values.phone)) {
     errors.phone = "Invalid phone number!";
   }
 
