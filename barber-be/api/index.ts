@@ -31,7 +31,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const db = require("./app/models");
+const db = require("../app/models");
 const Role = db.role;
 const User = db.user;
 const Capster = db.capster;
@@ -227,13 +227,13 @@ app.get("/", (req, res) => {
 });
 
 // routes
-require("./app/routes/auth.routes")(app);
-require("./app/routes/user.routes")(app);
-require("./app/routes/capster.routes")(app);
-require("./app/routes/service.routes")(app);
-require("./app/routes/session.routes")(app);
-require("./app/routes/booking.routes")(app);
-require("./app/routes/testimony.routes")(app);
+require("../app/routes/auth.routes")(app);
+require("../app/routes/user.routes")(app);
+require("../app/routes/capster.routes")(app);
+require("../app/routes/service.routes")(app);
+require("../app/routes/session.routes")(app);
+require("../app/routes/booking.routes")(app);
+require("../app/routes/testimony.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

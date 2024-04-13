@@ -1,10 +1,10 @@
 {
   "name": "barber-be",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "./api/index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node ./api/index.ts"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
