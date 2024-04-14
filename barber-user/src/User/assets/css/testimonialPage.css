@@ -94,7 +94,28 @@
 
   @media screen and (max-width: 575px) {
     .row:nth-child(1) img {
-      width: 100px;
+      width: 115px;
+    }
+
+    .form-control {
+      font-size: 12px;
+    }
+
+    .input-group-text i {
+      font-size: 13px;
+    }
+
+    .btn-primary-add {
+      width: 223px !important;
+      font-size: 13px;
+    }
+
+    .btn-primary-add i {
+      font-size: 13px;
+    }
+
+    .card-text span {
+      font-size: 13px;
     }
   }
 }
