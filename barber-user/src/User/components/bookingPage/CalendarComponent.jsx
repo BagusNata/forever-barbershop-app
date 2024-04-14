@@ -165,7 +165,7 @@ const BookingComponent = () => {
         icon: "info",
         title: "Syarat & Ketentuan",
         html: `
-          <div style="max-height: 300px; overflow-y: auto; text-align: center;">
+          <div style="max-height: 300px; overflow-y: auto; text-align: center; -webkit-overflow-scrolling: auto;">
             <ol style="text-align: left; padding-left: 20px; line-height: 1.5;">
               <li style="margin-bottom: 10px;">Toleransi waktu keterlambatan maksimal <strong>15 menit</strong>.</li>
               <li style="margin-bottom: 10px;">Pembatalan booking paling lambat <strong>2 jam</strong> sebelum waktu booking.</li>
