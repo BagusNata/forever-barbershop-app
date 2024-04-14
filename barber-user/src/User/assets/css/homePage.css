@@ -1,9 +1,23 @@
 /* SECTION HERO STYLE */
 .cover {
   background: url("/cover.webp");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.cover::after {
+  content: "";
+  position: fixed; /* stretch a fixed position to the whole screen */
+  top: 0;
+  height: 100vh; /* fix for mobile browser address bar appearing disappearing */
+  left: 0;
+  right: 0;
+  z-index: -1; /* needed to keep in the background */
+  background: url("/cover.webp") center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
 }
 
@@ -120,12 +134,12 @@
   color: var(--text-color-light);
 }
 
-.homepage .about a{
+.homepage .about a {
   text-decoration: none;
   color: var(--text-color-light);
 }
 
-.homepage .about a:hover{
+.homepage .about a:hover {
   color: var(--secondary-color);
 }
 
@@ -287,7 +301,7 @@
   column-gap: 10px;
 }
 
-.homepage .testimonial .swiper-slide .detail p{
+.homepage .testimonial .swiper-slide .detail p {
   opacity: 50%;
   margin: 0;
 }
