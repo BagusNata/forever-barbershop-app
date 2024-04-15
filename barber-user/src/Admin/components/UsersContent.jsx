@@ -122,7 +122,7 @@ const UsersContent = () => {
 
   function formatDate(dateString) {
     return format(dateString, "PPpp", {
-      timeZone: "Asia/Makassar",
+      timeZone: "America/Los_Angeles",
     });
   }
 
