@@ -122,6 +122,14 @@ const BookingComponent = () => {
     return count >= 3;
   };
 
+  const availableSlot = (sessionId) => {
+    const bookedCount = bookedTime.filter(
+      (booking) => booking.sessionId === sessionId
+    ).length;
+    const availableSlots = 3 - bookedCount;
+    return availableSlots > 0 ? availableSlots : 0;
+  };
+
   // push selected Time & Service data to userBooking
   const handleTimeClick = (selectedTime) => {
     setSelectedTime(selectedTime);
@@ -351,6 +359,13 @@ const BookingComponent = () => {
                       {data.time}:00
                     </button>
                   ))}
+
+                  {/* Show available slot */}
+                  {selectedTime && (
+                    <p className="mt-3">
+                      Jumlah slot tersisa: {availableSlot(selectedTime.id)}
+                    </p>
+                  )}
                 </div>
 
                 {/* Show service */}
